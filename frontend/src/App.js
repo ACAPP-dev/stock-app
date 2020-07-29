@@ -1,10 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
-import CompanyReducer from './reducers/CompanyReducer'
-import UserReducer from './reducers/UserReducer'
-import WatchlistReducer from './reducers/WatchlistReducer'
+
 import './App.css';
 // import Bootstrap CSS for styling of certain user interface items
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -20,15 +16,14 @@ import CompanyContainer from './containers/CompanyContainer'
 const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
 const FINNHUB_API_KEY = 'bsfleivrh5rf14r5rh80'
 
-const rootReducer = combineReducers({
-  companies: CompanyReducer,
-  users: UserReducer,
-  watchlists: WatchlistReducer
-})
 
-store = createStore(rootReducer)
+
+
 
 class App extends React.Component {
+
+  
+
   // Disable Fetch for now...
   componentDidMount() {
     // fetch(FINNHUB_STOCK_DATA_URL)
@@ -36,6 +31,9 @@ class App extends React.Component {
     // .then(json => {
     //   console.log(json)
     // })
+
+    // Testing: Automatically Log in seed user
+    // need to code
   }
 
 

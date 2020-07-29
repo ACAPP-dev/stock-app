@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import companyReducer from './reducers/companyReducer'
+import userReducer from './reducers/userReducer'
+import watchlistReducer from './reducers/watchlistReducer'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const rootReducer = combineReducers({
+  companies: companyReducer,
+  users: userReducer,
+  watchlists: watchlistReducer
+})
+
+const store = createStore(rootReducer)
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
