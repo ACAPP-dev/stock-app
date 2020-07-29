@@ -1,10 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
+// import Bootstrap CSS for styling of certain user interface items
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import candlestick chart components from amcharts.com below:
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-am4core.useTheme(am4themes_animated);
+
+
+// import NavBarContainer from './containers/NavBarContainer';
+import Home from './components/Home';
+import Login from './components/Login'
 
 // from to in stock data is unix time from 6/1/20 to 6/15/20
 const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
@@ -13,11 +20,11 @@ const FINNHUB_API_KEY = 'bsfleivrh5rf14r5rh80'
 class App extends React.Component {
   // Disable Fetch for now...
   componentDidMount() {
-    fetch(FINNHUB_STOCK_DATA_URL)
-    .then(resp => resp.json())
-    .then(json => {
-      console.log(json)
-    })
+    // fetch(FINNHUB_STOCK_DATA_URL)
+    // .then(resp => resp.json())
+    // .then(json => {
+    //   console.log(json)
+    // })
   }
 
 testCandleChart = () => {
@@ -38,7 +45,7 @@ testCandleChart = () => {
 
   var chart = am4core.create("chartdiv", am4charts.XYChart);
   chart.paddingRight = 20;
-
+debugger
   chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
 
   var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
@@ -387,45 +394,6 @@ testCandleChart = () => {
 }];
 }
 
-
-    // Sample xy chart from amcharts.com for React:
-  testXYChart = () => {
-    let chart = am4core.create("chartdiv", am4charts.XYChart);
-
-    chart.paddingRight = 20;
-
-    let data = [];
-    let visits = 10;
-    for (let i = 1; i < 366; i++) {
-      visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-      data.push({ date: new Date(2018, 0, i), name: "name" + i, value: visits });
-    }
-  
-    chart.data = data;
-    console.log(chart.data)
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.grid.template.location = 0;
-  
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.tooltip.disabled = true;
-    valueAxis.renderer.minWidth = 35;
-  
-    let series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = "date";
-    series.dataFields.valueY = "value";
-  
-    series.tooltipText = "{valueY.value}";
-    chart.cursor = new am4charts.XYCursor();
-  
-    let scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
-    chart.scrollbarX = scrollbarX;
-  
-    // this.chart = chart;
-    
-   
-    }
-  
     
   componentWillUnmount() {
     if (this.chart) {
@@ -446,6 +414,7 @@ testCandleChart = () => {
   
   render() {
     return (
+    <Router>
       <div className="App">
         <header className="App-header">
           <h1>Andrew's Final Project</h1>
@@ -454,8 +423,11 @@ testCandleChart = () => {
         <div id="chartdiv" style={{ width: "100%", height: "500px" }}>
           {this.testCandleChart()}
         </div>
+        {/* <NavBarContainer /> */}
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
       </div>
-    );
+    </Router>)
   }
 }
 
