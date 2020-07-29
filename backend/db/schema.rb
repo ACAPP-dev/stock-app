@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_170935) do
   create_table "tickers", force: :cascade do |t|
     t.string "ticker"
     t.string "ticker_name"
+    t.string "exchange"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
