@@ -12,13 +12,13 @@ const FINNHUB_API_KEY = 'bsfleivrh5rf14r5rh80'
 
 class App extends React.Component {
   // Disable Fetch for now...
-  // componentDidMount() {
-  //   fetch(FINNHUB_STOCK_DATA_URL)
-  //   .then(resp => resp.json())
-  //   .then(json => {
-  //     console.log(json)
-  //   })
-  // }
+  componentDidMount() {
+    fetch(FINNHUB_STOCK_DATA_URL)
+    .then(resp => resp.json())
+    .then(json => {
+      console.log(json)
+    })
+  }
 
 testCandleChart = () => {
   /** Sample of candlestick chart

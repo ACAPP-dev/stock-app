@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Create user(s)
+
+user1 = User.create(name: 'Andrew Capp', email: 'acapp909@gmail.com', password: '1234')
+
+user2 = User.create(name: 'Dad', email: 'dad@gmail.com', password: '1111')
+
+# Build database of tickers
+
+
