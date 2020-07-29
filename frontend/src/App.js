@@ -43,19 +43,19 @@ testCandleChart = () => {
 
   am4core.useTheme(am4themes_animated);
 
-  var chart = am4core.create("chartdiv", am4charts.XYChart);
+  const chart = am4core.create("chartdiv", am4charts.XYChart);
   chart.paddingRight = 20;
-debugger
+  // debugger
   chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
 
-  var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+  const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
   dateAxis.renderer.grid.template.location = 0;
   dateAxis.renderer.minGridDistance = 60;
 
-  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
   valueAxis.tooltip.disabled = true;
 
-  var series = chart.series.push(new am4charts.CandlestickSeries());
+  const series = chart.series.push(new am4charts.CandlestickSeries());
   series.dataFields.dateX = "date";
   series.dataFields.valueY = "close";
   series.dataFields.openValueY = "open";
@@ -392,14 +392,17 @@ debugger
     "low": "169.18",
     "close": "172.75"
 }];
+
+  return chart
+
 }
 
     
-  componentWillUnmount() {
-    if (this.chart) {
-      this.chart.dispose();
-    }
-  }
+  // componentWillUnmount() {
+  //   if (this.chart) {
+  //     this.chart.dispose();
+  //   }
+  // }
 
 
     //sample api request from finnhub.io documentation
@@ -420,7 +423,8 @@ debugger
           <h1>Andrew's Final Project</h1>
           <h2>Stock App</h2>
         </header>
-        <div id="chartdiv" style={{ width: "100%", height: "500px" }}>
+        <div>
+        {/* <div id="chartdiv" style={{ width: "100%", height: "500px" }}> */}
           {this.testCandleChart()}
         </div>
         {/* <NavBarContainer /> */}
