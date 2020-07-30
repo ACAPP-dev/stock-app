@@ -36,7 +36,7 @@ class NavBarContainer extends React.Component {
                 <Navbar.Brand href='/about'>Andrew's Stock App</Navbar.Brand>
                 <Nav className='mr-auto'>
                     <Nav.Link href='/'>Home</Nav.Link>
-                    
+                    <Nav.Link href='/stock'>Stock Picker</Nav.Link>
                     <Nav.Link href='/company'>Company Container</Nav.Link>
                     <Nav.Link href='/watchlists'>Watchlists</Nav.Link>
                     

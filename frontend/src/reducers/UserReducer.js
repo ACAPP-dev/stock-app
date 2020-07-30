@@ -1,6 +1,6 @@
 
 function userReducer(state = {
-        name: "", email: "", loggedIn: false
+        name: "", email: "", id: "", loggedIn: false
         }, action) 
     {
     console.log('State from userReducer:', state)
@@ -12,6 +12,7 @@ function userReducer(state = {
             return {...state, 
                 name: action.payload.name, 
                 email: action.payload.email,
+                id: action.payload.id,
                 loggedIn: true
             }
         default:

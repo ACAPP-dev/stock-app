@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './App.css';
@@ -11,6 +11,7 @@ import About from './components/About'
 import Login from './components/Login'
 
 import CompanyContainer from './containers/CompanyContainer'
+import WatchlistContainer from './containers/WatchlistContainer';
 
 // from to in stock data is unix time from 6/1/20 to 6/15/20
 const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
@@ -74,6 +75,7 @@ class App extends React.Component {
           <Route exact path="/about" component={About} />
           <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
           <Route exact path="/company" component={CompanyContainer} />
+          <Route exact path="/watchlists" component={WatchlistContainer} />
         </div>
       </div>
     </Router>)

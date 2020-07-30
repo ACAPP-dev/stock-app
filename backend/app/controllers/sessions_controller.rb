@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
         user = User.find_by(email: params[:email])
 
         if (user && user.authenticate(params[:password]))
-            render json: user, only: [:email, :name]
+            render json: user, only: [:id, :email, :name], include: [:watchlists]
         end
     end
 end
