@@ -1,4 +1,8 @@
 
+body {
+  padding-top: 50px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
@@ -10,3 +14,16 @@
   color: white;
 }
 
+.nav-image {
+  margin: 2px;
+}
+
+.login-form {
+  width: 50%;
+  margin: 5px auto;
+  justify-content: center;
+}
+
+h2 {
+  text-align: center;
+}

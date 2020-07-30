@@ -2,16 +2,26 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import checkmark from '../images/checkmark.jpg'
+
+// import { loginUser } from '../reducers/userReducer'
 
 // need to set up and import presentational navbar components
 
 class NavBarContainer extends React.Component {
 
     userNavInfo = () => {
-        if (this.props.user) {
+        // debugger
+        if (this.props.user.name) {
             return (
-                <Nav.Link href='/logout'>Logout</Nav.Link>
-                // {this.props.user.name}
+                <React.Fragment>
+                    <Nav.Link href='/logout'>Logout</Nav.Link>
+                    {/* Need to add link to specific user details below */}
+                    <Nav.Link href='/user' >
+                    <img className='nav-image' src={ checkmark } alt='checkmark' width='20' height='20' />
+                        {this.props.user.name}
+                    </Nav.Link>
+                </React.Fragment>
             )
 
         } else {
@@ -28,6 +38,8 @@ class NavBarContainer extends React.Component {
                     <Nav.Link href='/'>Home</Nav.Link>
                     
                     <Nav.Link href='/company'>Company Container</Nav.Link>
+                    <Nav.Link href='/watchlists'>Watchlists</Nav.Link>
+                    
                 </Nav>
                 <Nav className='justify-content-end'>
                     {this.userNavInfo()}
@@ -43,5 +55,6 @@ const mapStateToProps = state => {
     console.log('mapStateToProps in NavBarContainer:', state.users)
     return {user: state.users}
 }
+
 
 export default connect(mapStateToProps)(NavBarContainer)

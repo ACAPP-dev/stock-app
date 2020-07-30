@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 import './App.css';
 // import Bootstrap CSS for styling of certain user interface items
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -46,24 +46,47 @@ class App extends React.Component {
     //   console.log(body.explanation);
     // });
 
-  
+  handleLogin = (formData) => {
+    // debugger
+    const loginObject = {
+      method: 'POST',
+      headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify(formData)
+    }
+
+  fetch('http://localhost:3000/login', loginObject)
+      .then(resp => resp.json())
+      .then(json => {
+          console.log('userlogin response: ', json)
+
+          return this.props.loginUser(json)
+      })
+}
+
+
   render() {
     return (
     <Router>
       <div className="App">
-        <header>
-          <NavBarContainer />
-          <h1>Andrew's Final Project</h1>
-          <h2>Stock App</h2>
-        </header>
-        
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/company" component={CompanyContainer} />
+        <div><NavBarContainer /></div>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
+          <Route exact path="/company" component={CompanyContainer} />
+        </div>
       </div>
     </Router>)
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  console.log('mapStateToProps in App:', state.users)
+  return {user: state.users}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {loginUser: (user) => dispatch({type: 'LOGIN_USER', payload: user})}
+}
+
+export default connect (mapStateToProps,mapDispatchToProps)(App);
