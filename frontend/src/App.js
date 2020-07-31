@@ -83,8 +83,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('mapStateToProps in App:', state.users)
-  return {user: state.users}
+  console.log('mapStateToProps in App:', state.user)
+  return {user: state.user}
 }
 
 const mapDispatchToProps = dispatch => {

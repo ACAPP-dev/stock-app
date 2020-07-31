@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
   companies: companyReducer,
-  users: userReducer,
+  user: userReducer,
   watchlists: watchlistReducer
 })
 

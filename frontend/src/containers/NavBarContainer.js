@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -25,21 +26,22 @@ class NavBarContainer extends React.Component {
             )
 
         } else {
-            return <Nav.Link href='/login'>Login</Nav.Link>
-        }
+            return <NavLink style={{ marginRight: '10px' }} to="/login" >Login</NavLink>
+                    }
     }
 
 
     render() {
         return (
             <Navbar fixed='top' bg='dark' variant='dark'>
-                <Navbar.Brand href='/about'>Andrew's Stock App</Navbar.Brand>
+                <Navbar.Brand>
+                    <NavLink style={{ marginRight: '10px' }} to="/about" >Andrew's Stock App</NavLink>
+                </Navbar.Brand>
                 <Nav className='mr-auto'>
-                    <Nav.Link href='/'>Home</Nav.Link>
-                    <Nav.Link href='/stock'>Stock Picker</Nav.Link>
-                    <Nav.Link href='/company'>Company Container</Nav.Link>
-                    <Nav.Link href='/watchlists'>Watchlists</Nav.Link>
-                    
+                    <NavLink style={{ marginRight: '10px' }} to="/" >Home</NavLink>
+                    <NavLink style={{ marginRight: '10px' }} to="/stock" >Look Up Stock</NavLink>
+                    <NavLink style={{ marginRight: '10px' }} to="/company" >Company Data</NavLink>
+                    <NavLink style={{ marginRight: '10px' }} to="/watchlists" >Watchlists</NavLink>
                 </Nav>
                 <Nav className='justify-content-end'>
                     {this.userNavInfo()}
@@ -52,8 +54,8 @@ class NavBarContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('mapStateToProps in NavBarContainer:', state.users)
-    return {user: state.users}
+    console.log('mapStateToProps in NavBarContainer:', state)
+    return {user: state.user}
 }
 
 

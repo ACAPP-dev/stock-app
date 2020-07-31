@@ -4,16 +4,17 @@ import { connect } from 'react-redux'
 
 class WatchlistContainer extends React.Component {
 
-    getWatchlist = () => {
-        fetch(`/watchlists/${this.props.user.id}`)
-            .then(resp => resp.json())
-            .then(json => {
-                console.log(json)
-            })
-    }
+    // Not needed for index - will need to get details of stocks / companies at some point
+    // getWatchlist = () => {
+    //     fetch(`/watchlists/${this.props.user.id}`)
+    //         .then(resp => resp.json())
+    //         .then(json => {
+    //             console.log(json)
+    //         })
+    // }
 
     render() {
-        this.getWatchlist()
+        // this.getWatchlist()
 
         return(
             <div>
@@ -25,8 +26,8 @@ class WatchlistContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return {user: state.users, watchLists: state.watchlists}
-
+    return {user: state.user, watchLists: state.user.watchlists}
+    
 }
 
 export default connect (mapStateToProps)(WatchlistContainer)

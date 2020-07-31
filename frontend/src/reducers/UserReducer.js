@@ -1,20 +1,26 @@
 
 function userReducer(state = {
-        name: "", email: "", id: "", loggedIn: false
-        }, action) 
-    {
+        name: "", 
+        email: "", 
+        id: "", 
+        loggedIn: false,
+        watchlists: []
+        }, action) {
     console.log('State from userReducer:', state)
     console.log('Action from userReducer:', action)
     
     switch (action.type) {
         case 'LOGIN_USER':
-            
-            return {...state, 
+            const newUser = {
                 name: action.payload.name, 
                 email: action.payload.email,
                 id: action.payload.id,
-                loggedIn: true
+                loggedIn: true,
+                watchlists: action.payload.watchlists
             }
+
+            return {...state, ...newUser}
+            
         default:
             return state
     } 
