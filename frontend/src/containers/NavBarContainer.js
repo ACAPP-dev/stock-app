@@ -11,22 +11,24 @@ import checkmark from '../images/checkmark.jpg'
 
 class NavBarContainer extends React.Component {
 
+    
+
     userNavInfo = () => {
         // debugger
         if (this.props.user.name) {
             return (
                 <React.Fragment>
-                    <Nav.Link href='/logout'>Logout</Nav.Link>
+                    <NavLink activeClassName='active-nav' className='nav' to='/logout'>Logout</NavLink>
                     {/* Need to add link to specific user details below */}
-                    <Nav.Link href='/user' >
+                    <NavLink activeClassName='active-nav' className='nav' to='/user' >
                     <img className='nav-image' src={ checkmark } alt='checkmark' width='20' height='20' />
                         {this.props.user.name}
-                    </Nav.Link>
+                    </NavLink>
                 </React.Fragment>
             )
 
         } else {
-            return <NavLink style={{ marginRight: '10px' }} to="/login" >Login</NavLink>
+            return <NavLink activeClassName='active-nav' className='nav' to="/login" >Login</NavLink>
                     }
     }
 
@@ -35,13 +37,13 @@ class NavBarContainer extends React.Component {
         return (
             <Navbar fixed='top' bg='dark' variant='dark'>
                 <Navbar.Brand>
-                    <NavLink style={{ marginRight: '10px' }} to="/about" >Andrew's Stock App</NavLink>
+                    <NavLink activeClassName='active-nav' className='nav' to="/about" >Andrew's Stock App</NavLink>
                 </Navbar.Brand>
                 <Nav className='mr-auto'>
-                    <NavLink style={{ marginRight: '10px' }} to="/" >Home</NavLink>
-                    <NavLink style={{ marginRight: '10px' }} to="/stock" >Look Up Stock</NavLink>
-                    <NavLink style={{ marginRight: '10px' }} to="/company" >Company Data</NavLink>
-                    <NavLink style={{ marginRight: '10px' }} to="/watchlists" >Watchlists</NavLink>
+                    <NavLink exact activeClassName='active-nav' className='nav' to="/" >Home</NavLink>
+                    <NavLink activeClassName='active-nav' className='nav' to="/stock" >Look Up Stock</NavLink>
+                    <NavLink activeClassName='active-nav' className='nav' to="/company" >Company Data</NavLink>
+                    <NavLink activeClassName='active-nav' className='nav' to="/watchlists" >Watchlists</NavLink>
                 </Nav>
                 <Nav className='justify-content-end'>
                     {this.userNavInfo()}

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 import companyReducer from './reducers/companyReducer'
 import userReducer from './reducers/userReducer'
 import watchlistReducer from './reducers/watchlistReducer'
@@ -15,7 +16,7 @@ const rootReducer = combineReducers({
   watchlists: watchlistReducer
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <React.StrictMode>

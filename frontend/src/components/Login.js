@@ -28,14 +28,14 @@ export default class Login extends React.Component {
                 <div>
                     <h2>User Login</h2>
                     <Form className='login-form' onSubmit={this.returnLogin}>
-                        <Form.Group controlID='formBasicEmail'>
+                        <Form.Group >
                             <Form.Label>Email: </Form.Label>
                             <Form.Control type='email' onChange={this.handleChange} name='email' placeholder='Enter email' value={this.state.email} />
                             <Form.Text className='text-muted'>
                                 Email address is used for login
                             </Form.Text>
                         </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group >
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" onChange={this.handleChange} name='password' placeholder="Enter password" value={this.state.password} />
                             <Form.Text className='text-muted'>

@@ -8,8 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBarContainer from './containers/NavBarContainer';
 import Home from './components/Home';
 import About from './components/About'
+
 import Login from './components/Login'
 
+import fetchUser from './actions/fetchUser'
+import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
 import WatchlistContainer from './containers/WatchlistContainer';
 
@@ -49,22 +52,9 @@ class App extends React.Component {
 
   handleLogin = (formData) => {
     // debugger
-    const loginObject = {
-      method: 'POST',
-      headers: {"Content-Type": "application/json", "Accept": "application/json"},
-      body: JSON.stringify(formData)
-    }
-
-  fetch('http://localhost:3000/login', loginObject)
-      .then(resp => resp.json())
-      .then(json => {
-          console.log('userlogin response: ', json)
-
-          return this.props.loginUser(json)
-      })
-}
-
-
+    this.props.loginUser(formData)
+  }
+  
   render() {
     return (
     <Router>
@@ -74,6 +64,9 @@ class App extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
+          <Route exact path="/logout" component={Home} />
+          <Route exact path="/user" component={Home} />
+          <Route exact path="/stock" component={TickerContainer} />
           <Route exact path="/company" component={CompanyContainer} />
           <Route exact path="/watchlists" component={WatchlistContainer} />
         </div>
@@ -88,7 +81,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {loginUser: (user) => dispatch({type: 'LOGIN_USER', payload: user})}
+  return {loginUser: (user) => dispatch(fetchUser(user))}
 }
 
 export default connect (mapStateToProps,mapDispatchToProps)(App);

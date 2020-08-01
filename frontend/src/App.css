@@ -27,3 +27,17 @@ body {
 h2 {
   text-align: center;
 }
+
+.active-nav {
+  background:#A8A8A7 ;
+}
+
+.nav {
+  margin-right: 10px;
+  color: lightgrey;
+}
+
+.nav:hover {
+  color:white;
+  
+}

@@ -20,7 +20,9 @@ function userReducer(state = {
             }
 
             return {...state, ...newUser}
-            
+        case 'START_USER_LOGIN':
+            console.log('starting user fetch!')
+            return state
         default:
             return state
     } 
