@@ -25,9 +25,11 @@ let basicData = {}
         .then(resp => resp.json())
         .then(json => {
             console.log(json.metric)
-            return basicData = json.metric
+            basicData = json.metric
+            return databaseFetch()
         })
 
+        const databaseFetch = () => {
         // Persist company data to database
 
         // create_table "companies", force: :cascade do |t|
@@ -46,7 +48,7 @@ let basicData = {}
         // t.string "fifty_two_week_low"
         // t.string "fifty_two_week_low_date"
 
-        const companyDataObject = {
+        const companyDataObject = {data: {
             ticker: companyData.ticker,
             name: companyData.name,
             country: companyData.country,
@@ -61,8 +63,8 @@ let basicData = {}
             fifty_two_week_high_date: basicData['52WeekHighDate'],
             fifty_two_week_low: basicData['52WeekLow'],
             fifty_two_week_low_date: basicData['52WeekLowDate']
-        }
-
+        }}
+        
         const companyObject = {
             method: 'POST',
             headers: {"Content-Type": "application/json", "Accept": "application/json"},
@@ -75,6 +77,7 @@ let basicData = {}
             console.log('company database response: ', json)
             return dispatch({type: 'ADD_COMPANY', payload: json})
         })
+        }
     }
 }
 
