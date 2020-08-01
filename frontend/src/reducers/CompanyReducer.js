@@ -9,7 +9,7 @@ function companyReducer(state={}, action) {
         case 'START_COMPANY_FETCH':
             return state
         case 'ADD_COMPANY':
-            return state
+            return {...state, ...action.payload}
         default:
             return state
     }

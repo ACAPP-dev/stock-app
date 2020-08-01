@@ -2,16 +2,16 @@ class CompaniesController < ApplicationController
     def create
         
         company = Company.find_by(ticker: params[:ticker])
-        byebug
+        # byebug
         if (company)
             company.update(company_params)
         else
             company = Company.new(company_params)
-            if (company.save)
-                render json: company
-            else
-                render json: {response: "Error"}, status: 402 
-            end
+        end
+        if (company.save)
+            render json: company
+        else
+            render json: {response: "Error"}, status: 502 
         end
     end
 

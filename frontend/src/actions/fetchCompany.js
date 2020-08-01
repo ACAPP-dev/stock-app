@@ -18,16 +18,19 @@ let basicData = {}
         .then(resp => resp.json())
         .then(json => {
             console.log(json)
-            return companyData = json
+            companyData = json
+            return fetchBasicData()
         })
 
-        fetch(FINNHUB_BASIC_DATA_URL + ticker + '&metric=price' + FINNHUB_API_KEY)
-        .then(resp => resp.json())
-        .then(json => {
-            console.log(json.metric)
-            basicData = json.metric
-            return databaseFetch()
-        })
+        const fetchBasicData = () => {
+            fetch(FINNHUB_BASIC_DATA_URL + ticker + '&metric=price' + FINNHUB_API_KEY)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json.metric)
+                basicData = json.metric
+                return databaseFetch()
+            })
+        }
 
         const databaseFetch = () => {
         // Persist company data to database

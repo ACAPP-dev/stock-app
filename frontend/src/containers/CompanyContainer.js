@@ -1,5 +1,6 @@
 import React from 'react'
 import Chart from '../components/company/Chart'
+import { connect } from 'react-redux'
 
 class CompanyContainer extends React.Component {
 
@@ -14,4 +15,9 @@ class CompanyContainer extends React.Component {
     
 }
 
-export default CompanyContainer
+const mapStateToProps = state => {
+    console.log('state in companycontainer:', state)
+    return state
+}
+
+export default connect(mapStateToProps)(CompanyContainer)
