@@ -20,38 +20,9 @@ import WatchlistContainer from './containers/WatchlistContainer';
 const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
 const FINNHUB_API_KEY = 'bsfleivrh5rf14r5rh80'
 
-
-
-
-
 class App extends React.Component {
 
-  
-
-  // Disable Fetch for now...
-  componentDidMount() {
-    // fetch(FINNHUB_STOCK_DATA_URL)
-    // .then(resp => resp.json())
-    // .then(json => {
-    //   console.log(json)
-    // })
-
-    // Testing: Automatically Log in seed user
-    // need to code
-  }
-
-
-    //sample api request from finnhub.io documentation
-    // const request = require('request');
-
-    // request('https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=1&from=1572651390&to=1572910590&token=bsfleivrh5rf14r5rh80', { json: true }, (err, res, body) => {
-    //   if (err) { return console.log(err); }
-    //   console.log(body.url);
-    //   console.log(body.explanation);
-    // });
-
   handleLogin = (formData) => {
-    // debugger
     this.props.loginUser(formData)
   }
   

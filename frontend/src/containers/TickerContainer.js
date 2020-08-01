@@ -2,8 +2,10 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Tickers from '../components/ticker/TickerList'
+import { connect } from 'react-redux'
+import fetchCompany from '../actions/fetchCompany'
 
-export default class TickerContainer extends React.Component {
+class TickerContainer extends React.Component {
 
     
     state = {
@@ -24,8 +26,9 @@ export default class TickerContainer extends React.Component {
         
     }
     
-    handleSearch = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault()
+        this.props.fetchCompanyData(this.state.ticker)
 
     }
     
@@ -34,13 +37,13 @@ export default class TickerContainer extends React.Component {
     }
 
     returnTickers = () => {
-        console.log('state tickers in tickercontainer:', this.state.tickers)
+        
         if (this.state.searchText) {
             const tickerList = this.state.tickers.filter(ticker => {
                 const matchText = new RegExp(this.state.searchText, "gi")
                 return ticker.ticker_name.match(matchText)
             })
-            console.log(tickerList)
+            
             return < Tickers returnTicker={this.updateTicker} tickers={tickerList.slice(0, 5)} />
         }
     }
@@ -52,7 +55,7 @@ export default class TickerContainer extends React.Component {
 
             <div>
                 <h2>Enter Company Name to Search for Ticker</h2>
-                <Form className='login-form' onSubmit={this.handleSearch}>
+                <Form className='login-form' onSubmit={this.handleSubmit}>
                     <Form.Group >
                         <Form.Label>Company Name to Search:</Form.Label>
                         <Form.Control type='text' onChange={this.handleChange} name='searchText' value={this.state.searchText} />
@@ -88,3 +91,14 @@ export default class TickerContainer extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return state
+}
+
+const mapDispatchToProps = dispatch => {
+    return {fetchCompanyData: (ticker) => dispatch(fetchCompany(ticker))}
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TickerContainer)

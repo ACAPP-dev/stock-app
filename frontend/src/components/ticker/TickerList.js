@@ -21,10 +21,10 @@ const TickerList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.tickers.map(ticker => {
+                    {props.tickers.map((ticker, index) => {
                         return(
                             
-                        <tr data-ticker={ticker.ticker} onClick={handleClick}>
+                        <tr key={index} data-ticker={ticker.ticker} onClick={handleClick}>
                             <td>{ticker.ticker}</td>
                             <td>{ticker.ticker_name}</td>
                             <td>{ticker.exchange}</td>
