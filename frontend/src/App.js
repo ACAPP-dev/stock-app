@@ -16,9 +16,7 @@ import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
 import WatchlistContainer from './containers/WatchlistContainer';
 
-// from to in stock data is unix time from 6/1/20 to 6/15/20
-const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
-const FINNHUB_API_KEY = 'bsfleivrh5rf14r5rh80'
+
 
 class App extends React.Component {
 

@@ -1,6 +1,11 @@
 
 body {
   padding-top: 50px;
+  
+}
+
+.App {
+  background: grey;
 }
 
 .App-header {
@@ -41,3 +46,16 @@ h2 {
   color:white;
   
 }
+
+.company-container {
+  color: white;
+}
+
+.company-row {
+  border-bottom: 1px solid black;
+}
+
+.company-col {
+  border-right: 1px solid black;
+}
+

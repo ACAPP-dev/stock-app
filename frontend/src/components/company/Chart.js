@@ -17,12 +17,7 @@ const Chart = (props) => {
      * ---------------------------------------
      */
   
-    componentWillUnmount() {
-      if (this.chart) {
-        this.chart.dispose();
-      }
-    }
-    
+
     am4core.useTheme(am4themes_animated);
 
         let newChart = am4core.create("chartdiv", am4charts.XYChart);
