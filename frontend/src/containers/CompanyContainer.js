@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Statistics from '../components/company/Statistics'
+import Industry from '../components/company/Industry'
 
 class CompanyContainer extends React.Component {
 
@@ -25,17 +27,12 @@ class CompanyContainer extends React.Component {
                     </Row>
                     <Row className='company-row'>
                         <Col className='company-col'>
-                            <div>Latest Stock Statistics</div>
-                            <p>Use statistics container to return a table</p>
-                            <div>Exchange: {this.props.data.exchange}</div>
-                            <div>52 Week High: {this.props.data.fifty_two_week_high}</div>
-                            <div>Date: {this.props.data.fifty_two_week_high_date}</div>
-                            <div>52 Week Low: {this.props.data.fifty_two_week_low}</div>
-                            <div>Date: {this.props.data.fifty_two_week_low_date}</div>
+                            <h6>Latest Stock Statistics</h6>
+                            < Statistics data={this.props.data} />
                         </Col>
                         <Col>
-                            <div>Industry Info</div>
-                            <div>Sector: {this.props.data.industry}</div>
+                        <h6>Company Info</h6>
+                            < Industry data={this.props.data} />
 
                         </Col>
                     </Row>

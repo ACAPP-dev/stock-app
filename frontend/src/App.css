@@ -52,10 +52,25 @@ h2 {
 }
 
 .company-row {
-  border-bottom: 1px solid black;
+  
 }
 
 .company-col {
   border-right: 1px solid black;
 }
 
+.small-table {
+  width: 100%;
+  font-size: small;
+  color: white;
+  margin: 1px auto;
+}
+
+.small-table tr {
+  border-bottom: 1px solid black;
+}
+
+h6 {
+  background: darkslategray;
+  text-align: center;
+}
