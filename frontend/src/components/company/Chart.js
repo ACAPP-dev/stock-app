@@ -17,6 +17,11 @@ const Chart = (props) => {
      * ---------------------------------------
      */
   
+    componentWillUnmount() {
+      if (this.chart) {
+        this.chart.dispose();
+      }
+    }
     
     am4core.useTheme(am4themes_animated);
 
@@ -378,10 +383,6 @@ return (
   }
   
       
-    // componentWillUnmount() {
-    //   if (this.chart) {
-    //     this.chart.dispose();
-    //   }
-    // }
+    
   
   export default Chart

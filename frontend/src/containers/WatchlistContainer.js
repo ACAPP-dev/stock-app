@@ -26,7 +26,7 @@ class WatchlistContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('watchlist state:', this.state)
+    console.log('watchlist state:', state)
     return {user: state.user, watchLists: state.user.watchlists}
     
 }
