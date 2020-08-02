@@ -12,12 +12,20 @@
 
 ActiveRecord::Schema.define(version: 2020_07_29_170935) do
 
-  create_table "charts", force: :cascade do |t|
+  create_table "chart_lines", force: :cascade do |t|
+    t.integer "chart_id"
     t.string "date"
     t.string "open"
     t.string "high"
     t.string "low"
     t.string "close"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "charts", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "chart_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,14 +45,6 @@ ActiveRecord::Schema.define(version: 2020_07_29_170935) do
     t.string "fifty_two_week_high_date"
     t.string "fifty_two_week_low"
     t.string "fifty_two_week_low_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "company_charts", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "chart_id"
-    t.string "chart_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -14,6 +14,7 @@ let chartEndDate = '1596153600' // July 31, 2020 - need to make this variable
 let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 let companyData = {}
 let basicData = {}
+let newChartData = []
 
     return dispatch => {
         dispatch({ type: 'START_COMPANY_FETCH'})
@@ -41,7 +42,7 @@ let basicData = {}
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)
-                const newChartData = readyChartData(json)
+                newChartData = readyChartData(json)
                 return databaseFetch()
             })
 
@@ -67,22 +68,25 @@ let basicData = {}
         // t.string "fifty_two_week_low"
         // t.string "fifty_two_week_low_date"
 
-        const companyDataObject = {data: {
-            ticker: companyData.ticker,
-            name: companyData.name,
-            country: companyData.country,
-            exchange: companyData.exchange,
-            market_cap: companyData.marketCapitalization,
-            outstanding_shares: companyData.shareOutstanding,
-            web_url: companyData.weburl,
-            logo: companyData.logo,
-            industry: companyData.finnhubIndustry,
-            three_month_trading_volume: basicData['3MonthAverageTradingVolume'],
-            fifty_two_week_high: basicData['52WeekHigh'],
-            fifty_two_week_high_date: basicData['52WeekHighDate'],
-            fifty_two_week_low: basicData['52WeekLow'],
-            fifty_two_week_low_date: basicData['52WeekLowDate']
-        }}
+        const companyDataObject = {
+            data: {
+                ticker: companyData.ticker,
+                name: companyData.name,
+                country: companyData.country,
+                exchange: companyData.exchange,
+                market_cap: companyData.marketCapitalization,
+                outstanding_shares: companyData.shareOutstanding,
+                web_url: companyData.weburl,
+                logo: companyData.logo,
+                industry: companyData.finnhubIndustry,
+                three_month_trading_volume: basicData['3MonthAverageTradingVolume'],
+                fifty_two_week_high: basicData['52WeekHigh'],
+                fifty_two_week_high_date: basicData['52WeekHighDate'],
+                fifty_two_week_low: basicData['52WeekLow'],
+                fifty_two_week_low_date: basicData['52WeekLowDate']
+            },
+            chartData: newChartData
+        }
         
         const companyObject = {
             method: 'POST',
@@ -118,7 +122,8 @@ const readyChartData = (chartData) => {
     console.log(newChartData)
     return newChartData
 }
-// newChart.data = [ {
+// Example of chart data format: 
+//  newChart.data = [ {
 //     "date": "2018-08-01",
 //     "open": "136.65",
 //     "high": "136.96",
