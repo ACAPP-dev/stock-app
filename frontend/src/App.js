@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './App.css';
+
 // import Bootstrap CSS for styling of certain user interface items
 import 'bootstrap/dist/css/bootstrap.min.css'
 

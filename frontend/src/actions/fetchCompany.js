@@ -3,34 +3,50 @@ function fetchCompany(ticker) {
   
   // from to in stock data is unix time from 6/1/20 to 6/15/20
 // const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
-const FINNHUB_COMPANY_DATA_URL = 'https://finnhub.io/api/v1/stock/profile2?symbol='
-const FINNHUB_BASIC_DATA_URL = 'https://finnhub.io/api/v1/stock/metric?symbol='
+const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
+const FINNHUB_COMPANY_DATA_URL = '/stock/profile2?symbol='
+const FINNHUB_BASIC_DATA_URL = '/stock/metric?symbol='
+const FINNHUB_CHART_URL = '/stock/candle?symbol='
+const FINNHUB_CHART_TIMEFRAME = '&resolution=D&from='
 const FINNHUB_API_KEY = '&token=bsfleivrh5rf14r5rh80'
+let chartStartDate = '1593561600' // July 1, 2020 - need to make this variable
+let chartEndDate = '1596153600' // July 31, 2020 - need to make this variable
+let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 let companyData = {}
 let basicData = {}
 
     return dispatch => {
         dispatch({ type: 'START_COMPANY_FETCH'})
         
-        // Get company and stock price data from API (2 fetches)
+        // Get company, stock, and chart data from API (3 fetches)
 
-        fetch(FINNHUB_COMPANY_DATA_URL + ticker + FINNHUB_API_KEY)
+        fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + ticker + FINNHUB_API_KEY)
         .then(resp => resp.json())
         .then(json => {
-            console.log(json)
             companyData = json
             return fetchBasicData()
         })
 
         const fetchBasicData = () => {
-            fetch(FINNHUB_BASIC_DATA_URL + ticker + '&metric=price' + FINNHUB_API_KEY)
+            fetch(FINNHUB_BASIC_URL + FINNHUB_BASIC_DATA_URL + ticker + '&metric=price' + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
-                console.log(json.metric)
                 basicData = json.metric
-                return databaseFetch()
+                return fetchChartData()
             })
         }
+
+        const fetchChartData = () => {
+            fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json)
+                const newChartData = readyChartData(json)
+                return databaseFetch()
+            })
+
+        }
+
 
         const databaseFetch = () => {
         // Persist company data to database
@@ -83,5 +99,31 @@ let basicData = {}
         }
     }
 }
+
+// Convert chart data from API fetch to a format that can persist to the database and work with the chart library
+// Add volume to model later?
+const readyChartData = (chartData) => {
+    const newChartData = []
+
+    chartData.t.map( (date, index) => {
+        return newChartData.push(
+            {date: date,
+            open: chartData.o[index],
+            high: chartData.h[index],
+            low: chartData.l[index],
+            close: chartData.c[index]
+            }
+        )
+    })
+    console.log(newChartData)
+    return newChartData
+}
+// newChart.data = [ {
+//     "date": "2018-08-01",
+//     "open": "136.65",
+//     "high": "136.96",
+//     "low": "134.15",
+//     "close": "136.49"
+//   },
 
 export default fetchCompany
