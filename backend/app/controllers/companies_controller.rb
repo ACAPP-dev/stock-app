@@ -1,36 +1,38 @@
 class CompaniesController < ApplicationController
     def index
-        company = Company.all 
-        render json: company
+        @company = Company.all 
+        render json: @company
     end
 
     def create
         
-        company = Company.find_by(ticker: params[:ticker])
+        @company = Company.find_by(ticker: params[:ticker])
         
-        if (company)
-            company.update(company_params)
+        if (@company)
+            @company.update(company_params)
         else
-            company = Company.new(company_params)
+            @company = Company.new(company_params)
         end
-        if (company.save)
+        if (@company.save)
             # byebug
             if (params[:chartData])
-                new_chart = company.charts.build(chart_type: 'Candle')
+                new_chart = @company.charts.build(chart_type: 'Candle')
                 new_chart.save
-                chart_params.each do |line|
-                    byebug
+                params[:chartData].each do |line|
+                    
                     new_chart.chart_lines.build(
-                        date: line.date,
-                        open: line.open,
-                        high: line.high,
-                        low: line.low,
-                        close: line.close
+                        date: line[:date],
+                        open: line[:open],
+                        high: line[:high],
+                        low: line[:low],
+                        close: line[:close]
                     )
                     new_chart.save
+                    
                 end
             end
-            render json: company, new_chart
+            
+            render json: @company
         else
             render json: {response: "Error"}, status: 502 
         end
