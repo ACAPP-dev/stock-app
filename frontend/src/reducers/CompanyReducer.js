@@ -1,7 +1,7 @@
 
 function companyReducer(state={ charts: [{chart_lines: []}]}, action) {
-    console.log('State from companyReducer:', state)
-    console.log('Action from companyReducer:', action)
+    // console.log('State from companyReducer:', state)
+    // console.log('Action from companyReducer:', action)
 
     switch (action.type) {
         

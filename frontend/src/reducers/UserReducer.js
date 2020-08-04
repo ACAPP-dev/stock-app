@@ -6,8 +6,8 @@ function userReducer(state = {
         loggedIn: false,
         watchlists: []
         }, action) {
-    console.log('State from userReducer:', state)
-    console.log('Action from userReducer:', action)
+    // console.log('State from userReducer:', state)
+    // console.log('Action from userReducer:', action)
     
     switch (action.type) {
         case 'LOGIN_USER':
@@ -21,7 +21,6 @@ function userReducer(state = {
 
             return {...state, ...newUser}
         case 'START_USER_LOGIN':
-            console.log('starting user fetch!')
             return state
         default:
             return state

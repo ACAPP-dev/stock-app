@@ -50,7 +50,7 @@ class CompanyContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('state in companycontainer:', state)
+    // console.log('state in companycontainer:', state)
     return {data: state.companies}
 }
 

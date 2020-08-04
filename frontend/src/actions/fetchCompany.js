@@ -41,7 +41,6 @@ let newChartData = []
             fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
-                console.log(json)
                 newChartData = readyChartData(json)
                 return databaseFetch()
             })
@@ -50,56 +49,40 @@ let newChartData = []
 
 
         const databaseFetch = () => {
-        // Persist company data to database
+            // Persist company and chart data to database
 
-        // create_table "companies", force: :cascade do |t|
-        // t.string "ticker"
-        // t.string "name"
-        // t.string "country"
-        // t.string "exchange"
-        // t.string "market_cap"
-        // t.string "outstanding_shares"
-        // t.string "web_url"
-        // t.string "logo"
-        // t.string "industry"
-        // t.string "three_month_trading_volume"
-        // t.string "fifty_two_week_high"
-        // t.string "fifty_two_week_high_date"
-        // t.string "fifty_two_week_low"
-        // t.string "fifty_two_week_low_date"
-
-        const companyDataObject = {
-            data: {
-                ticker: companyData.ticker,
-                name: companyData.name,
-                country: companyData.country,
-                exchange: companyData.exchange,
-                market_cap: companyData.marketCapitalization,
-                outstanding_shares: companyData.shareOutstanding,
-                web_url: companyData.weburl,
-                logo: companyData.logo,
-                industry: companyData.finnhubIndustry,
-                three_month_trading_volume: basicData['3MonthAverageTradingVolume'],
-                fifty_two_week_high: basicData['52WeekHigh'],
-                fifty_two_week_high_date: basicData['52WeekHighDate'],
-                fifty_two_week_low: basicData['52WeekLow'],
-                fifty_two_week_low_date: basicData['52WeekLowDate']
-            },
-            chartData: newChartData
-        }
+            const companyDataObject = {
+                data: {
+                    ticker: companyData.ticker,
+                    name: companyData.name,
+                    country: companyData.country,
+                    exchange: companyData.exchange,
+                    market_cap: companyData.marketCapitalization,
+                    outstanding_shares: companyData.shareOutstanding,
+                    web_url: companyData.weburl,
+                    logo: companyData.logo,
+                    industry: companyData.finnhubIndustry,
+                    three_month_trading_volume: basicData['3MonthAverageTradingVolume'],
+                    fifty_two_week_high: basicData['52WeekHigh'],
+                    fifty_two_week_high_date: basicData['52WeekHighDate'],
+                    fifty_two_week_low: basicData['52WeekLow'],
+                    fifty_two_week_low_date: basicData['52WeekLowDate']
+                },
+                chartData: newChartData
+            }
         
-        const companyObject = {
-            method: 'POST',
-            headers: {"Content-Type": "application/json", "Accept": "application/json"},
-            body: JSON.stringify(companyDataObject)
-        }
+            const companyObject = {
+                method: 'POST',
+                headers: {"Content-Type": "application/json", "Accept": "application/json"},
+                body: JSON.stringify(companyDataObject)
+            }
 
-        fetch('http://localhost:3000/companies', companyObject)
-        .then(resp => resp.json())
-        .then(json => {
-            console.log('company database response: ', json)
-            return dispatch({type: 'ADD_COMPANY', payload: json})
-        })
+            fetch('http://localhost:3000/companies', companyObject)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log('company database response: ', json)
+                return dispatch({type: 'ADD_COMPANY', payload: json})
+            })
         }
     }
 }
@@ -119,7 +102,7 @@ const readyChartData = (chartData) => {
             }
         )
     })
-    console.log(newChartData)
+    // console.log(newChartData)
     return newChartData
 }
 // Example of chart data format: 
