@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
 
     def create
         
-        @company = Company.find_by(ticker: params[:ticker])
+        @company = Company.find_by(ticker: company_params[:ticker])
         
         if (@company)
             @company.update(company_params)

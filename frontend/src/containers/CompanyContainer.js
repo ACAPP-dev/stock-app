@@ -20,7 +20,8 @@ class CompanyContainer extends React.Component {
                             <div>
                                 <span><img src={this.props.data.logo} alt='logo' width='15px' height='15px' /></span>
                                 <span> {this.props.data.name}</span>
-                                <span> ({this.props.data.ticker})</span></div>
+                                <span> ({this.props.data.ticker})</span>
+                            </div>
                             <div>Need to add latest stock price</div>
                         </Col>
                         <Col sm={3} >Add to watchlist button</Col>
