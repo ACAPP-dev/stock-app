@@ -46,24 +46,22 @@ const Chart = (props) => {
   
     newChart.data = props.chart.chart_lines.map( line => {
       //Convert Unix Date to JS Date Object
-      debugger
       const rawDate = new Date(parseInt(line.date) * 1000)
-      const month = rawDate.getUTCMonth()
-      const day = rawDate.getUTCDate()
-      const chartDate = rawDate.getUTCFullYear() + '-' + month < 10 ? '0' + month : month + day < 10 ? '0' + day : day
-      
-      return {"date": chartDate,
-      "open": line.open,
-      "high": line.high,
-      "low": line.low,
-      "close": line.close}
+      const rawMonth = rawDate.getUTCMonth()
+      const rawDay = rawDate.getUTCDate()
+      const chartDate = rawDate.getUTCFullYear() + '-' + (rawMonth < 10 ? '0' + rawMonth : rawMonth) + '-' + (rawDay < 10 ? '0' + rawDay : rawDay)
+      return {date: chartDate,
+      open: line.open,
+      high: line.high,
+      low: line.low,
+      close: line.close}
 
     })
     
     // Example unix date July 1st: 1593561600
     
     
-  //   [ {
+  //   newChart.data = [ {
   //     "date": "2018-08-01",
   //     "open": "136.65",
   //     "high": "136.96",
@@ -389,6 +387,7 @@ const Chart = (props) => {
   //     "close": "172.75"
   // }];
 
+  console.log(newChart.data)
 return (
     <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
 )
