@@ -41,7 +41,7 @@ class CompanyContainer extends React.Component {
 
                 </Container>
                 <p>Chart goes here</p>
-                {/* < Chart chart={this.props.data.charts[0]} /> */}
+                < Chart chart={this.props.data.charts[0]} />
             </React.Fragment>
         )
     }

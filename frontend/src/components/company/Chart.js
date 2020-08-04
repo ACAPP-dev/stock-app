@@ -16,7 +16,7 @@ const Chart = (props) => {
      * https://www.amcharts.com/docs/v4/
      * ---------------------------------------
      */
-  
+    console.log('props.chart in chart component: ', props.chart)
 
     am4core.useTheme(am4themes_animated);
 
@@ -44,16 +44,14 @@ const Chart = (props) => {
   
     newChart.scrollbarX = new am4core.Scrollbar();
   
-    newChart.data = props.map( line => {
+    newChart.data = props.chart.chart_lines.map( line => {
       //Convert Unix Date to JS Date Object
-      const rawDate = new Date(line.date * 1000)
+      debugger
+      const rawDate = new Date(parseInt(line.date) * 1000)
       const month = rawDate.getUTCMonth()
       const day = rawDate.getUTCDate()
-      const chartDate = 
-        rawDate.getUTCFullYear() + '-' + 
-        month < 10 ? '0' + month : month +
-        day < 10 ? '0' + day : day
-
+      const chartDate = rawDate.getUTCFullYear() + '-' + month < 10 ? '0' + month : month + day < 10 ? '0' + day : day
+      
       return {"date": chartDate,
       "open": line.open,
       "high": line.high,
