@@ -3,7 +3,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
 
 const WatchListing = props => {
     console.log('watchlisting props: ', props)
@@ -11,15 +11,17 @@ const WatchListing = props => {
     const handleView = id => {
         props.viewWatchlist(id)
     }
-    
+
     const handleRemove = id => {
         props.returnRemove(id)
     }
 
+    
+
     return(
         
             <Container className='watchlist-card-container'>
-            {props.watchList.map(watchlist => {
+            {props.watchlists.map(watchlist => {
                 return(
                     
                     <Card bg='light' className='watchlist-card' key={watchlist.id}>

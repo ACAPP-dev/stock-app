@@ -1,23 +1,18 @@
 function fetchWatchlistDetail(watchlistId, userId) {
     
-    const FETCH_URL = `http://localhost:3000/users/${userId}/watchlist/${watchlistId}`
+    const FETCH_URL = `http://localhost:3000/users/${userId}/watchlists/${watchlistId}`
 
-    const watchlistObject = {
-        method: 'POST',
-        headers: {"Content-Type": "application/json", "Accept": "application/json"},
-        body: JSON.stringify({watchlist: formData})
-      }
     // debugger
     return dispatch => {
-        dispatch({ type: 'START_ADD_WATCHLIST'})
+        dispatch({ type: 'START_GET_WATCHLIST_DETAIL'})
 
-        fetch(FETCH_URL, watchlistObject)
+        fetch(FETCH_URL)
         .then(resp => resp.json())
         .then(json => {
-            console.log('watchlist add response: ', json)
-            return dispatch({type: 'ADD_WATCHLIST', payload: json})
+            console.log('watchlist get detail response: ', json)
+            return dispatch({type: 'GET_WATCHLIST_DETAIL', payload: json})
         })
     }
 }
 
-export default addWatchlist
+export default fetchWatchlistDetail

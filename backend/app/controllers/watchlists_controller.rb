@@ -2,10 +2,11 @@ class WatchlistsController < ApplicationController
 
     def index
         user = User.find_by(id: params[:user_id])
+        watchlists = user.watchlists
         # byebug
         if user
             # render json: user.watchlists, only: [:id, :name, :description]
-            render json: user.watchlists, only: [:user_id, :id, :name, :description]
+            render json: watchlists
         else
             render json: {response: "User not found!"}, status: 404
         end

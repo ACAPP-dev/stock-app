@@ -7,11 +7,13 @@ import AddWatchlist from '../components/watchlist/AddWatchlist'
 import addWatchlist from '../actions/addWatchlist'
 import fetchWatchlist from '../actions/removeWatchlist'
 import fetchWatchlistDetail from '../actions/fetchWatchlistDetail'
+import WatchDetail from '../components/watchlist/WatchDetail'
 
 class WatchlistContainer extends React.Component {
 
     state = {
-        showAddWatchlist: false
+        showAddWatchlist: false,
+        showWatchlistDetail: false
     }
 
     addWatchlist = formData => {
@@ -21,6 +23,7 @@ class WatchlistContainer extends React.Component {
 
     viewWatchlist = id => {
         this.props.fetchWatchlistDetail(id, this.props.user.id)
+        this.setState({showWatchlistDetail: true})
     }
 
     removeWatchlist = id => {
@@ -51,12 +54,19 @@ class WatchlistContainer extends React.Component {
         return(
             <div className='watchlist-div'>
                 <h2>Watchlists</h2>
-                
+                {this.state.showWatchlistDetail ?
+                    < WatchDetail watchDetail={this.props.watchlistDetail} /> :
+                    null
+                }
                 {this.state.showAddWatchlist ?
                     < AddWatchlist closeForm={this.closeForm} returnWatchlist={this.addWatchlist} /> :
                     <Button className='watchlist-btn' onClick={this.addWatchListForm}>Add Watchlist</Button>
                 }
-                < WatchListing viewWatchlist={this.viewWatchlist} returnRemove={this.removeWatchlist} watchList={this.props.watchLists} />
+                < WatchListing 
+                    viewWatchlist={this.viewWatchlist} 
+                    returnRemove={this.removeWatchlist} 
+                    watchlists={this.props.watchLists}
+                />
                 {/* <Link className='nav' to='/watchlists/new'>Add Watchlist</Link> */}
             </div>
         )
@@ -65,13 +75,14 @@ class WatchlistContainer extends React.Component {
 
 const mapStateToProps = state => {
     console.log('watchlist state:', state)
-    return {user: state.user, watchLists: state.user.watchlists}    
+    return {user: state.user, watchLists: state.user.watchlists,
+        watchlistDetail: state.watchlists}    
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addWatchlist: (formData, userId) => dispatch(addWatchlist(formData, userId))
-        getWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId))
+        addWatchlist: (formData, userId) => dispatch(addWatchlist(formData, userId)),
+        fetchWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId))
     }
 
 }
