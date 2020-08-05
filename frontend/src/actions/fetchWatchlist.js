@@ -1,4 +1,4 @@
-function fetchWatchlist(id) {
+function fetchWatchlist() {
     // const watchListObject = {
     //     method: 'POST',
     //     headers: {"Content-Type": "application/json", "Accept": "application/json"},

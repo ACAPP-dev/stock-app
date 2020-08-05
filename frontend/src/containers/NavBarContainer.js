@@ -18,6 +18,7 @@ class NavBarContainer extends React.Component {
         if (this.props.user.name) {
             return (
                 <React.Fragment>
+                    <NavLink activeClassName='active-nav' className='nav' to={`/users/${this.props.user.id}/watchlists`} >Watchlists</NavLink>
                     <NavLink activeClassName='active-nav' className='nav' to='/logout'>Logout</NavLink>
                     {/* Need to add link to specific user details below */}
                     <NavLink activeClassName='active-nav' className='nav' to='/user' >
@@ -43,7 +44,7 @@ class NavBarContainer extends React.Component {
                     <NavLink exact activeClassName='active-nav' className='nav' to="/" >Home</NavLink>
                     <NavLink activeClassName='active-nav' className='nav' to="/stock" >Look Up Stock</NavLink>
                     <NavLink activeClassName='active-nav' className='nav' to="/company" >Company Data</NavLink>
-                    <NavLink activeClassName='active-nav' className='nav' to="/watchlists" >Watchlists</NavLink>
+                    
                 </Nav>
                 <Nav className='justify-content-end'>
                     {this.userNavInfo()}
