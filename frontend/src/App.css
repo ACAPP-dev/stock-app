@@ -78,3 +78,13 @@ h6 {
 .watchlist-card-container {
   width: 50%;
 }
+
+.watchlist-div {
+  width: 75%;
+  text-align: center;
+  margin: auto;
+}
+
+.watchlist-btn {
+  margin: 5px;
+}

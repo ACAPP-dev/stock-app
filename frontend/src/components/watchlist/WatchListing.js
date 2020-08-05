@@ -8,6 +8,10 @@ import Col from 'react-bootstrap/Col'
 const WatchListing = props => {
     console.log('watchlisting props: ', props)
 
+    const handleView = id => {
+        props.viewWatchlist(id)
+    }
+    
     const handleRemove = id => {
         props.returnRemove(id)
     }
@@ -18,15 +22,15 @@ const WatchListing = props => {
             {props.watchList.map(watchlist => {
                 return(
                     
-                    <Card className='watchlist-card' key={watchlist.id}>
+                    <Card bg='light' className='watchlist-card' key={watchlist.id}>
                         <Card.Img variant='top' src='holder.js/100px160' />
                         <Card.Body>
                             <Card.Title>{watchlist.name}</Card.Title>
                             <Card.Text>{watchlist.description}</Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button variant='dark' onClick={() => handleRemove(watchlist.id)}>Edit Watchlist</Button>
-                            <Button variant='danger' onClick={() => handleRemove(watchlist.id)}>Remove Watchlist</Button>
+                            <Button className='watchlist-btn' variant='primary' onClick={() => handleView(watchlist.id)}>View/Edit</Button>
+                            <Button className='watchlist-btn' variant='danger' onClick={() => handleRemove(watchlist.id)}>Delete</Button>
                         </Card.Footer>
 
                     </Card>

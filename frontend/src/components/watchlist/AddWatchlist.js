@@ -19,6 +19,10 @@ export default class AddWatchlist extends React.Component {
         this.props.returnWatchlist(this.state)
     }
 
+    closeForm = () => {
+        this.props.closeForm()
+    }
+
     render() {
         console.log('props for addwatchlist:', this.props)
         // if (this.props.loggedIn) {
@@ -43,9 +47,8 @@ export default class AddWatchlist extends React.Component {
                             </Form.Text>
                         </Form.Group>
                         
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                        <Button className='watchlist-btn' variant="primary" type="submit">Submit</Button>
+                        <Button className='watchlist-btn' onClick={this.closeForm} variant="secondary">Close Form</Button>
                     </Form>
                 </div>
             )
