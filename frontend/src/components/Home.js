@@ -16,12 +16,10 @@ const Home = () => {
             </div>
             
             <Card className="text-center">
-                <Card.Header>Watchlists</Card.Header>
+                <Card.Header>Watchlists Card</Card.Header>
                 <Card.Body>
                     <Card.Title>watchlist info</Card.Title>
                     
-                    
-                    <Button variant="secondary">remove button...</Button>
                 </Card.Body>
                 <Card.Footer className="text-muted">footer...</Card.Footer>
             </Card>

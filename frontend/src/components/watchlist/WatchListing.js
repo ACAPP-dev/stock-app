@@ -1,5 +1,6 @@
 import React from 'react'
-import Table from 'react-bootstrap/Table'
+import CardDeck from 'react-bootstrap/CardDeck'
+import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
 const WatchListing = props => {
@@ -10,30 +11,29 @@ const WatchListing = props => {
     }
 
     return(
-        <React.Fragment>
-            <h2>List of Watchlists</h2>
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Ticker</th>
-                        <th>Company Name</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.watchList.map(watchlist => {
-                        return(
-                        <tr key={watchlist.id}>
-                            <td>{watchlist.name}</td>
-                            <td>{watchlist.description}</td>
-                            <td><Button variant='dark' onClick={() => handleRemove(watchlist.id)}>Remove</Button></td>
-                        </tr>
-                        )
-                    })}
-                </tbody>
-            </Table>
-        </React.Fragment>
+        <CardDeck className='watchlist-card-container'>
+            {props.watchList.map(watchlist => {
+                return(
+                    <Card key={watchlist.id}>
+                        <Card.Img variant='top' src='holder.js/100px160' />
+                        <Card.Body>
+                            <Card.Title>{watchlist.name}</Card.Title>
+                            <Card.Text>{watchlist.description}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <Button variant='dark' onClick={() => handleRemove(watchlist.id)}>Edit Watchlist</Button>
+                            <Button variant='danger' onClick={() => handleRemove(watchlist.id)}>Remove Watchlist</Button>
+                        </Card.Footer>
 
+                    </Card>
+                
+               
+                )
+            })}
+
+
+        </CardDeck>
+           
     )
 
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import WatchListing from '../components/watchlist/WatchListing'
 import { connect } from 'react-redux'
@@ -26,7 +27,7 @@ class WatchlistContainer extends React.Component {
             <div>
                 <h2>Watchlist Container</h2>
                 < WatchListing returnRemove={this.removeWatchlist} watchList={this.props.watchLists} />
-                <Button>Add Watchlist (need form)</Button>
+                <Link className='nav' to='/watchlists/new'>Add Watchlist</Link>
             </div>
         )
     }

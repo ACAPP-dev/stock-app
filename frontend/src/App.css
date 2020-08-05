@@ -74,3 +74,8 @@ h6 {
   background: darkslategray;
   text-align: center;
 }
+
+.watchlist-card-container {
+  width: 75%;
+  align-items: center;
+}

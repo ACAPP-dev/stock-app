@@ -16,7 +16,7 @@ import fetchUser from './actions/fetchUser'
 import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
 import WatchlistContainer from './containers/WatchlistContainer';
-
+import AddWatchlist from './components/watchlist/AddWatchlist'
 
 
 class App extends React.Component {
@@ -39,6 +39,7 @@ class App extends React.Component {
           <Route exact path="/stock" component={TickerContainer} />
           <Route exact path="/company" component={CompanyContainer} />
           <Route exact path="/watchlists" component={WatchlistContainer} />
+          <Route exact path="/watchlists/new" component={AddWatchlist} />
         </div>
       </div>
     </Router>)
