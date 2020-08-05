@@ -16,9 +16,6 @@ import fetchUser from './actions/fetchUser'
 import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
 import WatchlistContainer from './containers/WatchlistContainer';
-import AddWatchlist from './components/watchlist/AddWatchlist'
-import addWatchlist from './actions/addWatchlist'
-
 
 class App extends React.Component {
 
@@ -26,7 +23,7 @@ class App extends React.Component {
     this.props.loginUser(formData)
   }
   
-  addWatchlist = formData => {this.props.addWatchlist(formData, this.props.user.id)}
+  
 
   render() {
     return (
@@ -42,7 +39,7 @@ class App extends React.Component {
           <Route exact path="/stock" component={TickerContainer} />
           <Route exact path="/company" component={CompanyContainer} />
           <Route exact path="/watchlists" component={WatchlistContainer} />
-          <Route exact path="/watchlists/new" render={routerProps => <AddWatchlist {...routerProps} addWatchlist={this.addWatchlist} />} /> />
+          {/* <Route exact path="/watchlists/new" render={routerProps => <AddWatchlist {...routerProps} addWatchlist={this.addWatchlist} />} /> */}
         </div>
       </div>
     </Router>)
@@ -56,8 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (user) => dispatch(fetchUser(user)),
-    addWatchlist: (formData, userId) => dispatch(addWatchlist(formData, userId))
+    loginUser: (user) => dispatch(fetchUser(user))
   }
 
 }

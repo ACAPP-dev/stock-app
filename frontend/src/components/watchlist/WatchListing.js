@@ -1,7 +1,9 @@
 import React from 'react'
-import CardDeck from 'react-bootstrap/CardDeck'
+
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 
 const WatchListing = props => {
     console.log('watchlisting props: ', props)
@@ -11,10 +13,12 @@ const WatchListing = props => {
     }
 
     return(
-        <CardDeck className='watchlist-card-container'>
+        
+            <Container className='watchlist-card-container'>
             {props.watchList.map(watchlist => {
                 return(
-                    <Card key={watchlist.id}>
+                    
+                    <Card className='watchlist-card' key={watchlist.id}>
                         <Card.Img variant='top' src='holder.js/100px160' />
                         <Card.Body>
                             <Card.Title>{watchlist.name}</Card.Title>
@@ -26,13 +30,13 @@ const WatchListing = props => {
                         </Card.Footer>
 
                     </Card>
-                
+                   
                
                 )
             })}
 
-
-        </CardDeck>
+        </Container>
+       
            
     )
 

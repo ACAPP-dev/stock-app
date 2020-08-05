@@ -3,8 +3,19 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import WatchListing from '../components/watchlist/WatchListing'
 import { connect } from 'react-redux'
+import AddWatchlist from '../components/watchlist/AddWatchlist'
+import addWatchlist from '../actions/addWatchlist'
 
 class WatchlistContainer extends React.Component {
+
+    state = {
+        showAddWatchlist: false
+    }
+
+    addWatchlist = formData => {
+        this.setState({showAddWatchlist: false})
+        return this.props.addWatchlist(formData, this.props.user.id)
+    }
 
     removeWatchlist = id => {
         console.log('removewatchlist in watchlistcontainer: ', id)
@@ -20,6 +31,12 @@ class WatchlistContainer extends React.Component {
     //         })
     // }
 
+    addWatchListForm = () => {
+        this.setState({showAddWatchlist: true})
+           
+        
+    }
+
     render() {
         // this.getWatchlist()
 
@@ -27,7 +44,12 @@ class WatchlistContainer extends React.Component {
             <div>
                 <h2>Watchlist Container</h2>
                 < WatchListing returnRemove={this.removeWatchlist} watchList={this.props.watchLists} />
-                <Link className='nav' to='/watchlists/new'>Add Watchlist</Link>
+                {this.state.showAddWatchlist ?
+                    < AddWatchlist returnWatchlist={this.addWatchlist} /> :
+                    <Button onClick={this.addWatchListForm}>Add Watchlist</Button>
+                }
+                
+                {/* <Link className='nav' to='/watchlists/new'>Add Watchlist</Link> */}
             </div>
         )
     }
@@ -38,6 +60,12 @@ const mapStateToProps = state => {
     return {user: state.user, watchLists: state.user.watchlists}    
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        addWatchlist: (formData, userId) => dispatch(addWatchlist(formData, userId))
+    }
+
+}
 
 
-export default connect (mapStateToProps)(WatchlistContainer)
+export default connect (mapStateToProps, mapDispatchToProps)(WatchlistContainer)

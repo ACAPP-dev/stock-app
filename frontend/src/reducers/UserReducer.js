@@ -22,6 +22,12 @@ function userReducer(state = {
             return {...state, ...newUser}
         case 'START_USER_LOGIN':
             return state
+        case 'START_ADD_WATCHLIST':
+            return state
+        case 'ADD_WATCHLIST':
+            // debugger
+            return {...state, watchlists: action.payload}    
+
         default:
             return state
     } 

@@ -16,7 +16,7 @@ export default class AddWatchlist extends React.Component {
 
     returnWatchlist = (event) => {
         event.preventDefault()
-        this.props.addWatchlist(this.state)
+        this.props.returnWatchlist(this.state)
     }
 
     render() {

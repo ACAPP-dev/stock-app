@@ -4,7 +4,8 @@ class WatchlistsController < ApplicationController
         user = User.find_by(id: params[:user_id])
         # byebug
         if user
-            render json: user.watchlists, only: [:id, :name, :description]
+            # render json: user.watchlists, only: [:id, :name, :description]
+            render json: user.watchlists, only: [:user_id, :id, :name, :description]
         else
             render json: {response: "User not found!"}, status: 404
         end
@@ -14,9 +15,9 @@ class WatchlistsController < ApplicationController
         user = User.find_by(id: params[:user_id])
         # byebug
         if user
-            watchlist = Watchlist.new(watchlist_params)
-            if watchlist.save
-                render json: watchlist, only: [:id, :name, description]
+            user.watchlists.build(watchlist_params)
+            if user.save
+                render json: user.watchlists, only: [:user_id, :id, :name, :description]
             else
                 render json: {response: "Error!"}, status: 502
             end
@@ -29,6 +30,6 @@ class WatchlistsController < ApplicationController
     private
 
     def watchlist_params
-        params.require(:watchList).permit(:name, :description)
+        params.require(:watchlist).permit(:name, :description)
     end
 end
