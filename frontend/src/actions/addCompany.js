@@ -7,7 +7,7 @@ function addCompany(formData, userId) {
         headers: {"Content-Type": "application/json", "Accept": "application/json"},
         body: JSON.stringify({watchlist: formData})
       }
-    // debugger
+    debugger
     return dispatch => {
         dispatch({ type: 'START_ADD_WATCHLIST'})
 

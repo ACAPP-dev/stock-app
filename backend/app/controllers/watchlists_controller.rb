@@ -88,7 +88,7 @@ class WatchlistsController < ApplicationController
             render json: {response: "User not found!"}, status: 404
         end 
         
-        render json: user.watchlists
+        render json: watchlist
 
     end
 
