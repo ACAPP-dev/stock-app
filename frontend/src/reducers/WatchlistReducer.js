@@ -32,8 +32,15 @@ function watchlistReducer(state={companies: []}, action) {
             // debugger
             return {...state, ...watchlistDetail}
 
-    default:
-        return state
+        case 'START_WATCHLIST_REMOVE':
+            return state
+
+        case 'REMOVE_WATCHLIST':
+            debugger
+            return state
+
+        default:
+            return state
     }
 }
 

@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
+import market from '../../images/market.png'
 
 const WatchListing = props => {
     console.log('watchlisting props: ', props)
@@ -25,11 +26,13 @@ const WatchListing = props => {
                 return(
                     
                     <Card bg='light' className='watchlist-card' key={watchlist.id}>
-                        <Card.Img variant='top' src='holder.js/100px160' />
+                        <Card.Img variant='top' src={ market } height='100px' />
+                        
                         <Card.Body>
                             <Card.Title>{watchlist.name}</Card.Title>
                             <Card.Text>{watchlist.description}</Card.Text>
                         </Card.Body>
+                        
                         <Card.Footer>
                             <Button className='watchlist-btn' variant='primary' onClick={() => handleView(watchlist.id)}>View/Edit</Button>
                             <Button className='watchlist-btn' variant='danger' onClick={() => handleRemove(watchlist.id)}>Delete</Button>

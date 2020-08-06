@@ -43,6 +43,24 @@ class WatchlistsController < ApplicationController
         end 
     end
 
+    def destroy
+        user = User.find_by(id: params[:user_id])
+        # byebug
+        if user
+            watchlist = Watchlist.find_by(id: params[:id])
+            if watchlist && watchlist.user_id == user.id
+                watchlist.destroy
+            else
+                render json: {response: "Watchlist not found!"}, status: 404
+            end
+        else
+            render json: {response: "User not found!"}, status: 404
+        end 
+        byebug
+        render json: user.watchlists
+
+    end
+
     private
 
     def watchlist_params

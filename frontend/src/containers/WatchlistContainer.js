@@ -5,7 +5,7 @@ import WatchListing from '../components/watchlist/WatchListing'
 import { connect } from 'react-redux'
 import AddWatchlist from '../components/watchlist/AddWatchlist'
 import addWatchlist from '../actions/addWatchlist'
-import fetchWatchlist from '../actions/removeWatchlist'
+import removeWatchlist from '../actions/removeWatchlist'
 import fetchWatchlistDetail from '../actions/fetchWatchlistDetail'
 import WatchDetail from '../components/watchlist/WatchDetail'
 
@@ -39,6 +39,10 @@ class WatchlistContainer extends React.Component {
     //             console.log(json)
     //         })
     // }
+
+    componentDidUpdate() {
+        window.scrollTo(0, 0)
+    }
 
     addWatchListForm = () => {
         this.setState({showAddWatchlist: true})
@@ -82,6 +86,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addWatchlist: (formData, userId) => dispatch(addWatchlist(formData, userId)),
+        removeWatchlist: (id, userId) => dispatch(removeWatchlist(id, userId)),
         fetchWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId))
     }
 
