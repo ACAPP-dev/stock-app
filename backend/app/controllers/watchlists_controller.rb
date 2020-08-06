@@ -1,14 +1,18 @@
 class WatchlistsController < ApplicationController
 
     def index
-        user = User.find_by(id: params[:user_id])
-        watchlists = user.watchlists
-        # byebug
-        if user
-            # render json: user.watchlists, only: [:id, :name, :description]
-            render json: watchlists
+        if params[:user_id]
+            user = User.find_by(id: params[:user_id])
+            if user
+                
+                watchlists = user.watchlists
+                render json: watchlists
+            else
+                render json: {response: "User not found!"}, status: 404
+            end
         else
-            render json: {response: "User not found!"}, status: 404
+            watchlists = Watchlist.all 
+            render json: watchlists
         end
     end
 
@@ -29,18 +33,23 @@ class WatchlistsController < ApplicationController
     end
 
     def show
-        user = User.find_by(id: params[:user_id])
-        # byebug
-        if user
-            watchlist = Watchlist.find_by(id: params[:id])
-            if watchlist && watchlist.user_id == user.id
-                render json: watchlist
+        if params[:user_id]
+            user = User.find_by(id: params[:user_id])
+            # byebug
+            if user
+                watchlist = Watchlist.find_by(id: params[:id])
+                if watchlist && watchlist.user_id == user.id
+                    render json: watchlist
+                else
+                    render json: {response: "Watchlist not found!"}, status: 404
+                end
             else
-                render json: {response: "Watchlist not found!"}, status: 404
+                render json: {response: "User not found!"}, status: 404
             end
         else
-            render json: {response: "User not found!"}, status: 404
-        end 
+            watchlist = Watchlist.find_by(id: params[:id])
+            render json: watchlist
+        end
     end
 
     def destroy
@@ -58,6 +67,29 @@ class WatchlistsController < ApplicationController
         end 
         
         render json: user.watchlists
+    end
+
+    def add_company
+    end
+
+    def remove_company
+        # byebug
+        user = User.find_by(id: params[:userId])
+        # byebug
+        if user
+            watchlist = Watchlist.find_by(id: params[:watchlistId])
+            company = Company.find_by(id: params[:companyId])
+            if watchlist && watchlist.user_id == user.id
+                watchlist.companies.delete(company)
+            else
+                render json: {response: "Watchlist not found!"}, status: 404
+            end
+        else
+            render json: {response: "User not found!"}, status: 404
+        end 
+        
+        render json: user.watchlists
+
     end
 
     private

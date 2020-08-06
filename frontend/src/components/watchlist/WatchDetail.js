@@ -14,8 +14,8 @@ const WatchDetail = props => {
         props.addCompany()
     }
 
-    const removeCompany = id => {
-        props.removeCompany(id)
+    const removeCompany = companyId => {
+        props.removeCompany(props.watchDetail.id, companyId, )
     }
 
     return (
