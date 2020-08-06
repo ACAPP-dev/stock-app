@@ -27,7 +27,8 @@ function userReducer(state = {
         case 'ADD_WATCHLIST':
             // debugger
             return {...state, watchlists: action.payload}    
-
+        case 'REMOVE_WATCHLIST':
+            return {...state, watchlists: action.payload} 
         default:
             return state
     } 

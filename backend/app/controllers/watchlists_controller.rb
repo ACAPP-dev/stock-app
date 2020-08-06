@@ -56,9 +56,8 @@ class WatchlistsController < ApplicationController
         else
             render json: {response: "User not found!"}, status: 404
         end 
-        byebug
+        
         render json: user.watchlists
-
     end
 
     private

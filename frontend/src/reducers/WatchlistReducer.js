@@ -4,10 +4,7 @@ function watchlistReducer(state={companies: []}, action) {
     console.log('Action from watchlistReducer:', action)
     
     switch (action.type) {
-        case 'ADD_WATCHLIST':
-            // debugger
-            return state
-            
+                    
         case 'START_GET_WATCHLIST_DETAIL':
             return state
 
@@ -33,10 +30,6 @@ function watchlistReducer(state={companies: []}, action) {
             return {...state, ...watchlistDetail}
 
         case 'START_WATCHLIST_REMOVE':
-            return state
-
-        case 'REMOVE_WATCHLIST':
-            debugger
             return state
 
         default:

@@ -1,7 +1,7 @@
 function removeWatchlist(watchlistId, userId) {
     
     const DELETE_URL = `http://localhost:3000/users/${userId}/watchlists/${watchlistId}`
-
+    
     const removeObject = {
         method: 'DELETE',
         headers: {"Content-Type": "application/json", "Accept": "application/json"},

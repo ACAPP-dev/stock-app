@@ -26,9 +26,13 @@ class WatchlistContainer extends React.Component {
         this.setState({showWatchlistDetail: true})
     }
 
-    removeWatchlist = id => {
-        console.log('removewatchlist in watchlistcontainer: ', id)
+    hideWatchlist = () => {
+        this.setState({showWatchlistDetail: false})
+    }
 
+    removeWatchlist = (id) => {
+        console.log('removewatchlist in watchlistcontainer: ', id)
+        this.props.removeWatchlist(id, this.props.user.id)
     }
 
     // Not needed for index - will need to get details of stocks / companies at some point
@@ -48,6 +52,14 @@ class WatchlistContainer extends React.Component {
         this.setState({showAddWatchlist: true})
     }
 
+    addCompany = () => {
+        console.log('add company clicked in watchlist detail')
+    }
+
+    removeCompany = id => {
+        console.log('remove company clicked in watchlist detail', id)
+    }
+
     closeForm = () => {
         this.setState({showAddWatchlist: false})
     }
@@ -59,7 +71,12 @@ class WatchlistContainer extends React.Component {
             <div className='watchlist-div'>
                 <h2>Watchlists</h2>
                 {this.state.showWatchlistDetail ?
-                    < WatchDetail watchDetail={this.props.watchlistDetail} /> :
+                    < WatchDetail 
+                        hideWatchlist={this.hideWatchlist} 
+                        watchDetail={this.props.watchlistDetail} 
+                        addCompany={this.addCompany}
+                        removeCompany={this.removeCompany}
+                    /> :
                     null
                 }
                 {this.state.showAddWatchlist ?

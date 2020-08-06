@@ -6,6 +6,18 @@ import Button from 'react-bootstrap/Button'
 const WatchDetail = props => {
     console.log('watchdetail props: ', props)
     
+    const returnHide = () => {
+        props.hideWatchlist()
+    }
+
+    const addCompany = () => {
+        props.addCompany()
+    }
+
+    const removeCompany = id => {
+        props.removeCompany(id)
+    }
+
     return (
         <Container>
             <h2>{props.watchDetail.name}</h2>
@@ -17,6 +29,7 @@ const WatchDetail = props => {
                     <th>Ticker</th>
                     <th>Name</th>
                     <th>Price...</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,12 +39,13 @@ const WatchDetail = props => {
                         <td>{company.ticker}</td>
                         <td>{company.name}</td>
                         <td>Future: Add stock price</td>
+                        <td><Button variant='danger' onClick={() => removeCompany(company.id)}>Remove</Button></td>
                     </tr>)
                 })}
             </tbody>
             </Table>
-            <Button className='watchlist-btn'>Add Stock</Button>
-            <Button className='watchlist-btn'>Hide Detail</Button>
+            <Button onClick={addCompany} className='watchlist-btn'>Add Stock</Button>
+            <Button onClick={returnHide} className='watchlist-btn'>Hide Detail</Button>
         </Container>
     )
 }
