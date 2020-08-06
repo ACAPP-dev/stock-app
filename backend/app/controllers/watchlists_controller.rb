@@ -70,12 +70,30 @@ class WatchlistsController < ApplicationController
     end
 
     def add_company
+        user = User.find_by(id: params[:userId])
+        byebug
+        if user
+            watchlist = Watchlist.find_by(id: params[:watchlistId])
+            
+            if watchlist && watchlist.user_id == user.id
+                company = Company.find_by(id: params[:companyId])
+                if !company
+                    company = watchlist.companies.build(ticker: params[:formData])
+                end
+            else
+                render json: {response: "Watchlist not found!"}, status: 404
+            end
+        else
+            render json: {response: "User not found!"}, status: 404
+        end 
+        
+        render json: watchlist
+
     end
 
     def remove_company
-        # byebug
         user = User.find_by(id: params[:userId])
-        # byebug
+        
         if user
             watchlist = Watchlist.find_by(id: params[:watchlistId])
             company = Company.find_by(id: params[:companyId])

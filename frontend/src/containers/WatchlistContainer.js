@@ -10,12 +10,14 @@ import fetchWatchlistDetail from '../actions/fetchWatchlistDetail'
 import WatchDetail from '../components/watchlist/WatchDetail'
 import addCompany from '../actions/addCompany'
 import removeCompany from '../actions/removeCompany'
+import TickerForm from '../components/ticker/TickerForm'
 
 class WatchlistContainer extends React.Component {
 
     state = {
         showAddWatchlist: false,
-        showWatchlistDetail: false
+        showWatchlistDetail: false,
+        showAddCompany: false
     }
 
     addWatchlist = formData => {
@@ -54,6 +56,14 @@ class WatchlistContainer extends React.Component {
         this.setState({showAddWatchlist: true})
     }
 
+    showAddStockForm = () => {
+        this.setState({showAddCompany: true})
+    }
+
+    hideAddStockForm = () => {
+        this.setState({showAddCompany: false})
+    }
+
     addCompany = (formData) => {
         console.log('add company clicked in watchlist detail')
         this.props.addCompany(formData, this.props.user.id)
@@ -78,11 +88,14 @@ class WatchlistContainer extends React.Component {
                     < WatchDetail 
                         hideWatchlist={this.hideWatchlist} 
                         watchDetail={this.props.watchlistDetail} 
-                        addCompany={this.addCompany}
+                        addCompany={this.showAddStockForm}
+                        
                         removeCompany={this.removeCompany}
                     /> :
                     null
                 }
+                {this.state.showAddCompany ?
+                    < TickerForm buttonText={'Add to Watchlist'} hideAddCompany={this.hideAddStockForm} returnSubmit={this.addCompany} /> : null }
                 {this.state.showAddWatchlist ?
                     < AddWatchlist closeForm={this.closeForm} returnWatchlist={this.addWatchlist} /> :
                     <Button className='watchlist-btn' onClick={this.addWatchListForm}>Add Watchlist</Button>

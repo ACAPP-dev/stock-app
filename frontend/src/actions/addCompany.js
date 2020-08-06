@@ -1,21 +1,21 @@
 function addCompany(formData, userId) {
     
-    const FETCH_URL = `http://localhost:3000/users/${userId}/watchlists`
+    const FETCH_URL = `http://localhost:3000/watchlists`
 
     const watchlistObject = {
         method: 'POST',
         headers: {"Content-Type": "application/json", "Accept": "application/json"},
-        body: JSON.stringify({watchlist: formData})
+        body: JSON.stringify({ticker: formData, userId: userId})
       }
     debugger
     return dispatch => {
-        dispatch({ type: 'START_ADD_WATCHLIST'})
+        dispatch({ type: 'START_ADD_COMPANY_TO_WATCHLIST'})
 
         fetch(FETCH_URL, watchlistObject)
         .then(resp => resp.json())
         .then(json => {
-            console.log('watchlist add response: ', json)
-            return dispatch({type: 'ADD_WATCHLIST', payload: json})
+            console.log('watchlist TICKER add response: ', json)
+            return dispatch({type: 'GET_WATCHLIST_DETAIL', payload: json})
         })
     }
 }
