@@ -71,14 +71,21 @@ class WatchlistsController < ApplicationController
 
     def add_company
         user = User.find_by(id: params[:userId])
-        byebug
+        
         if user
             watchlist = Watchlist.find_by(id: params[:watchlistId])
             
             if watchlist && watchlist.user_id == user.id
-                company = Company.find_by(id: params[:companyId])
-                if !company
-                    company = watchlist.companies.build(ticker: params[:formData])
+                
+                # byebug
+                if !watchlist.companies.find(ifnone=nil) {|company| company.ticker == params[:ticker]}
+                    company = Company.find_by(ticker: params[:ticker])
+                    if company
+                        watchlist.companies.push(company)
+                    else
+                        watchlist.companies.build(ticker: params[:ticker])
+                    end
+                    watchlist.save
                 end
             else
                 render json: {response: "Watchlist not found!"}, status: 404
@@ -86,7 +93,7 @@ class WatchlistsController < ApplicationController
         else
             render json: {response: "User not found!"}, status: 404
         end 
-        
+        # byebug
         render json: watchlist
 
     end

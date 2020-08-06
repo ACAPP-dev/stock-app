@@ -17,7 +17,9 @@ class WatchlistContainer extends React.Component {
     state = {
         showAddWatchlist: false,
         showWatchlistDetail: false,
-        showAddCompany: false
+        showAddCompany: false,
+        currentWatchlistId: ""
+
     }
 
     addWatchlist = formData => {
@@ -27,7 +29,7 @@ class WatchlistContainer extends React.Component {
 
     viewWatchlist = id => {
         this.props.fetchWatchlistDetail(id, this.props.user.id)
-        this.setState({showWatchlistDetail: true})
+        this.setState({showWatchlistDetail: true, currentWatchlistId: id})
     }
 
     hideWatchlist = () => {
@@ -66,7 +68,7 @@ class WatchlistContainer extends React.Component {
 
     addCompany = (formData) => {
         console.log('add company clicked in watchlist detail')
-        this.props.addCompany(formData, this.props.user.id)
+        this.props.addCompany(this.state.currentWatchlistId, formData, this.props.user.id)
     }
 
     removeCompany = (watchlistId, companyId) => {
@@ -121,7 +123,7 @@ const mapDispatchToProps = dispatch => {
     return {
         addWatchlist: (formData, userId) => dispatch(addWatchlist(formData, userId)),
         removeWatchlist: (watchlistId, userId) => dispatch(removeWatchlist(watchlistId, userId)),
-        addCompany: (formData, userId) => dispatch(addCompany(formData, userId)),
+        addCompany: (watchlistId, formData, userId) => dispatch(addCompany(watchlistId, formData, userId)),
         removeCompany: (watchlistId, companyId, userId) => dispatch(removeCompany(watchlistId, companyId, userId)),
         fetchWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId))
     }
