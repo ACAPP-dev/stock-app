@@ -16,7 +16,9 @@ function watchlistReducer(state={companies: []}, action) {
                 companies.push({
                     id: company.id,
                     ticker: company.ticker,
-                    name: company.name
+                    name: company.name,
+                    currentPrice: company.current_price,
+                    prevClosePrice: company.previous_close_price
                 })
             })
 

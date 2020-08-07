@@ -42,7 +42,10 @@ const WatchDetail = props => {
                         <td>{index + 1}</td>
                         <td>{company.ticker}</td>
                         <td>{company.name}</td>
-                        <td>Future: Add stock price</td>
+                        <td>
+                            <div className='space-span'>Current Price: ${Math.round(company.currentPrice * 100) / 100}</div>
+                            <div className='space-span'>Change: {Math.round(((company.currentPrice / company.prevClosePrice) - 1) * 10000) / 100}%</div>
+                        </td>
                         <td><Button className='watchlist-btn' variant='success' onClick={() => viewCompany(company.ticker)}>View Detail</Button>
                         <Button className='watchlist-btn' variant='danger' onClick={() => removeCompany(company.id)}>Remove</Button></td>
                     </tr>)

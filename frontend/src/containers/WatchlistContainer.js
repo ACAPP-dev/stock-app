@@ -98,7 +98,7 @@ class WatchlistContainer extends React.Component {
                     {this.state.showWatchlistDetail ?
                         < WatchDetail 
                             hideWatchlist={this.hideWatchlist} 
-                            watchDetail={this.props.watchlistDetail} 
+                            watchDetail={this.props.watchlistDetail}
                             addCompany={this.showAddStockForm}
                             viewCompany={this.viewCompany}
                             removeCompany={this.removeCompany}
@@ -125,8 +125,11 @@ class WatchlistContainer extends React.Component {
 
 const mapStateToProps = state => {
     console.log('watchlist state:', state)
-    return {user: state.user, watchLists: state.user.watchlists,
-        watchlistDetail: state.watchlists}    
+    return {
+        user: state.user, 
+        watchLists: state.user.watchlists,
+        watchlistDetail: state.watchlists
+    }    
 }
 
 const mapDispatchToProps = dispatch => {
