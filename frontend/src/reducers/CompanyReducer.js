@@ -6,10 +6,10 @@ function companyReducer(state={ charts: [{chart_lines: []}]}, action) {
     switch (action.type) {
         
         case 'START_COMPANY_FETCH':
-            
             return state
         case 'ADD_COMPANY':
             return {...state, ...action.payload}
+        
         default:
             return state
     }

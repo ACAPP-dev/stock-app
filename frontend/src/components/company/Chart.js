@@ -6,22 +6,39 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 class Chart extends React.Component {
 
+  componentDidUpdate(prevProps) {
+    // debugger
+    // Handle refreshing the chart when the dataset changes
+    if(prevProps.chart !== this.props.chart) {
+      if(this.newChart._super) {
+        this.newChart.dispose();
+      }
+      this.initChart();
+    }
+  }
+
   componentDidMount() {
+    this.initChart()
+  }
+
+  initChart() {
+    const { chartId } = this.props
+
     am4core.useTheme(am4themes_animated);
 
-    let newChart = am4core.create("chartdiv", am4charts.XYChart);
+    this.newChart = am4core.create("chartdiv", am4charts.XYChart);
     
-    newChart.paddingRight = 20;
-    newChart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+    this.newChart.paddingRight = 20;
+    this.newChart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
   
-    const dateAxis = newChart.xAxes.push(new am4charts.DateAxis());
+    const dateAxis = this.newChart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.grid.template.location = 0;
     dateAxis.renderer.minGridDistance = 60;
   
-    const valueAxis = newChart.yAxes.push(new am4charts.ValueAxis());
+    const valueAxis = this.newChart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.tooltip.disabled = true;
   
-    const series = newChart.series.push(new am4charts.CandlestickSeries());
+    const series = this.newChart.series.push(new am4charts.CandlestickSeries());
     series.dataFields.dateX = "date";
     series.dataFields.valueY = "close";
     series.dataFields.openValueY = "open";
@@ -29,11 +46,11 @@ class Chart extends React.Component {
     series.dataFields.highValueY = "high";
     series.tooltipText = "Open: [bold]${openValueY.value}[/]\nLow: [bold]${lowValueY.value}[/]\nHigh: [bold]${highValueY.value}[/]\nClose: [bold]${valueY.value}[/]";
   
-    newChart.cursor = new am4charts.XYCursor();
+    this.newChart.cursor = new am4charts.XYCursor();
   
-    newChart.scrollbarX = new am4core.Scrollbar();
+    this.newChart.scrollbarX = new am4core.Scrollbar();
   
-    newChart.data = this.props.chart.chart_lines.map( line => {
+    this.newChart.data = this.props.chart.chart_lines.map( line => {
       //Convert Unix Date to JS Date Object
       const rawDate = new Date(parseInt(line.date) * 1000)
       const rawMonth = rawDate.getUTCMonth()
@@ -46,7 +63,7 @@ class Chart extends React.Component {
       close: line.close}
 
     })
-    
+
     // Sample chart data for testing
 
     //   newChart.data = [ {
@@ -376,6 +393,12 @@ class Chart extends React.Component {
     // }];
 
     // console.log(newChart.data)
+  }
+
+  componentWillUnmount() {
+    if (this.newChart._super) {
+      this.newChart.dispose();
+    }
   }
 
   render() {
