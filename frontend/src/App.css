@@ -1,6 +1,6 @@
 
 body {
-  padding-top: 50px;
+  padding-top: 60px;
   
 }
 
@@ -23,10 +23,15 @@ body {
   margin: 2px;
 }
 
+.login-div {
+  justify-content: center;
+  background-image: url('./images/modern.png');
+}
 .login-form {
   width: 50%;
   margin: 5px auto;
   justify-content: center;
+  /* background-image: url('./images/modern.png'); */
 }
 
 h2 {
@@ -38,8 +43,13 @@ h2 {
 }
 
 .nav {
-  margin-right: 10px;
+  /* margin-right: 10px; */
+  margin: 2px;
+  padding: 2px;
+  background: black;
   color: lightgrey;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .nav:hover {

@@ -25,7 +25,7 @@ export default class Login extends React.Component {
             return <Redirect to="/" />
         } else {
             return(
-                <div>
+                <div className='login-div'>
                     <h2>User Login</h2>
                     <Form className='login-form' onSubmit={this.returnLogin}>
                         <Form.Group >

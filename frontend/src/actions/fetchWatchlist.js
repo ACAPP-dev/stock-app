@@ -8,12 +8,12 @@ function fetchWatchlist() {
     return dispatch => {
         dispatch({ type: 'START_WATCHLIST_FETCH'})
 //dont need fetch object unless creating a new watchlist...
-        fetch('http://localhost:3000/login')
-        .then(resp => resp.json())
-        .then(json => {
-            console.log('watchlist fetch response: ', json)
-            return dispatch({type: 'GET_WATCHLIST', payload: json})
-        })
+        // fetch('http://localhost:3000/login')
+        // .then(resp => resp.json())
+        // .then(json => {
+        //     console.log('watchlist fetch response: ', json)
+        //     return dispatch({type: 'GET_WATCHLIST', payload: json})
+        // })
     }
 }
 

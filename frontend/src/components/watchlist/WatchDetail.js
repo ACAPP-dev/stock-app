@@ -14,6 +14,10 @@ const WatchDetail = props => {
         props.addCompany()
     }
 
+    const viewCompany = ticker => {
+        props.viewCompany(ticker)
+    }
+    
     const removeCompany = companyId => {
         props.removeCompany(props.watchDetail.id, companyId, )
     }
@@ -39,7 +43,8 @@ const WatchDetail = props => {
                         <td>{company.ticker}</td>
                         <td>{company.name}</td>
                         <td>Future: Add stock price</td>
-                        <td><Button variant='danger' onClick={() => removeCompany(company.id)}>Remove</Button></td>
+                        <td><Button className='watchlist-btn' variant='success' onClick={() => viewCompany(company.ticker)}>View Detail</Button>
+                        <Button className='watchlist-btn' variant='danger' onClick={() => removeCompany(company.id)}>Remove</Button></td>
                     </tr>)
                 })}
             </tbody>

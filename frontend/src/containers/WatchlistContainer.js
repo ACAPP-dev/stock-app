@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import WatchListing from '../components/watchlist/WatchListing'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import AddWatchlist from '../components/watchlist/AddWatchlist'
 import addWatchlist from '../actions/addWatchlist'
 import removeWatchlist from '../actions/removeWatchlist'
@@ -11,6 +12,7 @@ import WatchDetail from '../components/watchlist/WatchDetail'
 import addCompany from '../actions/addCompany'
 import removeCompany from '../actions/removeCompany'
 import TickerForm from '../components/ticker/TickerForm'
+import fetchCompany from '../actions/fetchCompany'
 
 class WatchlistContainer extends React.Component {
 
@@ -18,7 +20,8 @@ class WatchlistContainer extends React.Component {
         showAddWatchlist: false,
         showWatchlistDetail: false,
         showAddCompany: false,
-        currentWatchlistId: ""
+        currentWatchlistId: "",
+        redirect: false
 
     }
 
@@ -71,6 +74,11 @@ class WatchlistContainer extends React.Component {
         this.props.addCompany(this.state.currentWatchlistId, formData, this.props.user.id)
     }
 
+    viewCompany = (ticker) => {
+        this.setState({redirect: true})
+        this.props.fetchCompanyData(ticker)
+    }
+
     removeCompany = (watchlistId, companyId) => {
         console.log('remove company clicked in watchlist detail', watchlistId, companyId)
         this.props.removeCompany(watchlistId, companyId, this.props.user.id)
@@ -81,35 +89,37 @@ class WatchlistContainer extends React.Component {
     }
 
     render() {
-        // this.getWatchlist()
-
-        return(
-            <div className='watchlist-div'>
-                <h2>Watchlists</h2>
-                {this.state.showWatchlistDetail ?
-                    < WatchDetail 
-                        hideWatchlist={this.hideWatchlist} 
-                        watchDetail={this.props.watchlistDetail} 
-                        addCompany={this.showAddStockForm}
-                        
-                        removeCompany={this.removeCompany}
-                    /> :
-                    null
-                }
-                {this.state.showAddCompany ?
-                    < TickerForm buttonText={'Add to Watchlist'} hideAddCompany={this.hideAddStockForm} returnSubmit={this.addCompany} /> : null }
-                {this.state.showAddWatchlist ?
-                    < AddWatchlist closeForm={this.closeForm} returnWatchlist={this.addWatchlist} /> :
-                    <Button className='watchlist-btn' onClick={this.addWatchListForm}>Add Watchlist</Button>
-                }
-                < WatchListing 
-                    viewWatchlist={this.viewWatchlist} 
-                    returnRemove={this.removeWatchlist} 
-                    watchlists={this.props.watchLists}
-                />
-                {/* <Link className='nav' to='/watchlists/new'>Add Watchlist</Link> */}
-            </div>
-        )
+        if (this.state.redirect) {
+            return <Redirect to="/company" />
+        } else {
+            return(
+                <div className='watchlist-div'>
+                    <h2>Watchlists</h2>
+                    {this.state.showWatchlistDetail ?
+                        < WatchDetail 
+                            hideWatchlist={this.hideWatchlist} 
+                            watchDetail={this.props.watchlistDetail} 
+                            addCompany={this.showAddStockForm}
+                            viewCompany={this.viewCompany}
+                            removeCompany={this.removeCompany}
+                        /> :
+                        null
+                    }
+                    {this.state.showAddCompany ?
+                        < TickerForm buttonText={'Add to Watchlist'} hideAddCompany={this.hideAddStockForm} returnSubmit={this.addCompany} /> : null }
+                    {this.state.showAddWatchlist ?
+                        < AddWatchlist closeForm={this.closeForm} returnWatchlist={this.addWatchlist} /> :
+                        <Button className='watchlist-btn' onClick={this.addWatchListForm}>Add Watchlist</Button>
+                    }
+                    < WatchListing 
+                        viewWatchlist={this.viewWatchlist} 
+                        returnRemove={this.removeWatchlist} 
+                        watchlists={this.props.watchLists}
+                    />
+                    {/* <Link className='nav' to='/watchlists/new'>Add Watchlist</Link> */}
+                </div>
+            )
+        }
     }
 }
 
@@ -125,7 +135,8 @@ const mapDispatchToProps = dispatch => {
         removeWatchlist: (watchlistId, userId) => dispatch(removeWatchlist(watchlistId, userId)),
         addCompany: (watchlistId, formData, userId) => dispatch(addCompany(watchlistId, formData, userId)),
         removeCompany: (watchlistId, companyId, userId) => dispatch(removeCompany(watchlistId, companyId, userId)),
-        fetchWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId))
+        fetchWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId)),
+        fetchCompanyData: (ticker) => dispatch(fetchCompany(ticker))
     }
 
 }
