@@ -4,6 +4,7 @@ function fetchCompany(ticker) {
   // from to in stock data is unix time from 6/1/20 to 6/15/20
 // const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
 const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
+const FINNHUB_QUOTE_URL = '/quote?symbol='
 const FINNHUB_COMPANY_DATA_URL = '/stock/profile2?symbol='
 const FINNHUB_BASIC_DATA_URL = '/stock/metric?symbol='
 const FINNHUB_CHART_URL = '/stock/candle?symbol='
@@ -13,6 +14,7 @@ let chartStartDate = '1593561600' // July 1, 2020 - need to make this variable
 let chartEndDate = '1596153600' // July 31, 2020 - need to make this variable
 let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 let companyData = {}
+let quoteData = {}
 let basicData = {}
 let newChartData = []
 
@@ -25,8 +27,17 @@ let newChartData = []
         .then(resp => resp.json())
         .then(json => {
             companyData = json
-            return fetchBasicData()
+            return fetchQuoteData()
         })
+
+        const fetchQuoteData = () => {
+            fetch(FINNHUB_BASIC_URL + FINNHUB_QUOTE_URL + ticker + FINNHUB_API_KEY)
+            .then(resp => resp.json())
+            .then(json => {
+                quoteData = json
+                return fetchBasicData()
+            })
+        }
 
         const fetchBasicData = () => {
             fetch(FINNHUB_BASIC_URL + FINNHUB_BASIC_DATA_URL + ticker + '&metric=price' + FINNHUB_API_KEY)
@@ -62,6 +73,8 @@ let newChartData = []
                     web_url: companyData.weburl,
                     logo: companyData.logo,
                     industry: companyData.finnhubIndustry,
+                    current_price: quoteData.c,
+                    previous_close_price: quoteData.pc,
                     three_month_trading_volume: basicData['3MonthAverageTradingVolume'],
                     fifty_two_week_high: basicData['52WeekHigh'],
                     fifty_two_week_high_date: basicData['52WeekHighDate'],

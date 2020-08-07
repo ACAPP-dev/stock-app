@@ -38,7 +38,7 @@ class NavBarContainer extends React.Component {
 
     render() {
         return (
-            <Navbar fixed='top' bg='dark' variant='dark'>
+            <Navbar className='nav-bar' fixed='top' bg='dark' variant='dark'>
                 <Navbar.Brand>
                     <NavLink activeClassName='active-nav' className='nav' to="/about" >Andrew's Stock App</NavLink>
                 </Navbar.Brand>

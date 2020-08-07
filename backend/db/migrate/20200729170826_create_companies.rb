@@ -10,6 +10,8 @@ class CreateCompanies < ActiveRecord::Migration[6.0]
       t.string :web_url
       t.string :logo
       t.string :industry
+      t.string :current_price
+      t.string :previous_close_price
       t.string :three_month_trading_volume
       t.string :fifty_two_week_high
       t.string :fifty_two_week_high_date

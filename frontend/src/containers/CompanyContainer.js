@@ -41,7 +41,7 @@ class CompanyContainer extends React.Component {
 
 
                 </Container>
-                <p>Chart goes here - add chart title and company name</p>
+                <div className='watchlist-div'>{this.props.data.name} - Candlestick Chart</div>
                 < Chart chart={this.props.data.charts[0]} />
             </React.Fragment>
         )

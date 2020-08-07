@@ -23,6 +23,10 @@ body {
   margin: 2px;
 }
 
+.nav-bar {
+  background-image: url('./images/modern.png');
+}
+
 .login-div {
   justify-content: center;
   background-image: url('./images/modern.png');
@@ -39,7 +43,7 @@ h2 {
 }
 
 .active-nav {
-  background:#A8A8A7 ;
+  background: yellow ;
 }
 
 .nav {
