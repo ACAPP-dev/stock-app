@@ -16,6 +16,10 @@ class CompaniesController < ApplicationController
         if (@company.save)
             # byebug
             if (params[:chartData])
+                current_chart = @company.charts.first
+                if current_chart
+                    @company.charts.first.destroy
+                end
                 new_chart = @company.charts.build(chart_type: 'Candle')
                 new_chart.save
                 params[:chartData].each do |line|
