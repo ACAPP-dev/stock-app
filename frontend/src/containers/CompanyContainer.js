@@ -22,9 +22,12 @@ class CompanyContainer extends React.Component {
                                 <span> {this.props.data.name}</span>
                                 <span> ({this.props.data.ticker})</span>
                             </div>
-                            <div>Need to add latest stock price</div>
+                            <div>
+                                <span className='space-span'>Current Price: ${Math.round(this.props.data.current_price * 100) / 100}</span>
+                                <span className='space-span'>Change: {Math.round(((this.props.data.current_price / this.props.data.previous_close_price) - 1) * 10000) / 100}%</span>
+                            </div>
                         </Col>
-                        <Col sm={3} >Add to watchlist button</Col>
+                        <Col sm={3} >Add to watchlist button?</Col>
                     </Row>
                     <Row className='company-row'>
                         <Col className='company-col'>

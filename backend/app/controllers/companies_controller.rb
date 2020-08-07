@@ -51,6 +51,8 @@ class CompaniesController < ApplicationController
             :web_url,
             :logo,
             :industry,
+            :current_price,
+            :previous_close_price,
             :three_month_trading_volume,
             :fifty_two_week_high,
             :fifty_two_week_high_date,
