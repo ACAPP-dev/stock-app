@@ -31,7 +31,11 @@ class TickerForm extends React.Component {
     
     handleSubmit = (event) => {
         event.preventDefault()
-        this.props.returnSubmit(this.state.ticker)
+        this.props.returnSubmit({
+            ticker: this.state.ticker,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
+        })
 
     }
     
@@ -90,7 +94,7 @@ class TickerForm extends React.Component {
                             <Row>
                             <Col>
                                 <Form.Label>Start Date:</Form.Label>
-                                <Form.Control type="date" onChange={this.handleChange} name='startDate' placeholder={new Date(Date.now()-30).toLocaleString().split(',')[0]} value={this.state.startDate} />
+                                <Form.Control type="date" onChange={this.handleChange} name='startDate' value={this.state.startDate} />
                                 <Form.Text className='text-muted'>
                                     Start Date for Chart
                                 </Form.Text>

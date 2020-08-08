@@ -20,7 +20,8 @@ class CompaniesController < ApplicationController
                 if current_chart
                     @company.charts.first.destroy
                 end
-                new_chart = @company.charts.build(chart_type: 'Candle')
+                
+                new_chart = @company.charts.build(chart_type: 'Candle', start_date: params[:chartStartDate], end_date: params[:chartEndDate])
                 new_chart.save
                 params[:chartData].each do |line|
                     

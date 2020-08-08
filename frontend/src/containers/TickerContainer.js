@@ -11,9 +11,9 @@ class TickerContainer extends React.Component {
         redirect: false
     }
 
-    handleSubmit = (ticker) => {
+    handleSubmit = (formData) => {
         this.setState({redirect: true})
-        this.props.fetchCompanyData(ticker)
+        this.props.fetchCompanyData(formData)
     }
 
     render() {
@@ -27,7 +27,7 @@ class TickerContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {fetchCompanyData: (ticker) => dispatch(fetchCompany(ticker))}
+    return {fetchCompanyData: formData => dispatch(fetchCompany(formData))}
 }
 
 

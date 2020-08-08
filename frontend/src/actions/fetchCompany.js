@@ -1,6 +1,6 @@
-function fetchCompany(ticker) {
+function fetchCompany(formData) {
     
-  
+//   debugger
   // from to in stock data is unix time from 6/1/20 to 6/15/20
 // const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
 const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
@@ -10,8 +10,13 @@ const FINNHUB_BASIC_DATA_URL = '/stock/metric?symbol='
 const FINNHUB_CHART_URL = '/stock/candle?symbol='
 const FINNHUB_CHART_TIMEFRAME = '&resolution=D&from='
 const FINNHUB_API_KEY = '&token=bsfleivrh5rf14r5rh80'
-let chartStartDate = '1593561600' // July 1, 2020 - need to make this variable
-let chartEndDate = '1596153600' // July 31, 2020 - need to make this variable
+const chartStartDate = (Date.parse(formData.startDate)/1000).toString()
+
+// 1593561600000
+// 1593561600
+// Test Date: '1593561600' // July 1, 2020 - need to make this variable
+const chartEndDate = (Date.parse(formData.endDate)/1000).toString()
+// Test Date: '1596153600' // July 31, 2020 - need to make this variable
 let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 let companyData = {}
 let quoteData = {}
@@ -23,7 +28,7 @@ let newChartData = []
         
         // Get company, stock, and chart data from API (3 fetches)
 
-        fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + ticker + FINNHUB_API_KEY)
+        fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + formData.ticker + FINNHUB_API_KEY)
         .then(resp => resp.json())
         .then(json => {
             companyData = json
@@ -31,7 +36,7 @@ let newChartData = []
         })
 
         const fetchQuoteData = () => {
-            fetch(FINNHUB_BASIC_URL + FINNHUB_QUOTE_URL + ticker + FINNHUB_API_KEY)
+            fetch(FINNHUB_BASIC_URL + FINNHUB_QUOTE_URL + formData.ticker + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
                 quoteData = json
@@ -40,7 +45,7 @@ let newChartData = []
         }
 
         const fetchBasicData = () => {
-            fetch(FINNHUB_BASIC_URL + FINNHUB_BASIC_DATA_URL + ticker + '&metric=price' + FINNHUB_API_KEY)
+            fetch(FINNHUB_BASIC_URL + FINNHUB_BASIC_DATA_URL + formData.ticker + '&metric=price' + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
                 basicData = json.metric
@@ -49,9 +54,10 @@ let newChartData = []
         }
 
         const fetchChartData = () => {
-            fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
+            fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + formData.ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
+                console.log('chart data: ', json)
                 newChartData = readyChartData(json)
                 return databaseFetch()
             })
@@ -81,6 +87,8 @@ let newChartData = []
                     fifty_two_week_low: basicData['52WeekLow'],
                     fifty_two_week_low_date: basicData['52WeekLowDate']
                 },
+                chartStartDate: chartStartDate,
+                chartEndDate: chartEndDate,
                 chartData: newChartData
             }
         

@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2020_07_29_170935) do
 
   create_table "charts", force: :cascade do |t|
     t.integer "company_id"
+    t.string "start_date"
+    t.string "end_date"
     t.string "chart_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
