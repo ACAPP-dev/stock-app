@@ -53,9 +53,10 @@ class Chart extends React.Component {
     this.newChart.data = this.props.chart.chart_lines.map( line => {
       //Convert Unix Date to JS Date Object
       const rawDate = new Date(parseInt(line.date) * 1000)
-      const rawMonth = rawDate.getUTCMonth()
+      const rawMonth = rawDate.getUTCMonth() + 1 // getMonth is zero based so have to add 1
       const rawDay = rawDate.getUTCDate()
       const chartDate = rawDate.getUTCFullYear() + '-' + (rawMonth < 10 ? '0' + rawMonth : rawMonth) + '-' + (rawDay < 10 ? '0' + rawDay : rawDay)
+      
       return {date: chartDate,
       open: line.open,
       high: line.high,
