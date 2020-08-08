@@ -1,8 +1,11 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import TickerList from './TickerList'
 import { connect } from 'react-redux'
+import { getDistance } from '@amcharts/amcharts4/.internal/core/utils/Math'
 
 class TickerForm extends React.Component {
 
@@ -10,7 +13,8 @@ class TickerForm extends React.Component {
     state = {
         searchText: "",
         ticker: "AAPL",
-        startDate: "",
+        startDate: new Date(new Date().setDate(new Date().getDate() - 30)).toJSON().slice(0,10),
+        endDate: new Date().toJSON().slice(0,10),
         tickers: []
     }
 
@@ -47,7 +51,17 @@ class TickerForm extends React.Component {
         }
     }
 
+    dateToString = date => {
+        // console.log(date, typeof(date))
+
+        // const dateString = date.getMonth() + '-' + date.getDistance() + '-' + date.getFullYear()
+        // console.log(dateString)
+
+        // return dateString
+    }
+
     render() {
+        console.log(this.state.endDate)
         return (
             <div>
                 <h2>Enter Company Name to Search for Ticker</h2>
@@ -72,11 +86,23 @@ class TickerForm extends React.Component {
                             </Form.Text>
                         </Form.Group>
                         <Form.Group >
-                            <Form.Label>Date Range(Future):</Form.Label>
-                            <Form.Control type="date" onChange={this.handleChange} name='startDate' placeholder="07/01/2020" value={this.state.startDate} />
-                            <Form.Text className='text-muted'>
-                                Will add in future
-                            </Form.Text>
+                            <Form.Label>Date Range:</Form.Label>
+                            <Row>
+                            <Col>
+                                <Form.Label>Start Date:</Form.Label>
+                                <Form.Control type="date" onChange={this.handleChange} name='startDate' placeholder={new Date(Date.now()-30).toLocaleString().split(',')[0]} value={this.state.startDate} />
+                                <Form.Text className='text-muted'>
+                                    Start Date for Chart
+                                </Form.Text>
+                            </Col>
+                            <Col>
+                            <Form.Label>End Date:</Form.Label>
+                                <Form.Control type="date" onChange={this.handleChange} name='endDate' value={this.state.endDate} />
+                                <Form.Text className='text-muted'>
+                                    End Date for Chart
+                                </Form.Text>
+                            </Col>
+                            </Row>
                         </Form.Group>
                         
                         <Button className='watchlist-btn' variant="dark" type="submit">
