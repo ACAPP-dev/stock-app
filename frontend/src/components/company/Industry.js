@@ -2,6 +2,14 @@ import React from 'react'
 
 const Industry = props => {
 
+    function formatNumber(number) {
+        if (!number || Number.isNaN(number)) { return '' }
+        const numberArry = parseFloat(number).toFixed(2).split('.')
+        numberArry[0] = numberArry[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return numberArry.join('.')
+    }
+
+
     return(
         <table className='small-table'>
             <tbody>
@@ -11,15 +19,15 @@ const Industry = props => {
                 </tr>
                 <tr>
                     <td>Market Capitalization</td>
-                    <td>{props.data.market_cap}</td>
+                    <td>{formatNumber(props.data.market_cap)}M</td>
                 </tr>
                 <tr>
                     <td>Outstanding Shares</td>
-                    <td>{props.data.outstanding_shares}</td>
+                    <td>{formatNumber(props.data.outstanding_shares)}M</td>
                 </tr>
                 <tr>
-                    <td>Three Month Trading Volume</td>
-                    <td>{props.data.three_month_trading_volume}</td>
+                    <td>Three Month Average Trading Volume</td>
+                    <td>{formatNumber(props.data.three_month_trading_volume/10)}M</td>
                 </tr>
             </tbody>
         </table>

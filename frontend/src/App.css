@@ -50,14 +50,15 @@ h2 {
   /* margin-right: 10px; */
   margin: 2px;
   padding: 2px;
-  background: black;
-  color: lightgrey;
+  /* background: white; */
+  color: black;
   border: 1px solid black;
   border-radius: 10px;
 }
 
 .nav:hover {
-  color:white;
+  color:yellow;
+  background: purple;
   
 }
 

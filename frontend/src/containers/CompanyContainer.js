@@ -4,10 +4,39 @@ import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 import Statistics from '../components/company/Statistics'
 import Industry from '../components/company/Industry'
+import addCompany from '../actions/addCompany'
 
 class CompanyContainer extends React.Component {
+
+    formatNumber = number => {
+        if (!number || Number.isNaN(number)) { return '' }
+        const numberArry = parseFloat(number).toFixed(2).split('.')
+        numberArry[0] = numberArry[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return numberArry.join('.')
+    }
+
+    addCompany = (watchlistId, ticker) => {
+        console.log('add company clicked in company dropdown')
+        this.props.addCompany(watchlistId, ticker, this.props.user.id)
+    }
+
+    addToWatchlist = () => {
+        if (this.props.data.ticker && this.props.user.watchlists.length > 0) {
+            return (
+                <DropdownButton title="Add to Watchlist">
+                    {this.props.user.watchlists.map(watchlist => {
+                        return (<Dropdown.Item
+                            onClick={()=>{this.addCompany(watchlist.id, this.props.data.ticker)}}
+                            >{watchlist.name}</Dropdown.Item>)
+                    })}    
+                </DropdownButton>
+            )
+        }
+    }
 
     render() {
         return (
@@ -23,11 +52,12 @@ class CompanyContainer extends React.Component {
                                 <span> ({this.props.data.ticker})</span>
                             </div>
                             <div>
-                                <span className='space-span'>Current Price: ${Math.round(this.props.data.current_price * 100) / 100}</span>
+                                <span className='space-span'>Current Price: ${this.formatNumber(this.props.data.current_price)}</span>
                                 <span className='space-span'>Change: {Math.round(((this.props.data.current_price / this.props.data.previous_close_price) - 1) * 10000) / 100}%</span>
+                                
                             </div>
                         </Col>
-                        <Col sm={3} >Add to watchlist button?</Col>
+                        <Col sm={3} > {this.addToWatchlist()}</Col>
                     </Row>
                     <Row className='company-row'>
                         <Col className='company-col'>
@@ -53,8 +83,12 @@ class CompanyContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    // console.log('state in companycontainer:', state)
-    return {data: state.companies}
+    console.log('state in companycontainer:', state)
+    return {data: state.companies, user: state.user}
 }
 
-export default connect(mapStateToProps)(CompanyContainer)
+const mapDispatchToProps = dispatch => {
+    return {addCompany: (watchlistId, formData, userId) => dispatch(addCompany(watchlistId, formData, userId))}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyContainer)

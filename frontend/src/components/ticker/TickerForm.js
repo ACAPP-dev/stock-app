@@ -21,7 +21,7 @@ class TickerForm extends React.Component {
     }
 
     handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value})
+        this.setState({[event.target.name]: event.target.value.toUpperCase()})
         
     }
     
@@ -48,10 +48,7 @@ class TickerForm extends React.Component {
     }
 
     render() {
-        console.log('state in tickerform: ', this.state)
-
         return (
-
             <div>
                 <h2>Enter Company Name to Search for Ticker</h2>
                 <Form className='login-form' onSubmit={this.handleSubmit}>

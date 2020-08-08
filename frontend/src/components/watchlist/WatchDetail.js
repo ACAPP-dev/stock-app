@@ -6,6 +6,13 @@ import Button from 'react-bootstrap/Button'
 const WatchDetail = props => {
     console.log('watchdetail props: ', props)
     
+    function formatNumber(number) {
+        if (!number || Number.isNaN(number)) { return '' }
+        const numberArry = parseFloat(number).toFixed(2).split('.')
+        numberArry[0] = numberArry[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return numberArry.join('.')
+    }
+
     const returnHide = () => {
         props.hideWatchlist()
     }
@@ -43,7 +50,7 @@ const WatchDetail = props => {
                         <td>{company.ticker}</td>
                         <td>{company.name}</td>
                         <td>
-                            <div className='space-span'>Current Price: ${Math.round(company.currentPrice * 100) / 100}</div>
+                            <div className='space-span'>Current Price: ${formatNumber(company.currentPrice)}</div>
                             <div className='space-span'>Change: {Math.round(((company.currentPrice / company.prevClosePrice) - 1) * 10000) / 100}%</div>
                         </td>
                         <td><Button className='watchlist-btn' variant='success' onClick={() => viewCompany(company.ticker)}>View Detail</Button>
