@@ -13,6 +13,7 @@ import About from './components/About'
 import Login from './components/Login'
 
 import fetchUser from './actions/fetchUser'
+import DailyContainer from './containers/DailyContainer'
 import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
 import WatchlistContainer from './containers/WatchlistContainer';
@@ -32,6 +33,7 @@ class App extends React.Component {
         <div><NavBarContainer /></div>
         <div>
           <Route exact path="/" component={Home} />
+          <Route exact path="/daily" component={DailyContainer} />
           <Route exact path="/about" component={About} />
           <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
           <Route exact path="/logout" component={Home} />
@@ -47,7 +49,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('mapStateToProps in App:', state.user)
+  // console.log('mapStateToProps in App:', state.user)
   return {user: state.user}
 }
 

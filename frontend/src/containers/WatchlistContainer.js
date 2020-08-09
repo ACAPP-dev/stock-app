@@ -71,7 +71,7 @@ class WatchlistContainer extends React.Component {
 
     addCompany = (formData) => {
         console.log('add company clicked in watchlist detail')
-        this.props.addCompany(this.state.currentWatchlistId, formData, this.props.user.id)
+        this.props.addCompany(this.state.currentWatchlistId, formData.ticker, this.props.user.id)
     }
 
     viewCompany = (ticker) => {

@@ -44,6 +44,7 @@ class NavBarContainer extends React.Component {
                 </Navbar.Brand>
                 <Nav className='mr-auto'>
                     <NavLink exact activeClassName='active-nav' className='nav' to="/" >Home</NavLink>
+                    <NavLink exact activeClassName='active-nav' className='nav' to="/daily">Daily View</NavLink>
                     <NavLink activeClassName='active-nav' className='nav' to="/stock" >Look Up Stock</NavLink>
                     <NavLink activeClassName='active-nav' className='nav' to="/company" >Company Data</NavLink>
                     
