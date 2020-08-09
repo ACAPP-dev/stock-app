@@ -11,28 +11,39 @@ import Col from 'react-bootstrap/Col'
 class DailyForm extends React.Component {
 
     state = {
-        startDate: new Date(new Date().setDate(new Date().getDate() - 3)).toJSON().slice(0,10),
+        watchlistId: '',
+        watchlistName: 'Select',
+        startDate: new Date(new Date().setDate(new Date().getDate() - 2)).toJSON().slice(0,10),
         endDate: new Date().toJSON().slice(0,10)
     }
 
     handleChange = event => {
+        
         if (event.target.name === 'startDate') {
-            const newEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 3)).toJSON().slice(0,10)
+            const newEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 2)).toJSON().slice(0,10)
             this.setState({
                 startDate: event.target.value,
                 endDate: newEndDate
             })
         } else if (event.target.name === 'endDate') {
-            const newStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 3)).toJSON().slice(0,10)
+            const newStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 2)).toJSON().slice(0,10)
             this.setState({
                 startDate: newStartDate,
                 endDate: event.target.value
             })
-        }
+        } 
+        console.log('setstate in daily form: ', this.state)
+    }
+
+    dropdownSelect = (id, name) => {
+        this.setState({
+            watchlistId: id,
+            watchlistName: name
+        })
     }
 
     returnSubmit = event => {
-
+        this.props.returnGetData(this.state)
 
     }
 
@@ -40,10 +51,16 @@ class DailyForm extends React.Component {
     selectWatchlist = () => {
         
             return (
-                <DropdownButton title="Select Watchlist">
+                <DropdownButton 
+                    title={'Watchlist: ' + this.state.watchlistName}
+                    
+                    >
                     {this.props.user.watchlists.map(watchlist => {
                         return (
-                            <Dropdown.Item>{watchlist.name}</Dropdown.Item>
+                            <Dropdown.Item 
+                                key={watchlist.id}
+                                onClick={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
+                            >{watchlist.name}</Dropdown.Item>
                         )
                     })}    
                 </DropdownButton>
@@ -54,7 +71,7 @@ class DailyForm extends React.Component {
     return (
         <div>
                 
-        <Form>
+        <Form onSubmit={this.returnSubmit}>
             
             
             <Form.Group >
@@ -76,7 +93,7 @@ class DailyForm extends React.Component {
                             End Date for View (3 Days Max)
                         </Form.Text>
                     </Col>
-                    <Col><Button>Refresh Data</Button></Col>
+                    <Col><Button type='submit'>Get Data</Button></Col>
                 </Row>
             </Form.Group>
             </Form>
