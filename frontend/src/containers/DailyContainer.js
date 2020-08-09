@@ -35,15 +35,15 @@ class DailyContainer extends React.Component {
                             <th>#</th>
                             <th>Ticker</th>
                             <th>Name</th>
-                            <th colspan='3'>Day 1</th>
-                            <th colspan='3'>Day 2</th>
-                            <th colspan='3'>Day 3</th>
+                            <th colSpan='3'>Day 1</th>
+                            <th colSpan='3'>Day 2</th>
+                            <th colSpan='3'>Day 3</th>
                             
-                            <th colspan='2'>Total</th>
+                            <th colSpan='2'>Total</th>
                             
                         </tr>
                         <tr>
-                            <th colspan='3'></th>
+                            <th colSpan='3'></th>
                             <th>Close Price</th>
                             <th>$ Change</th>
                             <th>% Change</th>
