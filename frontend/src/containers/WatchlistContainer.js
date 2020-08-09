@@ -76,7 +76,14 @@ class WatchlistContainer extends React.Component {
 
     viewCompany = (ticker) => {
         this.setState({redirect: true})
-        this.props.fetchCompanyData(ticker)
+        // Set default chart dates of last 30 days
+        const startDate = new Date(new Date().setDate(new Date().getDate() - 30)).toJSON().slice(0,10)
+        const endDate = new Date().toJSON().slice(0,10)
+        const formData = {ticker: ticker,
+            startDate: startDate,
+            endDate: endDate
+        }
+        this.props.fetchCompanyData(formData)
     }
 
     removeCompany = (watchlistId, companyId) => {
@@ -139,7 +146,7 @@ const mapDispatchToProps = dispatch => {
         addCompany: (watchlistId, formData, userId) => dispatch(addCompany(watchlistId, formData, userId)),
         removeCompany: (watchlistId, companyId, userId) => dispatch(removeCompany(watchlistId, companyId, userId)),
         fetchWatchlistDetail: (watchlistId, userId) => dispatch(fetchWatchlistDetail(watchlistId, userId)),
-        fetchCompanyData: (ticker) => dispatch(fetchCompany(ticker))
+        fetchCompanyData: (formData) => dispatch(fetchCompany(formData))
     }
 
 }
