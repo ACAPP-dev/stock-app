@@ -13,7 +13,8 @@ import Col from 'react-bootstrap/Col'
 class DailyContainer extends React.Component {
     
     getDailyData = formData => {
-        this.props.getDailyData(formData, this.state.user.id)
+        
+        this.props.getDailyData(formData, this.props.user.id)
     }
 
     render() {

@@ -43,6 +43,7 @@ class DailyForm extends React.Component {
     }
 
     returnSubmit = event => {
+        event.preventDefault()
         this.props.returnGetData(this.state)
 
     }
