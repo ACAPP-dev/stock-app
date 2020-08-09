@@ -1,6 +1,9 @@
-function getDailyData(formData, userId) {
+function getDailyData(formData, watchlistObj) {
     console.log('formdata from getDailyData: ', formData)
-    //   debugger
+      debugger
+      // !!!Need to iterate through watchlistObj.companies for company fetches...
+
+
       // from to in stock data is unix time from 6/1/20 to 6/15/20
     // const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
     const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
@@ -22,7 +25,7 @@ function getDailyData(formData, userId) {
     let quoteData = {}
     let basicData = {}
     let newChartData = []
-    debugger
+    
         return dispatch => {
             dispatch({ type: 'START_GET_DAILY_DATA'})
             

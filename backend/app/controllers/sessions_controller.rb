@@ -5,14 +5,9 @@ class SessionsController < ApplicationController
         watchlist_detail = []
 
         if (user && user.authenticate(params[:password]))
-            if user.watchlists
-                user.watchlists.map do |watchlist|
-                    byebug
-                    watchlist_detail.push(watchlist.companies)
-                end
-            end
+           
                 
-            render json: user, only: [:id, :email, :name], include: [:watchlists]
+            render json: user
         end
     end
 end
