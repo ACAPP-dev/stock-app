@@ -11,10 +11,32 @@ import Col from 'react-bootstrap/Col'
 class DailyForm extends React.Component {
 
     state = {
-        startDate: '2020-07-01',
-        endDate: '2020-07-09'
+        startDate: new Date(new Date().setDate(new Date().getDate() - 3)).toJSON().slice(0,10),
+        endDate: new Date().toJSON().slice(0,10)
     }
 
+    handleChange = event => {
+        if (event.target.name === 'startDate') {
+            const newEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 3)).toJSON().slice(0,10)
+            this.setState({
+                startDate: event.target.value,
+                endDate: newEndDate
+            })
+        } else if (event.target.name === 'endDate') {
+            const newStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 3)).toJSON().slice(0,10)
+            this.setState({
+                startDate: newStartDate,
+                endDate: event.target.value
+            })
+        }
+    }
+
+    returnSubmit = event => {
+
+
+    }
+
+    
     selectWatchlist = () => {
         
             return (
@@ -51,7 +73,7 @@ class DailyForm extends React.Component {
                     <Form.Label>End Date:</Form.Label>
                         <Form.Control type="date" onChange={this.handleChange} name='endDate' value={this.state.endDate} />
                         <Form.Text className='text-muted'>
-                            End Date for View (5 Days Max)
+                            End Date for View (3 Days Max)
                         </Form.Text>
                     </Col>
                     <Col><Button>Refresh Data</Button></Col>
