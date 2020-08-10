@@ -5,6 +5,7 @@ import DailyRows from '../components/daily/DailyRows'
 import DailyForm from '../components/daily/DailyForm'
 import getDailyData from '../actions/getDailyData'
 
+import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
@@ -12,6 +13,10 @@ import Col from 'react-bootstrap/Col'
 
 class DailyContainer extends React.Component {
     
+    showRequesting = () => {
+        return (<Alert className='alert' variant='warning'><h4>Requesting Data</h4></Alert>)
+    }
+
     getDailyData = formData => {
         
         const watchlistObj = this.props.user.watchlists.find(watchlist => {
@@ -26,7 +31,7 @@ class DailyContainer extends React.Component {
 
         return (
             <div className='daily-div'>
-                <h2>Daily Container</h2>
+                {this.props.daily.requesting ? this.showRequesting() : null}
                 < DailyForm returnGetData={this.getDailyData}/>
                 
                 <Table striped bordered hover size='sm'>

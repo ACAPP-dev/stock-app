@@ -1,6 +1,7 @@
 import React from 'react'
 import Chart from '../components/company/Chart'
 import { connect } from 'react-redux'
+import Alert from 'react-bootstrap/Alert'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -11,6 +12,11 @@ import Industry from '../components/company/Industry'
 import addCompany from '../actions/addCompany'
 
 class CompanyContainer extends React.Component {
+
+    showRequesting = () => {
+        return (<Alert className='alert' variant='warning'><h4>Requesting Data</h4></Alert>)
+
+    }
 
     formatNumber = number => {
         if (!number || Number.isNaN(number)) { return '' }
@@ -41,8 +47,7 @@ class CompanyContainer extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h2>Company Container</h2>
-                
+                {this.props.data.requesting ? this.showRequesting() : null}
                 <Container className='company-container'>
                     <Row className='company-row'>
                         <Col sm={9} >

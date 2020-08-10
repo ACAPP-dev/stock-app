@@ -1,14 +1,15 @@
 
-function dailyReducer(state={companies: []}, action) {
+function dailyReducer(state={companies: [], requesting: false}, action) {
     console.log('State from dailyReducer:', state)
     console.log('Action from dailyReducer:', action)
     
     switch (action.type) {
         case 'START_GET_DAILY_DATA':
-            return state        
+            return {...state, companies: [...state.companies], requesting: true}
        
         case 'ADD_DAILY_DATA':
-            return {...state, ...action.payload}
+
+            return {...state, ...action.payload, requesting: false}
 
         default:
             return state

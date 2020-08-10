@@ -1,15 +1,16 @@
 
-function companyReducer(state={ charts: [{chart_lines: []}]}, action) {
+function companyReducer(state={ requesting: false, charts: [{chart_lines: []}]}, action) {
     console.log('State from companyReducer:', state)
     console.log('Action from companyReducer:', action)
 
     switch (action.type) {
         
         case 'START_COMPANY_FETCH':
-            return state
+            // debugger
+            return {...state, charts: [...state.charts], requesting: true}
         case 'ADD_COMPANY':
             // debugger
-            return {...state, ...action.payload}
+            return {...state, ...action.payload, requesting: false}
         
         default:
             return state
