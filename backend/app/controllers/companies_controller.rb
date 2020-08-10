@@ -16,9 +16,10 @@ class CompaniesController < ApplicationController
         if (@company.save)
             # byebug
             if (params[:chartData])
-                current_chart = @company.charts.first
+                current_chart = @company.charts.find_by(chart_type: 'Candle')
                 if current_chart
-                    @company.charts.first.destroy
+                    # @company.charts.first.destroy
+                    current_chart.destroy
                 end
                 
                 new_chart = @company.charts.build(chart_type: 'Candle', start_date: params[:chartStartDate], end_date: params[:chartEndDate])
@@ -68,7 +69,7 @@ class CompaniesController < ApplicationController
                     end
                     @watchlist.save
                     # byebug
-                    chart = company.charts.find(ifnone=nil) {|chart| chart.chart_type == 'daily'}
+                    chart = company.charts.find_by(chart_type: 'daily')
                     if chart
                         chart.destroy
                     end

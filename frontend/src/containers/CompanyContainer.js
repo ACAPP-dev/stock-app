@@ -75,7 +75,7 @@ class CompanyContainer extends React.Component {
 
                 </Container>
                 <div className='watchlist-div'>{this.props.data.name} - Candlestick Chart</div>
-                < Chart chart={this.props.data.charts[0]} />
+                < Chart chart={this.props.data.charts.find(chart => chart.chart_type === 'Candle') || this.props.data.charts[0]} />
             </React.Fragment>
         )
     }
