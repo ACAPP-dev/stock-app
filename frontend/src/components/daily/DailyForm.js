@@ -80,7 +80,7 @@ class DailyForm extends React.Component {
 
     render() {
     return (
-        <div className='watchlist-div'>
+        <div className='daily-form-div'>
                 
         <Form onSubmit={this.returnSubmit}>
             

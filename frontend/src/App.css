@@ -123,3 +123,9 @@ thead {
 .daily-form {
   vertical-align: bottom;
 }
+
+.daily-form-div {
+  width: 95%;
+  text-align: center;
+  margin: auto;
+}

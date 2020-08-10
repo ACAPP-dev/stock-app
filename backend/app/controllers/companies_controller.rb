@@ -57,8 +57,9 @@ class CompaniesController < ApplicationController
 
                 params[:data].each do |ticker, object|
                     # byebug
-                    if @watchlist.companies.find(ifnone=nil) {|company| company.ticker == ticker}
-                        company = Company.find_by(ticker: ticker)
+                    company = @watchlist.companies.find(ifnone=nil) {|company| company.ticker == ticker}
+                    if company
+                        # company = Company.find_by(ticker: ticker)
                         # need to update with params data
                         company.update(daily_params(object))
                         company.save
@@ -66,12 +67,12 @@ class CompaniesController < ApplicationController
                         @watchlist.companies.build(daily_params(object))
                     end
                     @watchlist.save
-                    
+                    # byebug
                     chart = company.charts.find(ifnone=nil) {|chart| chart.chart_type == 'daily'}
                     if chart
                         chart.destroy
                     end
-                    # byebug
+                    
                     new_chart = company.charts.build(chart_type: 'daily', start_date: object[:chartData][:chartStartDate], end_date: object[:chartData][:chartEndDate])
                     new_chart.save
                     object[:chartData][:chartData].each do |line|
@@ -84,8 +85,11 @@ class CompaniesController < ApplicationController
                             close: line[:close]
                         )
                         new_chart.save
+                        company.save
+                        @watchlist.save
                         
                     end
+                    
                 end 
             else
                 render json: {response: "Watchlist not found!"}, status: 404

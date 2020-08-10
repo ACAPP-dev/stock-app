@@ -9,6 +9,10 @@ function userReducer(state = {
     console.log('State from userReducer:', state)
     console.log('Action from userReducer:', action)
     
+    let watchlistIndex
+    let watchlistCopy
+    let newWatchlists
+
     switch (action.type) {
         case 'LOGIN_USER':
             const newUser = {
@@ -30,10 +34,17 @@ function userReducer(state = {
         case 'REMOVE_WATCHLIST':
             return {...state, watchlists: action.payload} 
 
+        case 'GET_WATCHLIST_DETAIL':
+            watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
+            watchlistCopy = [...state.watchlists]
+            newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
+            // debugger
+            return {...state, watchlists: watchlistCopy}
+
         case 'ADD_DAILY_DATA':
-            const watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
-            const watchlistCopy = [...state.watchlists]
-            const newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
+            watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
+            watchlistCopy = [...state.watchlists]
+            newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
             // debugger
             return {...state, watchlists: watchlistCopy}
             
