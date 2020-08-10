@@ -14,22 +14,32 @@ class DailyForm extends React.Component {
         watchlistId: '',
         watchlistName: 'Select',
         startDate: new Date(new Date().setDate(new Date().getDate() - 2)).toJSON().slice(0,10),
-        endDate: new Date().toJSON().slice(0,10)
+        chartStartDate: new Date(new Date().setDate(new Date().getDate() - 3)).toJSON().slice(0,10),
+        endDate: new Date().toJSON().slice(0,10),
+        chartEndDate: new Date(new Date().setDate(new Date().getDate() +1)).toJSON().slice(0,10)
     }
 
     handleChange = event => {
         
         if (event.target.name === 'startDate') {
             const newEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 2)).toJSON().slice(0,10)
+            const newChartEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 3)).toJSON().slice(0,10)
+            const newChartStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 1)).toJSON().slice(0,10)
             this.setState({
                 startDate: event.target.value,
-                endDate: newEndDate
+                chartStartDate: newChartStartDate,
+                endDate: newEndDate,
+                chartEndDate: newChartEndDate
             })
         } else if (event.target.name === 'endDate') {
             const newStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 2)).toJSON().slice(0,10)
+            const newChartStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 3)).toJSON().slice(0,10)
+            const newChartEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 1)).toJSON().slice(0,10)
             this.setState({
                 startDate: newStartDate,
-                endDate: event.target.value
+                endDate: event.target.value,
+                chartStartDate: newChartStartDate,
+                chartEndDate: newChartEndDate
             })
         } 
         console.log('setstate in daily form: ', this.state)

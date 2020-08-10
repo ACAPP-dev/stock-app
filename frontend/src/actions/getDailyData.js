@@ -1,7 +1,6 @@
 function getDailyData(formData, watchlistObj, userId) {
     console.log('formdata from getDailyData: ', formData)
   
-      // !!!Need to iterate through watchlistObj.companies for company fetches...
 
     const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
     const FINNHUB_QUOTE_URL = '/quote?symbol='
@@ -10,8 +9,8 @@ function getDailyData(formData, watchlistObj, userId) {
     const FINNHUB_CHART_URL = '/stock/candle?symbol='
     const FINNHUB_CHART_TIMEFRAME = '&resolution=D&from='
     const FINNHUB_API_KEY = '&token=bsfleivrh5rf14r5rh80'
-    const chartStartDate = (Date.parse(formData.startDate)/1000).toString()
-    const chartEndDate = (Date.parse(formData.endDate)/1000).toString()
+    const chartStartDate = (Date.parse(formData.chartStartDate)/1000).toString()
+    const chartEndDate = (Date.parse(formData.chartEndDate)/1000).toString()
     let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
    
     
