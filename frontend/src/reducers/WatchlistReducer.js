@@ -33,6 +33,10 @@ function watchlistReducer(state={companies: []}, action) {
 
         case 'START_WATCHLIST_REMOVE':
             return state
+        case 'ADD_DAILY_DATA':
+            
+            
+            return {...state, ...action.payload}
 
         default:
             return state

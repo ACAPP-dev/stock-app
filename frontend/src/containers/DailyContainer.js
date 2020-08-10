@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import DailyRow from '../components/daily/DailyRow'
+import DailyRows from '../components/daily/DailyRows'
 import DailyForm from '../components/daily/DailyForm'
 import getDailyData from '../actions/getDailyData'
 
@@ -14,7 +14,7 @@ class DailyContainer extends React.Component {
     
     getDailyData = formData => {
         
-        const watchlistObj = this.props.watchlists.find(watchlist => {
+        const watchlistObj = this.props.user.watchlists.find(watchlist => {
             return watchlist.id === formData.watchlistId
         })
         this.props.getDailyData(formData, watchlistObj, this.props.user.id)
@@ -59,10 +59,8 @@ class DailyContainer extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>< DailyRow /></td>
-                    
-                    </tr>
+                        < DailyRows watchlist={this.props.watchlists} />
+                        
                     </tbody>
                 </Table>
                 
@@ -73,9 +71,10 @@ class DailyContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log('state in dailycontainer: ', state)
     return {
         user: state.user,
-        watchlists: state.user.watchlists
+        watchlists: state.watchlists
     }
 }
 

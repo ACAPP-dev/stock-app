@@ -6,8 +6,8 @@ function userReducer(state = {
         loggedIn: false,
         watchlists: []
         }, action) {
-    // console.log('State from userReducer:', state)
-    // console.log('Action from userReducer:', action)
+    console.log('State from userReducer:', state)
+    console.log('Action from userReducer:', action)
     
     switch (action.type) {
         case 'LOGIN_USER':
@@ -29,6 +29,18 @@ function userReducer(state = {
             return {...state, watchlists: action.payload}    
         case 'REMOVE_WATCHLIST':
             return {...state, watchlists: action.payload} 
+
+        case 'START_GET_DAILY_DATA':
+            return state
+        case 'ADD_DAILY_DATA':
+            
+            const watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
+            const watchlistCopy = [...state.watchlists]
+            const newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
+            // debugger
+            return {...state, watchlists: watchlistCopy}
+            
+            
         default:
             return state
     } 
