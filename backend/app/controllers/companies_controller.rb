@@ -44,7 +44,7 @@ class CompaniesController < ApplicationController
     end
 
     def add_daily_data
-        byebug
+        
 
         user = User.find_by(id: params[:userId])
         
@@ -53,7 +53,11 @@ class CompaniesController < ApplicationController
             
             if watchlist && watchlist.user_id == user.id
                 
-                # byebug
+                # map through the watchlist data and update database
+
+
+                byebug
+
                 if !watchlist.companies.find(ifnone=nil) {|company| company.ticker == params[:ticker]}
                     company = Company.find_by(ticker: params[:ticker])
                     if company
@@ -141,4 +145,19 @@ class CompaniesController < ApplicationController
     def chart_params
         params.permit(:chartData => [:date, :open, :high, :low, :close])
     end
+
+    def daily_params
+        params.require(:data).permit(
+            :ticker,
+            :name,
+            :country,
+            :exchange,
+            :market_cap,
+            :outstanding_shares,
+            :web_url,
+            :logo,
+            :industry
+        )
+    end
+
 end

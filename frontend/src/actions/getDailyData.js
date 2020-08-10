@@ -1,4 +1,4 @@
-function getDailyData(formData, watchlistObj) {
+function getDailyData(formData, watchlistObj, userId) {
     console.log('formdata from getDailyData: ', formData)
   
       // !!!Need to iterate through watchlistObj.companies for company fetches...
@@ -13,20 +13,15 @@ function getDailyData(formData, watchlistObj) {
     const chartStartDate = (Date.parse(formData.startDate)/1000).toString()
     const chartEndDate = (Date.parse(formData.endDate)/1000).toString()
     let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
-    let companyData = {}
-    let quoteData = {}
-    let basicData = {}
-    let newChartData = []
+   
     
-    const dailyDataArry = []
+  
 
     
 
     const readyChartData = (chartData) => {
-        const newChartData = []
-    
-        chartData.t.map( (date, index) => {
-            return newChartData.push(
+        return chartData.t.map( (date, index) => {
+            return (
                 {date: date,
                 open: chartData.o[index],
                 high: chartData.h[index],
@@ -35,70 +30,50 @@ function getDailyData(formData, watchlistObj) {
                 }
             )
         })
-        return newChartData
     }
+
+    
 
     return dispatch => {
         dispatch({ type: 'START_GET_DAILY_DATA'})
         
+        const dailyDataObject = watchlistObj.companies
+            .map(company => company.ticker)
+            .reduce(chainedFetchData, Promise.resolve({}))
+            .then(data => databaseFetch(data))
 
-        return watchlistObj.companies.map((index, company) => {
-           
-            // Get company, stock, and chart data from API (3 fetches)
-    
-                fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + company.ticker + FINNHUB_API_KEY)
-                .then(resp => resp.json())
-                .then(json => {
-                    companyData = json
-                    console.log('companydata in getdailydata: ', companyData)
-                    return fetchChartData()
-                })
 
-                const fetchChartData = () => {
-                    fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + company.ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
-                    .then(resp => resp.json())
-                    .then(json => {
-                        console.log('chart data: ', json)
-                        newChartData = readyChartData(json)
-                        return makeObj()
-                    })
+        function fetchData(ticker) {
+            return fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + ticker + FINNHUB_API_KEY)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log('companydata in getdailydata: ', json)
+                return makeCompanyObj(json)
+            })
+        }
+
+        function fetchChart(ticker) {
+            return fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log('chart data: ', json)
+                return {
+                    chartStartDate: chartStartDate,
+                    chartEndDate: chartEndDate,
+                    chartData: readyChartData(json)
                 }
+            })
+        }
         
-                const makeObj = () => {
-                    const companyDataObject = {
-                        data: {
-                            ticker: companyData.ticker,
-                            name: companyData.name,
-                            country: companyData.country,
-                            exchange: companyData.exchange,
-                            market_cap: companyData.marketCapitalization,
-                            outstanding_shares: companyData.shareOutstanding,
-                            web_url: companyData.weburl,
-                            logo: companyData.logo,
-                            industry: companyData.finnhubIndustry
-                            },
-                        chartStartDate: chartStartDate,
-                        chartEndDate: chartEndDate,
-                        chartData: newChartData
-                    }
-                    if (index < watchlistObj.companies.length) {
-                        return dailyDataArry.push(companyDataObject)
-                    } else {
-                        dailyDataArry.push(companyDataObject)
-                        return databaseFetch()
-                    }
-                }
-        })
-
-        const databaseFetch = () => {
+        const databaseFetch = (dailyDataArry) => {
             // Persist company and chart data to database
-
+            debugger
             const companyObject = {
                 method: 'POST',
                 headers: {"Content-Type": "application/json", "Accept": "application/json"},
-                body: JSON.stringify(dailyDataArry)
+                body: JSON.stringify({userId: userId, watchlistId: formData.watchlistId, data: dailyDataArry})
             }
-
+    
             fetch('http://localhost:3000/daily', companyObject)
             .then(resp => resp.json())
             .then(json => {
@@ -106,7 +81,36 @@ function getDailyData(formData, watchlistObj) {
                 return dispatch({type: 'ADD_DAILY_DATA', payload: json})
             })
         }
-    }
+     
+                
+        const makeCompanyObj = (companyData) => {
+            return {
+                ticker: companyData.ticker,
+                name: companyData.name,
+                country: companyData.country,
+                exchange: companyData.exchange,
+                market_cap: companyData.marketCapitalization,
+                outstanding_shares: companyData.shareOutstanding,
+                web_url: companyData.weburl,
+                logo: companyData.logo,
+                industry: companyData.finnhubIndustry
+            }  
+        }
+        
 
+        async function chainedFetchData(p, ticker) {
+            
+            const companyObj = await p
+            const companyData = await fetchData(ticker)
+            const chartData = await fetchChart(ticker)
+            console.log(companyData)
+            console.log(chartData)
+            
+            return {...companyObj, [ticker]: {companyData, chart: chartData}}
+    
+        }
+       
+    }
+    
 }
     export default getDailyData

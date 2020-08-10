@@ -17,7 +17,7 @@ class DailyContainer extends React.Component {
         const watchlistObj = this.props.watchlists.find(watchlist => {
             return watchlist.id === formData.watchlistId
         })
-        this.props.getDailyData(formData, watchlistObj)
+        this.props.getDailyData(formData, watchlistObj, this.props.user.id)
     }
 
     render() {
@@ -81,7 +81,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 
-    return {getDailyData: (formData, watchlistObj) => dispatch(getDailyData(formData, watchlistObj))}
+    return {getDailyData: (formData, watchlistObj, userId) => dispatch(getDailyData(formData, watchlistObj, userId))}
 }
 
 export default connect (mapStateToProps, mapDispatchToProps)(DailyContainer)
