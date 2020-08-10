@@ -49,78 +49,53 @@ class CompaniesController < ApplicationController
         user = User.find_by(id: params[:userId])
         
         if user
-            watchlist = Watchlist.find_by(id: params[:watchlistId])
+            @watchlist = Watchlist.find_by(id: params[:watchlistId])
             
-            if watchlist && watchlist.user_id == user.id
+            if @watchlist && @watchlist.user_id == user.id
                 
                 # map through the watchlist data and update database
 
                 params[:data].each do |ticker, object|
-                
-                    if watchlist.companies.find(ifnone=nil) {|company| company.ticker == ticker}
+                    # byebug
+                    if @watchlist.companies.find(ifnone=nil) {|company| company.ticker == ticker}
                         company = Company.find_by(ticker: ticker)
                         # need to update with params data
-                    if company
-                        watchlist.companies.push(company)
+                        company.update(daily_params(object))
+                        company.save
                     else
-                        watchlist.companies.build(ticker: params[:ticker])
+                        @watchlist.companies.build(daily_params(object))
                     end
-                    watchlist.save
-                end
-
-                end
-                byebug
-
-                
+                    @watchlist.save
+                    
+                    chart = company.charts.find(ifnone=nil) {|chart| chart.chart_type == 'daily'}
+                    if chart
+                        chart.destroy
+                    end
+                    # byebug
+                    new_chart = company.charts.build(chart_type: 'daily', start_date: object[:chartData][:chartStartDate], end_date: object[:chartData][:chartEndDate])
+                    new_chart.save
+                    object[:chartData][:chartData].each do |line|
+                        
+                        new_chart.chart_lines.build(
+                            date: line[:date],
+                            open: line[:open],
+                            high: line[:high],
+                            low: line[:low],
+                            close: line[:close]
+                        )
+                        new_chart.save
+                        
+                    end
+                end 
             else
                 render json: {response: "Watchlist not found!"}, status: 404
             end
         else
             render json: {response: "User not found!"}, status: 404
         end 
-
-
-
-
-
-        # @company = Company.find_by(ticker: company_params[:ticker])
-        
-        # if (@company)
-        #     @company.update(company_params)
-        # else
-        #     @company = Company.new(company_params)
-        # end
-        # if (@company.save)
-        #     # byebug
-        #     if (params[:chartData])
-        #         current_chart = @company.charts.first
-        #         if current_chart
-        #             @company.charts.first.destroy
-        #         end
-                
-        #         new_chart = @company.charts.build(chart_type: 'Candle', start_date: params[:chartStartDate], end_date: params[:chartEndDate])
-        #         new_chart.save
-        #         params[:chartData].each do |line|
-                    
-        #             new_chart.chart_lines.build(
-        #                 date: line[:date],
-        #                 open: line[:open],
-        #                 high: line[:high],
-        #                 low: line[:low],
-        #                 close: line[:close]
-        #             )
-        #             new_chart.save
-                    
-        #         end
-        #     end
-            
-        #     render json: @company
-        # else
-        #     render json: {response: "Error"}, status: 502 
-        # end
-
-
-
+        # byebug
+        # Need to render new watchlist with the companies and charts
+        render json: @watchlist, serializer: WatchlistSerializer
 
     end
 
@@ -151,8 +126,8 @@ class CompaniesController < ApplicationController
         params.permit(:chartData => [:date, :open, :high, :low, :close])
     end
 
-    def daily_params
-        params.require(:data).permit(
+    def daily_params(object)
+        object.require(:companyData).permit(
             :ticker,
             :name,
             :country,
@@ -165,4 +140,7 @@ class CompaniesController < ApplicationController
         )
     end
 
+    def daily_chart_params(object)
+        params.permit(:chartData => [:date, :open, :high, :low, :close])
+    end
 end
