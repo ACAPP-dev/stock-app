@@ -4,14 +4,17 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import companyReducer from './reducers/companyReducer'
+import dailyReducer from './reducers/dailyReducer'
 import userReducer from './reducers/userReducer'
 import watchlistReducer from './reducers/watchlistReducer'
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
   companies: companyReducer,
+  daily: dailyReducer,
   user: userReducer,
   watchlists: watchlistReducer
 })

@@ -111,3 +111,15 @@ h6 {
 .daily-div {
   font-size: 11px;
 }
+
+thead {
+  text-align: center;
+}
+
+.td-right {
+  text-align: right;
+}
+
+.daily-form {
+  vertical-align: bottom;
+}

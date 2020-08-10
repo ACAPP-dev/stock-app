@@ -42,7 +42,7 @@ const DailyRows = props => {
     }
 
 
-    return props.watchlist.companies.map(company => {
+    return props.daily.companies.map(company => {
         const chart = findChart(company)
         
         if (chart) {
@@ -53,18 +53,18 @@ const DailyRows = props => {
                     <td>{company.id}</td>
                     <td>{company.ticker}</td>
                     <td>{company.name}</td>
-                    {priceData.map(day => {
+                    {priceData.map( (day, index) => {
                         return (
-                            <React.Fragment>
-                            <td>${day.close}</td>
-                            <td>${day.dollarChg}</td>
-                            <td>{day.percentChg}%</td>
+                            <React.Fragment key={index}>
+                            <td className='td-right'>${day.close}</td>
+                            <td className='td-right'>${day.dollarChg}</td>
+                            <td className='td-right'>{day.percentChg}%</td>
                             </React.Fragment>
                         )
                     })}
                     <React.Fragment>
-                    <td>${totalData.totalDollarChg}</td>
-                    <td>{totalData.totalPercentChg}%</td>
+                    <td className='td-right'>${totalData.totalDollarChg}</td>
+                    <td className='td-right'>{totalData.totalPercentChg}%</td>
                     </React.Fragment>
                 </tr>
 

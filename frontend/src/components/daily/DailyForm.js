@@ -80,15 +80,13 @@ class DailyForm extends React.Component {
 
     render() {
     return (
-        <div>
+        <div className='watchlist-div'>
                 
         <Form onSubmit={this.returnSubmit}>
             
             
             <Form.Group >
-                
-                <Form.Label>Daily Setup</Form.Label>
-                <Row>
+                <Row >
                     <Col>{this.selectWatchlist()}</Col>    
                     <Col>
                         <Form.Label>Start Date:</Form.Label>
@@ -104,7 +102,7 @@ class DailyForm extends React.Component {
                             End Date for View (3 Days Max)
                         </Form.Text>
                     </Col>
-                    <Col><Button type='submit'>Get Data</Button></Col>
+                    <Col><Button variant='success' type='submit'>Get Data</Button></Col>
                 </Row>
             </Form.Group>
             </Form>

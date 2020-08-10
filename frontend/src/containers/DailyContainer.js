@@ -44,7 +44,7 @@ class DailyContainer extends React.Component {
                         </tr>
                         <tr>
                             <th colSpan='3'></th>
-                            <th>Close Price</th>
+                            <th>Close</th>
                             <th>$ Change</th>
                             <th>% Change</th>
                             <th>Close</th>
@@ -58,10 +58,14 @@ class DailyContainer extends React.Component {
                             <th>% Change</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
-                        < DailyRows watchlist={this.props.watchlists} />
-                        
+                   
+                        {this.props.daily.companies.length < 1 ? <tr /> : 
+                        < DailyRows daily={this.props.daily} /> }
+                    
                     </tbody>
+                    
                 </Table>
                 
                 
@@ -74,7 +78,7 @@ const mapStateToProps = state => {
     console.log('state in dailycontainer: ', state)
     return {
         user: state.user,
-        watchlists: state.watchlists
+        daily: state.daily
     }
 }
 

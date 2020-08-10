@@ -30,10 +30,7 @@ function userReducer(state = {
         case 'REMOVE_WATCHLIST':
             return {...state, watchlists: action.payload} 
 
-        case 'START_GET_DAILY_DATA':
-            return state
         case 'ADD_DAILY_DATA':
-            
             const watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
             const watchlistCopy = [...state.watchlists]
             const newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
