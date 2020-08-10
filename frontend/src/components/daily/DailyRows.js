@@ -15,37 +15,56 @@ const DailyRows = props => {
         return company.charts.find(chart => chart.chart_type === 'daily')
     }
 
-    const priceData = chart => {
+    const getPriceData = chart => {
         // Return object to use for the price data in the rows
+        const priceReturn =  chart.chart_lines.slice(1).map( (date, index) => {
+                
+                const prevClose = chart.chart_lines[index].close
+                return (
+                    {
+                        close: formatNumber(date.close),
+                        dollarChg: formatNumber(date.close - prevClose),
+                        percentChg: Math.round(((date.close / prevClose) - 1) * 10000) / 100
 
+                    }
+                )})
+        // debugger
+        return priceReturn
+    }
 
-        
+    const totalReturn = chart => {
+        const firstClose = chart.chart_lines[0].close
+        const lastClose = chart.chart_lines[chart.chart_lines.length-1].close
 
-
+        return { totalDollarChg: formatNumber(lastClose - firstClose),
+            totalPercentChg: Math.round(((lastClose / firstClose) - 1) * 10000) / 100}
 
     }
 
 
     return props.watchlist.companies.map(company => {
         const chart = findChart(company)
+        
         if (chart) {
+            const priceData = getPriceData(chart)
+            const totalData = totalReturn(chart)
             return (
                 <tr key={company.id}>
                     <td>{company.id}</td>
                     <td>{company.ticker}</td>
                     <td>{company.name}</td>
-                    {chart.chart_lines.map(day => {
+                    {priceData.map(day => {
                         return (
                             <React.Fragment>
-                            <td>{day.close}</td>
-                            <td>Need $ Change</td>
-                            <td>Need % Change</td>
+                            <td>${day.close}</td>
+                            <td>${day.dollarChg}</td>
+                            <td>{day.percentChg}%</td>
                             </React.Fragment>
                         )
                     })}
                     <React.Fragment>
-                    <td>Need total $ Change</td>
-                    <td>Need total % Change</td>
+                    <td>${totalData.totalDollarChg}</td>
+                    <td>{totalData.totalPercentChg}%</td>
                     </React.Fragment>
                 </tr>
 
