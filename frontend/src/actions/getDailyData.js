@@ -37,11 +37,24 @@ function getDailyData(formData, watchlistObj, userId) {
     return dispatch => {
         dispatch({ type: 'START_GET_DAILY_DATA'})
         
-        const dailyDataObject = watchlistObj.companies
-            .map(company => company.ticker)
-            .reduce(chainedFetchData, Promise.resolve({}))
-            .then(data => databaseFetch(data))
+        const databaseFetch = dailyData => {
+            // Persist company and chart data to database
+            debugger
+            const companyObject = {
+                method: 'POST',
+                headers: {"Content-Type": "application/json", "Accept": "application/json"},
+                body: JSON.stringify({userId: userId, watchlistId: formData.watchlistId, data: dailyData})
+            }
+    
+            fetch('http://localhost:3000/daily', companyObject)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log('add daily data database response: ', json)
+                return dispatch({type: 'ADD_DAILY_DATA', payload: json})
+            })
+        }
 
+        
 
         function fetchData(ticker) {
             return fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + ticker + FINNHUB_API_KEY)
@@ -65,22 +78,7 @@ function getDailyData(formData, watchlistObj, userId) {
             })
         }
         
-        const databaseFetch = (dailyDataArry) => {
-            // Persist company and chart data to database
-            debugger
-            const companyObject = {
-                method: 'POST',
-                headers: {"Content-Type": "application/json", "Accept": "application/json"},
-                body: JSON.stringify({userId: userId, watchlistId: formData.watchlistId, data: dailyDataArry})
-            }
-    
-            fetch('http://localhost:3000/daily', companyObject)
-            .then(resp => resp.json())
-            .then(json => {
-                console.log('add daily data database response: ', json)
-                return dispatch({type: 'ADD_DAILY_DATA', payload: json})
-            })
-        }
+        
      
                 
         const makeCompanyObj = (companyData) => {
@@ -105,11 +103,16 @@ function getDailyData(formData, watchlistObj, userId) {
             const chartData = await fetchChart(ticker)
             console.log(companyData)
             console.log(chartData)
-            
-            return {...companyObj, [ticker]: {companyData, chart: chartData}}
+            // debugger
+            return {...companyObj, [ticker]: {companyData: companyData, chartData: chartData}}
     
         }
        
+        const dailyDataObject = watchlistObj.companies
+            .map(company => company.ticker)
+            .reduce(chainedFetchData, Promise.resolve({}))
+            .then(dailyData => databaseFetch(dailyData))
+
     }
     
 }

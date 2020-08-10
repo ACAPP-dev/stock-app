@@ -55,11 +55,11 @@ class CompaniesController < ApplicationController
                 
                 # map through the watchlist data and update database
 
-
-                byebug
-
-                if !watchlist.companies.find(ifnone=nil) {|company| company.ticker == params[:ticker]}
-                    company = Company.find_by(ticker: params[:ticker])
+                params[:data].each do |ticker, object|
+                
+                    if watchlist.companies.find(ifnone=nil) {|company| company.ticker == ticker}
+                        company = Company.find_by(ticker: ticker)
+                        # need to update with params data
                     if company
                         watchlist.companies.push(company)
                     else
@@ -67,6 +67,11 @@ class CompaniesController < ApplicationController
                     end
                     watchlist.save
                 end
+
+                end
+                byebug
+
+                
             else
                 render json: {response: "Watchlist not found!"}, status: 404
             end
