@@ -67,7 +67,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loginUser: (user) => dispatch(fetchUser(user)),
     signupUser: (user) => dispatch(createUser(user)),
-    editUser: (user) => dispatch(editUser(user))
+    updateUser: (user) => dispatch(editUser(user))
   }
 
 }

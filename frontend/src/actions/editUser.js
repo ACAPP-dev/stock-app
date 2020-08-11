@@ -1,7 +1,7 @@
 function editUser(formData) {
 
     const userObject = {
-        method: 'UPDATE',
+        method: 'PATCH',
         headers: {"Content-Type": "application/json", "Accept": "application/json"},
         body: JSON.stringify({user: formData})
       }
@@ -9,7 +9,7 @@ function editUser(formData) {
     return dispatch => {
         dispatch({ type: 'START_CREATE_USER'})
 
-        fetch('http://localhost:3000/users', userObject)
+        fetch(`http://localhost:3000/users/${formData.id}`, userObject)
         .then(resp => resp.json())
         .then(json => {
             console.log('create user response: ', json)

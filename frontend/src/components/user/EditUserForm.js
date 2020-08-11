@@ -9,6 +9,7 @@ export default class EditUserForm extends React.Component {
         super(props)
         
         this.state = {
+            id: props.currentUser.id,
             name: props.currentUser.name,
             email: props.currentUser.email,
             password: ""
@@ -31,7 +32,7 @@ export default class EditUserForm extends React.Component {
             return(
                 <div className='login-div'>
                     <h2>Edit User</h2>
-                    <Form className='login-form' onSubmit={this.returnSignup}>
+                    <Form className='login-form' onSubmit={this.returnEditUser}>
                     <Form.Group >
                             <Form.Label>Full Name: </Form.Label>
                             <Form.Control type='text' onChange={this.handleChange} name='name' placeholder='Enter first and last name' value={this.state.name} />

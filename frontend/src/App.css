@@ -25,6 +25,16 @@ body {
 
 .nav-bar {
   background-image: url('./images/modern.png');
+  
+}
+
+.no-wrap-div {
+  display: inline-flex;
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
 }
 
 .login-div {
@@ -53,6 +63,7 @@ h2 {
   color: black;
   border: 1px solid black;
   border-radius: 10px;
+  
 }
 
 .nav:hover {

@@ -25,8 +25,10 @@ class NavBarContainer extends React.Component {
                     <NavLink onClick={this.props.logout} activeClassName='active-nav' className='nav' to='/logout'>Logout</NavLink>
                     {/* Need to add link to specific user details below */}
                     <NavLink activeClassName='active-nav' className='nav' to='/user' >
-                    <img className='nav-image' src={ checkmark } alt='checkmark' width='20' height='20' />
-                        {this.props.user.name}
+                        <div className='no-wrap-div'>
+                            <img className='nav-image' src={ checkmark } alt='checkmark' width='20' height='20' />
+                            {this.props.user.name}
+                        </div>
                     </NavLink>
                 </React.Fragment>
             )
