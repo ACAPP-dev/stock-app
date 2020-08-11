@@ -10,7 +10,7 @@ function getDailyData(formData, watchlistObj, userId) {
     const FINNHUB_CHART_TIMEFRAME = '&resolution=D&from='
     const FINNHUB_API_KEY = '&token=bsfleivrh5rf14r5rh80'
     const chartStartDate = (Date.parse(formData.chartStartDate)/1000).toString()
-    const chartEndDate = (Date.parse(formData.chartEndDate)/1000).toString()
+    const chartEndDate = (Date.parse(`${formData.chartEndDate}T22:00:00`)/1000).toString()
     let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
    
     
