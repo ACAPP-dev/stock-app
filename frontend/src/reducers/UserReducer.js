@@ -30,16 +30,6 @@ function userReducer(state = {
         case 'START_CREATE_USER':
         return state
 
-        case 'LOGIN_USER':
-        const newUser = {
-            name: action.payload.name, 
-            email: action.payload.email,
-            id: action.payload.id,
-            loggedIn: true,
-            watchlists: action.payload.watchlists
-        }
-        return {...state, ...newUser}
-
         case 'START_ADD_WATCHLIST':
             return state
 

@@ -7,13 +7,13 @@ function createUser(formData) {
       }
   
     return dispatch => {
-        dispatch({ type: 'START_CREATE_LOGIN'})
+        dispatch({ type: 'START_CREATE_USER'})
 
         fetch('http://localhost:3000/users', userObject)
         .then(resp => resp.json())
         .then(json => {
             console.log('create user response: ', json)
-            return dispatch({type: 'CREATE_USER', payload: json})
+            return dispatch({type: 'LOGIN_USER', payload: json})
         })
     }
 }
