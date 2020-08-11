@@ -29,13 +29,12 @@ body {
 
 .login-div {
   justify-content: center;
-  background-image: url('./images/modern.png');
+  background-image: url('./images/bluewave.jpg');
 }
 .login-form {
   width: 50%;
   margin: 5px auto;
   justify-content: center;
-  /* background-image: url('./images/modern.png'); */
 }
 
 h2 {
@@ -132,4 +131,12 @@ thead {
 
 .alert {
   text-align: center;
+}
+
+.home-col {
+  background-color: lightblue;
+  margin: 3px;
+  min-height: 50px;
+  border: 1px solid black;
+  border-radius: 20px;
 }

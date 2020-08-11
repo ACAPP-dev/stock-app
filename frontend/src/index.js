@@ -12,12 +12,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   companies: companyReducer,
   daily: dailyReducer,
   user: userReducer,
   watchlists: watchlistReducer
 })
+
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT') { state = undefined}
+  return appReducer(state, action)
+}
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 

@@ -32,6 +32,7 @@ class DailyContainer extends React.Component {
         return (
             <div className='daily-div'>
                 {this.props.daily.requesting ? this.showRequesting() : null}
+                <h2>View Watchlist Stock Data for Selected Days</h2>
                 < DailyForm returnGetData={this.getDailyData}/>
                 
                 <Table striped bordered hover size='sm'>

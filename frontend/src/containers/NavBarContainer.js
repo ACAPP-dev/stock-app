@@ -21,7 +21,8 @@ class NavBarContainer extends React.Component {
                     
                     {/* <NavLink activeClassName='active-nav' className='nav' to={`/users/${this.props.user.id}/watchlists`} >Watchlists</NavLink> */}
                     <NavLink activeClassName='active-nav' className='nav' to='/watchlists'>Watchlists</NavLink>
-                    <NavLink activeClassName='active-nav' className='nav' to='/logout'>Logout</NavLink>
+                    <NavLink exact activeClassName='active-nav' className='nav' to="/daily">Daily View</NavLink>
+                    <NavLink onClick={this.props.logout} activeClassName='active-nav' className='nav' to='/logout'>Logout</NavLink>
                     {/* Need to add link to specific user details below */}
                     <NavLink activeClassName='active-nav' className='nav' to='/user' >
                     <img className='nav-image' src={ checkmark } alt='checkmark' width='20' height='20' />
@@ -31,7 +32,12 @@ class NavBarContainer extends React.Component {
             )
 
         } else {
-            return <NavLink activeClassName='active-nav' className='nav' to="/login" >Login</NavLink>
+            return (
+                <React.Fragment>
+                    <NavLink activeClassName='active-nav' className='nav' to="/login" >Login</NavLink>
+                    <NavLink activeClassName='active-nav' className='nav' to="/new" >Sign Up</NavLink>
+                </React.Fragment>
+            )
                     }
     }
 
@@ -44,9 +50,10 @@ class NavBarContainer extends React.Component {
                 </Navbar.Brand>
                 <Nav className='mr-auto'>
                     <NavLink exact activeClassName='active-nav' className='nav' to="/" >Home</NavLink>
-                    <NavLink exact activeClassName='active-nav' className='nav' to="/daily">Daily View</NavLink>
                     <NavLink activeClassName='active-nav' className='nav' to="/stock" >Look Up Stock</NavLink>
-                    <NavLink activeClassName='active-nav' className='nav' to="/company" >Company Data</NavLink>
+                    <NavLink activeClassName='active-nav' className='nav' to="/company" >Stock Data</NavLink>
+                    
+                    
                     
                 </Nav>
                 <Nav className='justify-content-end'>
@@ -64,5 +71,8 @@ const mapStateToProps = state => {
     return {user: state.user}
 }
 
+const mapDispatchToProps = dispatch => {
+    return {logout: () => {dispatch({ type: 'LOGOUT' })}}
+}
 
-export default connect(mapStateToProps)(NavBarContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(NavBarContainer)

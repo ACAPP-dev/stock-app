@@ -1,10 +1,12 @@
 import React from 'react'
 import Chart from '../components/company/Chart'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import Alert from 'react-bootstrap/Alert'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Statistics from '../components/company/Statistics'
@@ -50,7 +52,7 @@ class CompanyContainer extends React.Component {
                 {this.props.data.requesting ? this.showRequesting() : null}
                 <Container className='company-container'>
                     <Row className='company-row'>
-                        <Col sm={9} >
+                        <Col sm={6} >
                             <div>
                                 <span><img src={this.props.data.logo} alt='logo' width='15px' height='15px' /></span>
                                 <span> {this.props.data.name}</span>
@@ -62,6 +64,7 @@ class CompanyContainer extends React.Component {
                                 
                             </div>
                         </Col>
+                        <Col sm={3}><Link to="/stock" ><Button>Look Up Stock</Button></Link></Col>
                         <Col sm={3} > {this.addToWatchlist()}</Col>
                     </Row>
                     <Row className='company-row'>

@@ -11,7 +11,7 @@ import Home from './components/Home';
 import About from './components/About'
 
 import Login from './components/Login'
-
+import NewUserForm from './components/user/NewUserForm'
 import fetchUser from './actions/fetchUser'
 import DailyContainer from './containers/DailyContainer'
 import TickerContainer from './containers/TickerContainer'
@@ -36,6 +36,7 @@ class App extends React.Component {
           <Route exact path="/daily" component={DailyContainer} />
           <Route exact path="/about" component={About} />
           <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
+          <Route exact path="/new" component={NewUserForm} />
           <Route exact path="/logout" component={Home} />
           <Route exact path="/user" component={Home} />
           <Route exact path="/stock" component={TickerContainer} />
