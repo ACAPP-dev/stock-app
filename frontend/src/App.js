@@ -44,10 +44,10 @@ class App extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/daily" component={DailyContainer} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
-          <Route exact path="/new" render={routerProps => <NewUserForm {...routerProps} loggedIn={this.props.user.loggedIn} signupUser={this.handleSignup} />} />
+          <Route exact path="/login" render={routerProps => <Login {...routerProps} reducerError={this.props.user.error} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
+          <Route exact path="/new" render={routerProps => <NewUserForm {...routerProps} reducerError={this.props.user.error} loggedIn={this.props.user.loggedIn} signupUser={this.handleSignup} />} />
           <Route exact path="/logout" component={Home} />
-          <Route exact path="/user" render={routerProps => <EditUserForm {...routerProps} currentUser={this.props.user} loggedIn={this.props.user.loggedIn} editUser={this.handleEditUser} />} />
+          <Route exact path="/user" render={routerProps => <EditUserForm {...routerProps} currentUser={this.props.user} reducerError={this.props.user.error} loggedIn={this.props.user.loggedIn} editUser={this.handleEditUser} />} />
           <Route exact path="/stock" component={TickerContainer} />
           <Route exact path="/company" component={CompanyContainer} />
           <Route exact path="/watchlists" component={WatchlistContainer} />
@@ -59,7 +59,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  // console.log('mapStateToProps in App:', state.user)
+  console.log('mapStateToProps in App:', state.user)
   return {user: state.user}
 }
 

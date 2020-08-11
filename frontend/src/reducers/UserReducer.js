@@ -4,7 +4,8 @@ function userReducer(state = {
         email: "", 
         id: "", 
         loggedIn: false,
-        watchlists: []
+        watchlists: [],
+        error: ""
         }, action) {
     console.log('State from userReducer:', state)
     console.log('Action from userReducer:', action)
@@ -18,17 +19,22 @@ function userReducer(state = {
             return state
         
         case 'LOGIN_USER':
-        const newUser = {
-            name: action.payload.name, 
-            email: action.payload.email,
-            id: action.payload.id,
-            loggedIn: true,
-            watchlists: action.payload.watchlists
-        }
-        return {...state, ...newUser}
+            if (action.payload.response) {
+                return {...state, error: action.payload.response}
+            } else {
+                const newUser = {
+                    name: action.payload.name, 
+                    email: action.payload.email,
+                    id: action.payload.id,
+                    loggedIn: true,
+                    watchlists: action.payload.watchlists,
+                    error: ""
+                }
+                return {...state, ...newUser}
+            }
         
         case 'START_CREATE_USER':
-        return state
+            return state
 
         case 'START_ADD_WATCHLIST':
             return state
