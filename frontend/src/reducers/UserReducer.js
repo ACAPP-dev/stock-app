@@ -14,23 +14,38 @@ function userReducer(state = {
     let newWatchlists
 
     switch (action.type) {
-        case 'LOGIN_USER':
-            const newUser = {
-                name: action.payload.name, 
-                email: action.payload.email,
-                id: action.payload.id,
-                loggedIn: true,
-                watchlists: action.payload.watchlists
-            }
-
-            return {...state, ...newUser}
         case 'START_USER_LOGIN':
             return state
+        
+        case 'LOGIN_USER':
+        const newUser = {
+            name: action.payload.name, 
+            email: action.payload.email,
+            id: action.payload.id,
+            loggedIn: true,
+            watchlists: action.payload.watchlists
+        }
+        return {...state, ...newUser}
+        
+        case 'START_CREATE_USER':
+        return state
+
+        case 'LOGIN_USER':
+        const newUser = {
+            name: action.payload.name, 
+            email: action.payload.email,
+            id: action.payload.id,
+            loggedIn: true,
+            watchlists: action.payload.watchlists
+        }
+        return {...state, ...newUser}
+
         case 'START_ADD_WATCHLIST':
             return state
+
         case 'ADD_WATCHLIST':
-            // debugger
-            return {...state, watchlists: action.payload}    
+            return {...state, watchlists: action.payload} 
+            
         case 'REMOVE_WATCHLIST':
             return {...state, watchlists: action.payload} 
 
@@ -38,14 +53,12 @@ function userReducer(state = {
             watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
             watchlistCopy = [...state.watchlists]
             newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
-            // debugger
             return {...state, watchlists: watchlistCopy}
 
         case 'ADD_DAILY_DATA':
             watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
             watchlistCopy = [...state.watchlists]
             newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
-            // debugger
             return {...state, watchlists: watchlistCopy}
             
             

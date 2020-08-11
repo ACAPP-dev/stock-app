@@ -10,9 +10,10 @@ import NavBarContainer from './containers/NavBarContainer';
 import Home from './components/Home';
 import About from './components/About'
 
-import Login from './components/Login'
+import Login from './components/user/Login'
 import NewUserForm from './components/user/NewUserForm'
 import fetchUser from './actions/fetchUser'
+import createUser from './actions/createUser'
 import DailyContainer from './containers/DailyContainer'
 import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
@@ -24,7 +25,9 @@ class App extends React.Component {
     this.props.loginUser(formData)
   }
   
-  
+  handleSignup = (formData) => {
+    this.props.signupUser(formData)
+  }
 
   render() {
     return (
@@ -36,7 +39,7 @@ class App extends React.Component {
           <Route exact path="/daily" component={DailyContainer} />
           <Route exact path="/about" component={About} />
           <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
-          <Route exact path="/new" component={NewUserForm} />
+          <Route exact path="/new" render={routerProps => <NewUserForm {...routerProps} loggedIn={this.props.user.loggedIn} signupUser={this.handleSignup} />} />
           <Route exact path="/logout" component={Home} />
           <Route exact path="/user" component={Home} />
           <Route exact path="/stock" component={TickerContainer} />
@@ -56,7 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (user) => dispatch(fetchUser(user))
+    loginUser: (user) => dispatch(fetchUser(user)),
+    signupUser: (user) => dispatch(createUser(user))
   }
 
 }

@@ -6,28 +6,36 @@ import { Redirect } from 'react-router-dom'
 export default class NewUser extends React.Component {
 
     state = {
-        email: "acapp909@gmail.com",
-        password: "1234"
+        name: "",
+        email: "",
+        password: ""
     }
 
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    returnLogin = (event) => {
+    returnSignup = (event) => {
         event.preventDefault()
-        this.props.loginUser(this.state)
+        this.props.signupUser(this.state)
     }
 
     render() {
-        console.log('login props for loginuser:', this.props.loggedIn)
+        console.log('props for newuser:', this.props.loggedIn)
         if (this.props.loggedIn) {
             return <Redirect to="/" />
         } else {
             return(
                 <div className='login-div'>
-                    <h2>User Login</h2>
-                    <Form className='login-form' onSubmit={this.returnLogin}>
+                    <h2>New User Signup</h2>
+                    <Form className='login-form' onSubmit={this.returnSignup}>
+                    <Form.Group >
+                            <Form.Label>Full Name: </Form.Label>
+                            <Form.Control type='text' onChange={this.handleChange} name='name' placeholder='Enter first and last name' value={this.state.name} />
+                            <Form.Text className='text-muted'>
+                                Full name for account
+                            </Form.Text>
+                        </Form.Group>
                         <Form.Group >
                             <Form.Label>Email: </Form.Label>
                             <Form.Control type='email' onChange={this.handleChange} name='email' placeholder='Enter email' value={this.state.email} />
@@ -44,7 +52,7 @@ export default class NewUser extends React.Component {
                         </Form.Group>
                         
                         <Button variant="primary" type="submit">
-                            Submit
+                            Create User
                         </Button>
                     </Form>
                 </div>
