@@ -12,8 +12,10 @@ import About from './components/About'
 
 import Login from './components/user/Login'
 import NewUserForm from './components/user/NewUserForm'
+import EditUserForm from './components/user/EditUserForm'
 import fetchUser from './actions/fetchUser'
 import createUser from './actions/createUser'
+import editUser from './actions/editUser'
 import DailyContainer from './containers/DailyContainer'
 import TickerContainer from './containers/TickerContainer'
 import CompanyContainer from './containers/CompanyContainer'
@@ -29,6 +31,10 @@ class App extends React.Component {
     this.props.signupUser(formData)
   }
 
+  handleEditUser = (formData) => {
+    this.props.updateUser(formData)
+  }
+
   render() {
     return (
     <Router>
@@ -41,7 +47,7 @@ class App extends React.Component {
           <Route exact path="/login" render={routerProps => <Login {...routerProps} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />
           <Route exact path="/new" render={routerProps => <NewUserForm {...routerProps} loggedIn={this.props.user.loggedIn} signupUser={this.handleSignup} />} />
           <Route exact path="/logout" component={Home} />
-          <Route exact path="/user" component={Home} />
+          <Route exact path="/user" render={routerProps => <EditUserForm {...routerProps} currentUser={this.props.user} loggedIn={this.props.user.loggedIn} editUser={this.handleEditUser} />} />
           <Route exact path="/stock" component={TickerContainer} />
           <Route exact path="/company" component={CompanyContainer} />
           <Route exact path="/watchlists" component={WatchlistContainer} />
@@ -60,7 +66,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loginUser: (user) => dispatch(fetchUser(user)),
-    signupUser: (user) => dispatch(createUser(user))
+    signupUser: (user) => dispatch(createUser(user)),
+    editUser: (user) => dispatch(editUser(user))
   }
 
 }
