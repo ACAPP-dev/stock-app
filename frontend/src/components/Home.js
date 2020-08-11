@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { NavLink } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
@@ -10,19 +10,24 @@ import WatchlistContainer from '../containers/WatchlistContainer'
 
 const Home = () => {
     return(
-        <div className='watchlist-div'>
+        <div className='home-div'>
             <h2>Home Component</h2>
-            <p>Need to add content: stock picker, watchlists, companies</p>
+            <p>Select Item Below to Get Started!</p>
             
             <Row>
-                <Col className='home-col'>Instructions</Col>
-                <Col className='home-col'>Log In</Col>
-
+                <Col className='home-col'>
+                    <NavLink exact className='nav-link' to="/about">Instructions</NavLink></Col>
+                <Col className='home-col'>
+                    <NavLink exact className='nav-link' to="/login">Login</NavLink>
+                </Col>
             </Row>
             <Row>
-                <Col className='home-col'>Daily View</Col>
-                <Col className='home-col'>Stock Lookup</Col>
-
+                <Col className='home-col'>
+                    <NavLink exact className='nav-link' to="/new">Signup</NavLink>
+                </Col>
+                <Col className='home-col'>
+                    <NavLink exact className='nav-link' to="/stock">Stock Lookup</NavLink>
+                </Col>
             </Row>
             
         </div>

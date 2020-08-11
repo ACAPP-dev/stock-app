@@ -19,17 +19,57 @@ class DailyForm extends React.Component {
         chartEndDate: new Date(new Date().setDate(new Date().getDate() +1)).toJSON().slice(0,10)
     }
 
+    convertDateToString = date => {
+        return date.toJSON().slice(0,10)
+    }
+
+    convertStringToDate = date => {
+        return new Date(`${date}T00:00:00`)
+    }
+
+    getWeekdayStartDate = date => {
+        if (date.getDay() === 0) {
+            return date.setDate(new Date(date).getDate() - 2)
+        } else if (date.getDay() === 6) {
+            return date.setDate(new Date(date).getDate() - 1)
+        } else {return date}
+    }
+
+    getWeekdayEndDate = date => {
+        if (date.getDay() === 0) {
+            return date.setDate(new Date(date).getDate() + 1)
+        } else if (date.getDay() === 6) {
+            return date.setDate(new Date(date).getDate() + 2)
+        } else {return date}
+    }
+    
     handleChange = event => {
         
         if (event.target.name === 'startDate') {
-            const newEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 2)).toJSON().slice(0,10)
-            const newChartEndDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() + 3)).toJSON().slice(0,10)
-            const newChartStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 1)).toJSON().slice(0,10)
+            
+            // Convert input date to date format
+            const convertedStartDate = this.convertStringToDate(event.target.value)
+            // Convert start date to weekday if needed
+            const weekdayStartDate = this.getWeekdayStartDate(convertedStartDate)
+            // Calculate end date based on 3 days (current fixed)
+            const newEndDate = weekdayStartDate.getDate() + 2
+            // Convert end date to weekday if needed
+            const weekdayEndDate = this.getWeekdayEndDate(newEndDate)
+            // Calculate chart end date based on weekday end date (this is 1 day after the shown date due to the requirements of the API)
+            const chartEndDate = weekdayEndDate.getDate() + 1
+            // Convert chart end date to weekday if needed
+            const chartWeekdayEndDate = this.getWeekdayEndDate(chartEndDate)
+            // Calculate chart start date (this date is 1 day before the set start date for calculation purposes)
+            const chartStartDate = weekdayStartDate.getDate() - 1
+            // Convert chart start date to weekday if needed 
+            const chartWeekdayStartDate = this.getWeekdayStartDate(chartStartDate)
+            
+
             this.setState({
-                startDate: event.target.value,
-                chartStartDate: newChartStartDate,
-                endDate: newEndDate,
-                chartEndDate: newChartEndDate
+                startDate: this.convertDateToString(weekdayStartDate),
+                chartStartDate: this.convertDateToString(chartWeekdayStartDate),
+                endDate: this.convertDateToString(weekdayEndDate),
+                chartEndDate: this.convertDateToString(chartWeekdayEndDate)
             })
         } else if (event.target.name === 'endDate') {
             const newStartDate = new Date(new Date(event.target.value).setDate(new Date(event.target.value).getDate() - 2)).toJSON().slice(0,10)

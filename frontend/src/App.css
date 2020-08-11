@@ -56,10 +56,8 @@ h2 {
 }
 
 .nav {
-  /* margin-right: 10px; */
   margin: 2px;
   padding: 2px;
-  /* background: white; */
   color: black;
   border: 1px solid black;
   border-radius: 10px;
@@ -67,6 +65,17 @@ h2 {
 }
 
 .nav:hover {
+  color:yellow;
+  background: purple;
+}
+
+.nav-link {
+  margin: 2px;
+  padding: 2px;
+  color: black;
+}
+
+.nav-link:hover {
   color:yellow;
   background: purple;
   
@@ -150,4 +159,15 @@ thead {
   min-height: 50px;
   border: 1px solid black;
   border-radius: 20px;
+}
+
+.home-col:hover {
+  color:yellow;
+  background: purple;
+}
+
+.home-div {
+  margin: auto;
+  width: 85%;
+  height: 500px;
 }

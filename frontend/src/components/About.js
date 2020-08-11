@@ -2,7 +2,10 @@ import React from 'react'
 
 const About = () => {
     return (
-        <h2>About Static Component</h2>
+        <div className='home-div'>
+            <h2>About Andrew's Stock App</h2>
+            <p>Add Info from Readme once complete!</p>
+        </div>
     )
 }
 
