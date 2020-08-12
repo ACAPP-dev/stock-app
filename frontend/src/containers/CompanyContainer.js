@@ -37,6 +37,7 @@ class CompanyContainer extends React.Component {
                 <DropdownButton title="Add to Watchlist">
                     {this.props.user.watchlists.map(watchlist => {
                         return (<Dropdown.Item
+                            key={watchlist.id}
                             onClick={()=>{this.addCompany(watchlist.id, this.props.data.ticker)}}
                             >{watchlist.name}</Dropdown.Item>)
                     })}    

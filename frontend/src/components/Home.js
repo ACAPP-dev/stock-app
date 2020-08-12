@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const Home = () => {
+const Home = (props) => {
     return(
         <div className='home-div'>
             <h2>Home Component</h2>
@@ -18,7 +18,10 @@ const Home = () => {
             </Row>
             <Row>
                 <Col className='home-col'>
-                    <NavLink exact className='nav-link' to="/new">Signup</NavLink>
+                    {props.user.id ?
+                        <NavLink exact className='nav-link' to="/watchlists">Watchlists</NavLink> :
+                        <NavLink exact className='nav-link' to="/new">Signup</NavLink>
+                    }
                 </Col>
                 <Col className='home-col'>
                     <NavLink exact className='nav-link' to="/stock">Stock Lookup</NavLink>

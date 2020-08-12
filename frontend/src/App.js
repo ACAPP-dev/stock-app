@@ -41,7 +41,7 @@ class App extends React.Component {
       <div className="App">
         <div><NavBarContainer /></div>
         <div>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={routerProps => <Home {...routerProps} user={this.props.user} />} />
           <Route exact path="/daily" component={DailyContainer} />
           <Route exact path="/about" component={About} />
           <Route exact path="/login" render={routerProps => <Login {...routerProps} reducerError={this.props.user.error} loggedIn={this.props.user.loggedIn} loginUser={this.handleLogin} />} />

@@ -1,6 +1,5 @@
 function fetchCompany(formData) {
     
-//   debugger
   // from to in stock data is unix time from 6/1/20 to 6/15/20
 // const FINNHUB_STOCK_DATA_URL = 'https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1590969600&to=1592179200&token=bsfleivrh5rf14r5rh80'
 const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
@@ -96,7 +95,6 @@ let newChartData = []
             fetch('http://localhost:3000/companies', companyObject)
             .then(resp => resp.json())
             .then(json => {
-                console.log('company database response: ', json)
                 return dispatch({type: 'ADD_COMPANY', payload: json})
             })
         }
@@ -107,17 +105,19 @@ let newChartData = []
 // Add volume to model later?
 const readyChartData = (chartData) => {
     const newChartData = []
+    if (chartData.length > 0) {
+        chartData.t.map( (date, index) => {
+            return newChartData.push(
+                {date: date,
+                open: chartData.o[index],
+                high: chartData.h[index],
+                low: chartData.l[index],
+                close: chartData.c[index]
+                }
+            )
+        })
+    }
 
-    chartData.t.map( (date, index) => {
-        return newChartData.push(
-            {date: date,
-            open: chartData.o[index],
-            high: chartData.h[index],
-            low: chartData.l[index],
-            close: chartData.c[index]
-            }
-        )
-    })
     return newChartData
 }
 // Example of chart data format: 
