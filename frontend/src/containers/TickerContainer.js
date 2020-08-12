@@ -1,5 +1,4 @@
 import React from 'react'
-import Tickers from '../components/ticker/TickerList'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import fetchCompany from '../actions/fetchCompany'

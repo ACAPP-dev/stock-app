@@ -5,11 +5,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import TickerList from './TickerList'
 import { connect } from 'react-redux'
-import { getDistance } from '@amcharts/amcharts4/.internal/core/utils/Math'
 
 class TickerForm extends React.Component {
 
-    
     state = {
         searchText: "",
         ticker: "AAPL",

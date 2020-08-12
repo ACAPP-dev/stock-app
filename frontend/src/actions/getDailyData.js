@@ -1,11 +1,7 @@
 function getDailyData(formData, watchlistObj, userId) {
-    console.log('formdata from getDailyData: ', formData)
   
-
     const FINNHUB_BASIC_URL = 'https://finnhub.io/api/v1'
-    const FINNHUB_QUOTE_URL = '/quote?symbol='
     const FINNHUB_COMPANY_DATA_URL = '/stock/profile2?symbol='
-    const FINNHUB_BASIC_DATA_URL = '/stock/metric?symbol='
     const FINNHUB_CHART_URL = '/stock/candle?symbol='
     const FINNHUB_CHART_TIMEFRAME = '&resolution=D&from='
     const FINNHUB_API_KEY = '&token=bsfleivrh5rf14r5rh80'
@@ -107,7 +103,12 @@ function getDailyData(formData, watchlistObj, userId) {
     
         }
        
-        const dailyDataObject = watchlistObj.companies
+        // const dailyDataObject = watchlistObj.companies
+        //     .map(company => company.ticker)
+        //     .reduce(chainedFetchData, Promise.resolve({}))
+        //     .then(dailyData => databaseFetch(dailyData))
+
+        watchlistObj.companies
             .map(company => company.ticker)
             .reduce(chainedFetchData, Promise.resolve({}))
             .then(dailyData => databaseFetch(dailyData))

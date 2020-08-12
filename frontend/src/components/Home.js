@@ -2,11 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import Table from 'react-bootstrap/Table'
-import WatchlistContainer from '../containers/WatchlistContainer'
-
 
 const Home = () => {
     return(

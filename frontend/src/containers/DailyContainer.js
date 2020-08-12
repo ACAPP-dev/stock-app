@@ -6,10 +6,7 @@ import DailyForm from '../components/daily/DailyForm'
 import getDailyData from '../actions/getDailyData'
 
 import Alert from 'react-bootstrap/Alert'
-import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 class DailyContainer extends React.Component {
     
@@ -64,24 +61,17 @@ class DailyContainer extends React.Component {
                             <th>% Change</th>
                         </tr>
                     </thead>
-                    
                     <tbody>
-                   
                         {this.props.daily.companies.length < 1 ? <tr /> : 
                         < DailyRows daily={this.props.daily} /> }
-                    
                     </tbody>
-                    
                 </Table>
-                
-                
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    console.log('state in dailycontainer: ', state)
     return {
         user: state.user,
         daily: state.daily
@@ -89,7 +79,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-
     return {getDailyData: (formData, watchlistObj, userId) => dispatch(getDailyData(formData, watchlistObj, userId))}
 }
 

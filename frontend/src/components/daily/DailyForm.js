@@ -133,7 +133,6 @@ class DailyForm extends React.Component {
     }
 
     dropdownSelect = (id, name) => {
-        debugger
         this.setState({
             watchlistId: id,
             watchlistName: name
@@ -143,80 +142,72 @@ class DailyForm extends React.Component {
     returnSubmit = event => {
         event.preventDefault()
         this.props.returnGetData(this.state)
-
     }
 
     // <Form.Control required as="select" custom></Form.Control>
     selectWatchlist = () => {
-        
             return (
-                // <DropdownButton 
+                <DropdownButton 
+                    title={'Watchlist: ' + this.state.watchlistName}
+                    >
+                    {this.props.user.watchlists.map(watchlist => {
+                        return (
+                            <Dropdown.Item 
+                                key={watchlist.id}
+                                onClick={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
+                            >{watchlist.name}</Dropdown.Item>
+                        )
+                    })}    
+                </DropdownButton>
+
+                // <Form.Control 
                 //     title={'Watchlist: ' + this.state.watchlistName}
                 //     required as='select'
                 //     >
                 //     {this.props.user.watchlists.map(watchlist => {
                 //         return (
-                //             <Dropdown.Item 
+                //             <option 
                 //                 key={watchlist.id}
-                //                 onClick={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
-                //             >{watchlist.name}</Dropdown.Item>
+                //                 onChange={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
+                //             >{watchlist.name}</option>
                 //         )
                 //     })}    
-                // </DropdownButton>
-
-                <Form.Control 
-                    title={'Watchlist: ' + this.state.watchlistName}
-                    required as='select'
-                    >
-                    {this.props.user.watchlists.map(watchlist => {
-                        return (
-                            <option 
-                                key={watchlist.id}
-                                onChange={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
-                            >{watchlist.name}</option>
-                        )
-                    })}    
-                </Form.Control>
-
-
+                // </Form.Control>
             )
         }
 
     render() {
-    return (
-        <div className='daily-form-div'>
-                
-        <Form onSubmit={this.returnSubmit}>
-            
-            
-            <Form.Group >
-                <Row >
-                    <Col>{this.selectWatchlist()}</Col>    
-                    <Col>
-                        <Form.Label>Start Date:</Form.Label>
-                        <Form.Control type="date" onChange={this.handleChange} name='startDate' value={this.state.startDate} />
-                        <Form.Text className='text-muted'>
-                            Start Date for View
-                        </Form.Text>
-                    </Col>
-                    <Col>
-                    <Form.Label>End Date:</Form.Label>
-                        <Form.Control type="date" onChange={this.handleChange} name='endDate' value={this.state.endDate} />
-                        <Form.Text className='text-muted'>
-                            End Date for View (3 Days Max)
-                        </Form.Text>
-                    </Col>
-                    <Col><Button variant='success' type='submit'>Get Data</Button></Col>
-                </Row>
-            </Form.Group>
-            </Form>
+        return (
+            <div className='daily-form-div'>
+                    
+                <Form onSubmit={this.returnSubmit}>
+                    <Form.Group >
+                        <Row >
+                            <Col>{this.selectWatchlist()}</Col>    
+                            <Col>
+                                <Form.Label>Start Date:</Form.Label>
+                                <Form.Control type="date" onChange={this.handleChange} name='startDate' value={this.state.startDate} />
+                                <Form.Text className='text-muted'>
+                                    Start Date for View
+                                </Form.Text>
+                            </Col>
+                            <Col>
+                            <Form.Label>End Date:</Form.Label>
+                                <Form.Control type="date" onChange={this.handleChange} name='endDate' value={this.state.endDate} />
+                                <Form.Text className='text-muted'>
+                                    End Date for View (3 Days Max)
+                                </Form.Text>
+                            </Col>
+                            <Col><Button variant='success' type='submit'>Get Data</Button></Col>
+                        </Row>
+                    </Form.Group>
+                </Form>
             </div>
-    )
+        )
     }
 }
 
 const mapStateToProps = state => {
-    console.log('state in daily form: ', state)
     return {user: state.user}
 }
 export default connect(mapStateToProps)(DailyForm)

@@ -57,6 +57,7 @@ class CompanyContainer extends React.Component {
                                     src={this.props.data.logo}
                                     width='15px' 
                                     height='15px' 
+                                    alt='Company Logo'
                                 /></span>
                                 <span> {this.props.data.name}</span>
                                 <span> ({this.props.data.ticker})</span>

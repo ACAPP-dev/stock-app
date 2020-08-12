@@ -3,7 +3,6 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Table from 'react-bootstrap/Table'
 import market from '../../images/market.png'
 
 const WatchListing = props => {

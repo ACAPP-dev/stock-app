@@ -2,11 +2,9 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 
 const TickerList = (props) => {
-    console.log('tickerlist props:', props)
     
     const handleClick = (event) => {
-        props.returnTicker(event.target.parentElement.getAttribute('data-ticker'))
-        
+        props.returnTicker(event.target.parentElement.getAttribute('data-ticker'))  
     }
 
     return (
@@ -22,21 +20,18 @@ const TickerList = (props) => {
                 </thead>
                 <tbody>
                     {props.tickers.map((ticker, index) => {
-                        return(
-                            
-                        <tr key={index} data-ticker={ticker.ticker} onClick={handleClick}>
-                            <td>{ticker.ticker}</td>
-                            <td>{ticker.ticker_name}</td>
-                            <td>{ticker.exchange}</td>
-                        </tr>
+                        return(   
+                            <tr key={index} data-ticker={ticker.ticker} onClick={handleClick}>
+                                <td>{ticker.ticker}</td>
+                                <td>{ticker.ticker_name}</td>
+                                <td>{ticker.exchange}</td>
+                            </tr>
                         )
                     })}
                 </tbody>
             </Table>
-        
         </div>
     )
-
 }
 
 export default TickerList
