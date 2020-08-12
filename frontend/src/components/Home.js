@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 const Home = (props) => {
     return(
         <div className='home-div'>
-            <h2>Home Component</h2>
+            <h2>Home</h2>
             <h4>Select Item Below to Get Started!</h4>
             
             <Row>
