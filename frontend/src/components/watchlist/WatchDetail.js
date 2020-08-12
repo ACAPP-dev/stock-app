@@ -4,7 +4,6 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 
 const WatchDetail = props => {
-    console.log('watchdetail props: ', props)
     
     function formatNumber(number) {
         if (!number || Number.isNaN(number)) { return '' }

@@ -12,7 +12,6 @@ function createUser(formData) {
         fetch('http://localhost:3000/users', userObject)
         .then(resp => resp.json())
         .then(json => {
-            console.log('create user response: ', json)
             return dispatch({type: 'LOGIN_USER', payload: json})
         })
     }

@@ -21,7 +21,6 @@ class WatchlistContainer extends React.Component {
         showAddCompany: false,
         currentWatchlistId: "",
         redirect: false
-
     }
 
     addWatchlist = formData => {
@@ -43,15 +42,6 @@ class WatchlistContainer extends React.Component {
         this.props.removeWatchlist(id, this.props.user.id)
     }
 
-    // Not needed for index - will need to get details of stocks / companies at some point
-    // getWatchlist = () => {
-    //     fetch(`/watchlists/${this.props.user.id}`)
-    //         .then(resp => resp.json())
-    //         .then(json => {
-    //             console.log(json)
-    //         })
-    // }
-
     componentDidUpdate() {
         window.scrollTo(0, 0)
     }
@@ -69,7 +59,6 @@ class WatchlistContainer extends React.Component {
     }
 
     addCompany = (formData) => {
-        console.log('add company clicked in watchlist detail')
         this.props.addCompany(this.state.currentWatchlistId, formData.ticker, this.props.user.id)
     }
 
@@ -146,6 +135,5 @@ const mapDispatchToProps = dispatch => {
     }
 
 }
-
 
 export default connect (mapStateToProps, mapDispatchToProps)(WatchlistContainer)

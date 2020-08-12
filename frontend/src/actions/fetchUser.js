@@ -11,7 +11,6 @@ function fetchUser(formData) {
         fetch('http://localhost:3000/login', loginObject)
         .then(resp => resp.json())
         .then(json => {
-            console.log('userlogin response: ', json)
             return dispatch({type: 'LOGIN_USER', payload: json})
         })
     }

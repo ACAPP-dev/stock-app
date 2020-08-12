@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container'
 import market from '../../images/market.png'
 
 const WatchListing = props => {
-    console.log('watchlisting props: ', props)
 
     const handleView = id => {
         props.viewWatchlist(id)
@@ -16,14 +15,10 @@ const WatchListing = props => {
         props.returnRemove(id)
     }
 
-    
-
     return(
-        
-            <Container className='watchlist-card-container'>
+        <Container className='watchlist-card-container'>
             {props.watchlists.map(watchlist => {
                 return(
-                    
                     <Card bg='light' className='watchlist-card' key={watchlist.id}>
                         <Card.Img variant='top' src={ market } height='100px' />
                         
@@ -36,20 +31,11 @@ const WatchListing = props => {
                             <Button className='watchlist-btn' variant='primary' onClick={() => handleView(watchlist.id)}>View/Edit</Button>
                             <Button className='watchlist-btn' variant='danger' onClick={() => handleRemove(watchlist.id)}>Delete</Button>
                         </Card.Footer>
-
                     </Card>
-                   
-               
                 )
             })}
-
-        </Container>
-       
-           
+        </Container>     
     )
-
-
-
 }
 
 export default WatchListing

@@ -12,11 +12,7 @@ const FINNHUB_CHART_TIMEFRAME = '&resolution=D&from='
 const FINNHUB_API_KEY = '&token=bsfleivrh5rf14r5rh80'
 const chartStartDate = (Date.parse(formData.startDate)/1000).toString()
 
-// 1593561600000
-// 1593561600
-// Test Date: '1593561600' // July 1, 2020 - need to make this variable
 const chartEndDate = (Date.parse(formData.endDate)/1000).toString()
-// Test Date: '1596153600' // July 31, 2020 - need to make this variable
 let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 let companyData = {}
 let quoteData = {}
@@ -63,7 +59,6 @@ let newChartData = []
             })
 
         }
-
 
         const databaseFetch = () => {
             // Persist company and chart data to database
@@ -123,7 +118,6 @@ const readyChartData = (chartData) => {
             }
         )
     })
-    // console.log(newChartData)
     return newChartData
 }
 // Example of chart data format: 
