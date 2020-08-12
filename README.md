@@ -1,68 +1,87 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# "Andrew's Stock App" Javascript / React / Redux Based Web App
 
-## Available Scripts
+Problem: Most stock apps use standard time periods (day, week, month, year) to view stock price trends.  This can make it difficult to spot and track price movement over short term periods.
 
-In the project directory, you can run:
+Solution: "Andrew's Stock App" allows the user to view stock candlestick charts over custom time periods, create and maintain watchlists, and view stock price data over a user specified three day period.
 
-### `yarn start`
+## Features
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<ul>
+    <li>Easily create an account with your name, email address, and password.</li>
+    <li>Passwords are encrypted using bcrypt.</li>
+    <li>Enter stock ticker or enter company name and select from list.</li>
+    <li>View company data and candlestick stock chart for user specified time period.</li>
+    <li>Create and save multiple "watchlists" to quickly view stock data.</li>
+    <li>Daily View with summary closing stock price and movement for three user specified days.</li>
+</ul>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Please use the following link to see an overview of the webapp on YouTube: need
 
-### `yarn test`
+My blog also talks about this project here: need
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies
 
-### `yarn build`
+<ul>
+    <li>Javascript</li>
+    <li>Ruby on Rails API Framework (Ruby version 2.6.1p33)</li>
+    <li>Sqlite3 Database</li>
+    <li>React Open Source Framework</li>
+    <li>Redux Framework for React</li>
+    <li>Stock Data from Finnhub: https://Finnhub.io</li>
+    <li>Charts Framework from AMCharts: https://amcharts.com</li>
+</ul>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+To refresh or set up the database, use the following steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    $ rails db:drop
 
-### `yarn eject`
+    $ rails db:migrate
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    $ rails db:seed
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Download the code for this webapp using:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    $ git clone need
 
-## Learn More
+Update Gem files using command:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    $ bundle install 
+    
+    or
+    
+    $ bundle update
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Development
 
-### Code Splitting
+    You can use:
+    
+    $ rails s
+            
+    to start webserver.
+    
+    Use:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+    $ rails c
 
-### Analyzing the Bundle Size
+    to enter a console session for debugging and/or exploring.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+    Start Webpage (from project directory /frontend):
 
-### Making a Progressive Web App
+    $ yarn start
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Contributing
 
-### Advanced Configuration
+Bug reports and pull requests are welcome on GitHub at need. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Written by **Andrew Capp** in conjunction with _Flatiron Academy_ - August 2020
 
-### Deployment
+## License
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-### `yarn build` fails to minify
+## Code of Conduct
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Everyone interacting in the project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [Code of Conduct](need).
