@@ -49,6 +49,7 @@ let newChartData = []
         }
 
         const fetchChartData = () => {
+            debugger
             fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + formData.ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {

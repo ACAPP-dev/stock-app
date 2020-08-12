@@ -27,7 +27,14 @@ const Home = (props) => {
                     <NavLink exact className='nav-link' to="/stock">Stock Lookup</NavLink>
                 </Col>
             </Row>
-            
+            {props.user.id ? (
+                <Row>
+                    <Col className='home-col'>
+                        <NavLink exact className='nav-link' to="/daily">Daily View</NavLink>
+                    </Col>
+                </Row>
+                ) : null
+            }   
         </div>
     )
     

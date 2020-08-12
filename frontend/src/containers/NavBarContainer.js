@@ -69,7 +69,6 @@ class NavBarContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    // console.log('mapStateToProps in NavBarContainer:', state)
     return {user: state.user}
 }
 
