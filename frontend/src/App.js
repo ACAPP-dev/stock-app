@@ -51,7 +51,6 @@ class App extends React.Component {
           <Route exact path="/stock" component={TickerContainer} />
           <Route exact path="/company" component={CompanyContainer} />
           <Route exact path="/watchlists" component={WatchlistContainer} />
-          {/* <Route exact path="/watchlists/new" render={routerProps => <AddWatchlist {...routerProps} addWatchlist={this.addWatchlist} />} /> */}
         </div>
       </div>
     </Router>)
@@ -59,7 +58,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('mapStateToProps in App:', state.user)
   return {user: state.user}
 }
 

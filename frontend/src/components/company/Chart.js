@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react'
 // import candlestick chart components from amcharts.com below:
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
@@ -22,7 +22,7 @@ class Chart extends React.Component {
   }
 
   initChart() {
-    const { chartId } = this.props
+    // const { chartId } = this.props
 
     am4core.useTheme(am4themes_animated);
 

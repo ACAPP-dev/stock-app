@@ -87,7 +87,6 @@ class WatchlistContainer extends React.Component {
     }
 
     removeCompany = (watchlistId, companyId) => {
-        console.log('remove company clicked in watchlist detail', watchlistId, companyId)
         this.props.removeCompany(watchlistId, companyId, this.props.user.id)
     }
 
@@ -123,7 +122,6 @@ class WatchlistContainer extends React.Component {
                         returnRemove={this.removeWatchlist} 
                         watchlists={this.props.watchLists}
                     />
-                    {/* <Link className='nav' to='/watchlists/new'>Add Watchlist</Link> */}
                 </div>
             )
         }
@@ -131,7 +129,6 @@ class WatchlistContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('watchlist state:', state)
     return {
         user: state.user, 
         watchLists: state.user.watchlists,

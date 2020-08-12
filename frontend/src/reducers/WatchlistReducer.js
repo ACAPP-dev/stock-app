@@ -1,7 +1,7 @@
 
 function watchlistReducer(state={companies: []}, action) {
-    console.log('State from watchlistReducer:', state)
-    console.log('Action from watchlistReducer:', action)
+    // console.log('State from watchlistReducer:', state)
+    // console.log('Action from watchlistReducer:', action)
     
     switch (action.type) {
                     
@@ -13,7 +13,7 @@ function watchlistReducer(state={companies: []}, action) {
             const companies = []
 
             action.payload.companies.map(company => {
-                companies.push({
+                return companies.push({
                     id: company.id,
                     ticker: company.ticker,
                     name: company.name,

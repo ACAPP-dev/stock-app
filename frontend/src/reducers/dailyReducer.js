@@ -1,7 +1,7 @@
 
 function dailyReducer(state={companies: [], requesting: false}, action) {
-    console.log('State from dailyReducer:', state)
-    console.log('Action from dailyReducer:', action)
+    // console.log('State from dailyReducer:', state)
+    // console.log('Action from dailyReducer:', action)
     
     switch (action.type) {
         case 'START_GET_DAILY_DATA':

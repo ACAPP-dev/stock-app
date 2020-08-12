@@ -12,7 +12,6 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Statistics from '../components/company/Statistics'
 import Industry from '../components/company/Industry'
 import addCompany from '../actions/addCompany'
-import bluewave from '../images/bluewave.jpg'
 
 class CompanyContainer extends React.Component {
 
@@ -29,7 +28,6 @@ class CompanyContainer extends React.Component {
     }
 
     addCompany = (watchlistId, ticker) => {
-        console.log('add company clicked in company dropdown')
         this.props.addCompany(watchlistId, ticker, this.props.user.id)
     }
 
@@ -70,7 +68,7 @@ class CompanyContainer extends React.Component {
                             </div>
                         </Col>
                         <Col sm={3}><Link to="/stock" ><Button>Look Up Stock</Button></Link></Col>
-                        <Col sm={3} > {this.addToWatchlist()}</Col>
+                        <Col sm={3}>{this.addToWatchlist()}</Col>
                     </Row>
                     <Row className='company-row'>
                         <Col className='company-col'>
@@ -96,7 +94,6 @@ class CompanyContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('state in companycontainer:', state)
     return {data: state.companies, user: state.user}
 }
 

@@ -55,17 +55,7 @@ class TickerForm extends React.Component {
         }
     }
 
-    dateToString = date => {
-        // console.log(date, typeof(date))
-
-        // const dateString = date.getMonth() + '-' + date.getDistance() + '-' + date.getFullYear()
-        // console.log(dateString)
-
-        // return dateString
-    }
-
     render() {
-        console.log(this.state.endDate)
         return (
             <div>
                 <h2>Enter Company Name to Search for Ticker</h2>
@@ -126,7 +116,6 @@ class TickerForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('props in tickerform: ', state)
     return state
 }
 

@@ -7,12 +7,12 @@ function userReducer(state = {
         watchlists: [],
         error: ""
         }, action) {
-    console.log('State from userReducer:', state)
-    console.log('Action from userReducer:', action)
+    // console.log('State from userReducer:', state)
+    // console.log('Action from userReducer:', action)
     
-    let watchlistIndex
+    // let watchlistIndex
     let watchlistCopy
-    let newWatchlists
+    // let newWatchlists
 
     switch (action.type) {
         case 'START_USER_LOGIN':
@@ -46,15 +46,15 @@ function userReducer(state = {
             return {...state, watchlists: action.payload} 
 
         case 'GET_WATCHLIST_DETAIL':
-            watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
+            // watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
             watchlistCopy = [...state.watchlists]
-            newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
+            // newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
             return {...state, watchlists: watchlistCopy}
 
         case 'ADD_DAILY_DATA':
-            watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
+            // watchlistIndex = state.watchlists.findIndex(watchlist => watchlist.id === action.payload.id)
             watchlistCopy = [...state.watchlists]
-            newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
+            // newWatchlists = watchlistCopy.splice(watchlistIndex, 1, action.payload)
             return {...state, watchlists: watchlistCopy}
             
             
