@@ -121,19 +121,19 @@ class DailyForm extends React.Component {
             const chartStartDate = new Date(new Date(newStartDate).setDate(new Date(newStartDate).getDate() - 1))
              // Convert chart start date to weekday if needed 
             const chartWeekdayStartDate = this.getWeekdayStartDate(chartStartDate)
-             
-             this.setState({
-                 startDate: this.convertDateToString(newStartDate),
-                 chartStartDate: this.convertDateToString(chartWeekdayStartDate),
-                 endDate: this.convertDateToString(weekdayEndDate),
-                 chartEndDate: this.convertDateToString(weekdayEndDate)
-             })
-        
+
+            this.setState({
+                startDate: this.convertDateToString(newStartDate),
+                chartStartDate: this.convertDateToString(chartWeekdayStartDate),
+                endDate: this.convertDateToString(weekdayEndDate),
+                chartEndDate: this.convertDateToString(weekdayEndDate)
+            })
         } 
         console.log('setstate in daily form: ', this.state)
     }
 
     dropdownSelect = (id, name) => {
+        debugger
         this.setState({
             watchlistId: id,
             watchlistName: name
@@ -146,23 +146,39 @@ class DailyForm extends React.Component {
 
     }
 
-    
+    // <Form.Control required as="select" custom></Form.Control>
     selectWatchlist = () => {
         
             return (
-                <DropdownButton 
+                // <DropdownButton 
+                //     title={'Watchlist: ' + this.state.watchlistName}
+                //     required as='select'
+                //     >
+                //     {this.props.user.watchlists.map(watchlist => {
+                //         return (
+                //             <Dropdown.Item 
+                //                 key={watchlist.id}
+                //                 onClick={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
+                //             >{watchlist.name}</Dropdown.Item>
+                //         )
+                //     })}    
+                // </DropdownButton>
+
+                <Form.Control 
                     title={'Watchlist: ' + this.state.watchlistName}
-                    
+                    required as='select'
                     >
                     {this.props.user.watchlists.map(watchlist => {
                         return (
-                            <Dropdown.Item 
+                            <option 
                                 key={watchlist.id}
-                                onClick={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
-                            >{watchlist.name}</Dropdown.Item>
+                                onChange={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
+                            >{watchlist.name}</option>
                         )
                     })}    
-                </DropdownButton>
+                </Form.Control>
+
+
             )
         }
 

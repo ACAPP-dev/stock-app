@@ -12,6 +12,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Statistics from '../components/company/Statistics'
 import Industry from '../components/company/Industry'
 import addCompany from '../actions/addCompany'
+import bluewave from '../images/bluewave.jpg'
 
 class CompanyContainer extends React.Component {
 
@@ -54,7 +55,11 @@ class CompanyContainer extends React.Component {
                     <Row className='company-row'>
                         <Col sm={6} >
                             <div>
-                                <span><img src={this.props.data.logo} alt='logo' width='15px' height='15px' /></span>
+                                <span><img 
+                                    src={this.props.data.logo}
+                                    width='15px' 
+                                    height='15px' 
+                                /></span>
                                 <span> {this.props.data.name}</span>
                                 <span> ({this.props.data.ticker})</span>
                             </div>

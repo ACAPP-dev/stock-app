@@ -82,7 +82,7 @@ h2 {
 }
 
 .company-container {
-  color: white;
+  color: black;
 }
 
 .company-row {
@@ -96,7 +96,7 @@ h2 {
 .small-table {
   width: 100%;
   font-size: small;
-  color: white;
+  color: black;
   margin: 1px auto;
 }
 
@@ -154,11 +154,12 @@ thead {
 }
 
 .home-col {
-  background-color: lightblue;
+  background-color: rgb(114, 166, 226);
   margin: 3px;
   min-height: 50px;
   border: 1px solid black;
   border-radius: 20px;
+  text-align: center;
 }
 
 .home-col:hover {
