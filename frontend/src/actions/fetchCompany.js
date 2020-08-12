@@ -49,7 +49,6 @@ let newChartData = []
         }
 
         const fetchChartData = () => {
-            debugger
             fetch(FINNHUB_BASIC_URL + FINNHUB_CHART_URL + formData.ticker + finnhubTimeframeUrl + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
@@ -62,7 +61,6 @@ let newChartData = []
 
         const databaseFetch = () => {
             // Persist company and chart data to database
-
             const companyDataObject = {
                 data: {
                     ticker: companyData.ticker,
@@ -105,10 +103,10 @@ let newChartData = []
 // Convert chart data from API fetch to a format that can persist to the database and work with the chart library
 // Add volume to model later?
 const readyChartData = (chartData) => {
-    const newChartData = []
-    if (chartData.length > 0) {
+    const newChartArry = []
+    if (chartData.t.length > 0) {
         chartData.t.map( (date, index) => {
-            return newChartData.push(
+            return newChartArry.push(
                 {date: date,
                 open: chartData.o[index],
                 high: chartData.h[index],
@@ -118,8 +116,7 @@ const readyChartData = (chartData) => {
             )
         })
     }
-
-    return newChartData
+    return newChartArry
 }
 // Example of chart data format: 
 //  newChart.data = [ {

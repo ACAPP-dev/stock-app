@@ -141,7 +141,11 @@ class DailyForm extends React.Component {
 
     returnSubmit = event => {
         event.preventDefault()
-        this.props.returnGetData(this.state)
+        if (this.state.watchlistId > 0) {
+            this.props.returnGetData(this.state)
+        } else {
+            alert('Select watchlist to view stock data.')
+        }
     }
 
     // <Form.Control required as="select" custom></Form.Control>

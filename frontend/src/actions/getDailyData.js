@@ -10,9 +10,8 @@ function getDailyData(formData, watchlistObj, userId) {
     let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 
     const readyChartData = (chartData) => {
-
-        if (chartData.length > 0) {
-            return chartData.t.map( (date, index) => {
+        if (chartData.t.length > 0) {
+            const newChartArry = chartData.t.map( (date, index) => {
                 return (
                     {date: date,
                     open: chartData.o[index],
@@ -22,6 +21,7 @@ function getDailyData(formData, watchlistObj, userId) {
                     }
                 )
             })
+            return newChartArry
         } else {
             return chartData
         }
