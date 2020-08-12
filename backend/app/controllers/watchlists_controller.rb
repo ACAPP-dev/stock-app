@@ -18,7 +18,6 @@ class WatchlistsController < ApplicationController
 
     def create
         user = User.find_by(id: params[:user_id])
-        # byebug
         if user
             user.watchlists.build(watchlist_params)
             if user.save
@@ -35,7 +34,6 @@ class WatchlistsController < ApplicationController
     def show
         if params[:user_id]
             user = User.find_by(id: params[:user_id])
-            # byebug
             if user
                 watchlist = Watchlist.find_by(id: params[:id])
                 if watchlist && watchlist.user_id == user.id
@@ -54,7 +52,6 @@ class WatchlistsController < ApplicationController
 
     def destroy
         user = User.find_by(id: params[:user_id])
-        # byebug
         if user
             watchlist = Watchlist.find_by(id: params[:id])
             if watchlist && watchlist.user_id == user.id
@@ -76,8 +73,6 @@ class WatchlistsController < ApplicationController
             watchlist = Watchlist.find_by(id: params[:watchlistId])
             
             if watchlist && watchlist.user_id == user.id
-                
-                # byebug
                 if !watchlist.companies.find(ifnone=nil) {|company| company.ticker == params[:ticker]}
                     company = Company.find_by(ticker: params[:ticker])
                     if company
@@ -93,7 +88,7 @@ class WatchlistsController < ApplicationController
         else
             render json: {response: "User not found!"}, status: 404
         end 
-        # byebug
+        
         render json: watchlist
 
     end

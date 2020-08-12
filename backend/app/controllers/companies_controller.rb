@@ -14,11 +14,9 @@ class CompaniesController < ApplicationController
             @company = Company.new(company_params)
         end
         if (@company.save)
-            # byebug
             if (params[:chartData])
                 current_chart = @company.charts.find_by(chart_type: 'Candle')
                 if current_chart
-                    # @company.charts.first.destroy
                     current_chart.destroy
                 end
                 
@@ -60,7 +58,6 @@ class CompaniesController < ApplicationController
                     # byebug
                     company = @watchlist.companies.find(ifnone=nil) {|company| company.ticker == ticker}
                     if company
-                        # company = Company.find_by(ticker: ticker)
                         # need to update with params data
                         company.update(daily_params(object))
                         company.save
@@ -68,7 +65,6 @@ class CompaniesController < ApplicationController
                         @watchlist.companies.build(daily_params(object))
                     end
                     @watchlist.save
-                    # byebug
                     chart = company.charts.find_by(chart_type: 'daily')
                     if chart
                         chart.destroy
@@ -98,7 +94,6 @@ class CompaniesController < ApplicationController
         else
             render json: {response: "User not found!"}, status: 404
         end 
-        # byebug
         # Need to render new watchlist with the companies and charts
         render json: @watchlist, serializer: WatchlistSerializer
 

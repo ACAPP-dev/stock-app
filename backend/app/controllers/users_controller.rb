@@ -6,11 +6,9 @@ class UsersController < ApplicationController
     end
 
     def create
-        # byebug
         user = User.find_by(email: params[:email])
         if !user
             user = User.new(user_params)
-        # watchlist_detail = []
 
             if (user.save)
                 render json: user
