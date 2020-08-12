@@ -129,7 +129,6 @@ class DailyForm extends React.Component {
                 chartEndDate: this.convertDateToString(weekdayEndDate)
             })
         } 
-        console.log('setstate in daily form: ', this.state)
     }
 
     dropdownSelect = (id, name) => {
@@ -163,20 +162,6 @@ class DailyForm extends React.Component {
                         )
                     })}    
                 </DropdownButton>
-
-                // <Form.Control 
-                //     title={'Watchlist: ' + this.state.watchlistName}
-                //     required as='select'
-                //     >
-                //     {this.props.user.watchlists.map(watchlist => {
-                //         return (
-                //             <option 
-                //                 key={watchlist.id}
-                //                 onChange={()=>this.dropdownSelect(watchlist.id, watchlist.name)}
-                //             >{watchlist.name}</option>
-                //         )
-                //     })}    
-                // </Form.Control>
             )
         }
 

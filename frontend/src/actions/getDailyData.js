@@ -10,7 +10,7 @@ function getDailyData(formData, watchlistObj, userId) {
     let finnhubTimeframeUrl = FINNHUB_CHART_TIMEFRAME + chartStartDate + '&to=' + chartEndDate
 
     const readyChartData = (chartData) => {
-        if (chartData.t.length > 0) {
+        if (chartData.t && chartData.t.length > 0) {
             const newChartArry = chartData.t.map( (date, index) => {
                 return (
                     {date: date,
@@ -44,7 +44,6 @@ function getDailyData(formData, watchlistObj, userId) {
             fetch('http://localhost:3000/daily', companyObject)
             .then(resp => resp.json())
             .then(json => {
-                console.log('add daily data database response: ', json)
                 return dispatch({type: 'ADD_DAILY_DATA', payload: json})
             })
         }
@@ -55,7 +54,6 @@ function getDailyData(formData, watchlistObj, userId) {
             return fetch(FINNHUB_BASIC_URL + FINNHUB_COMPANY_DATA_URL + ticker + FINNHUB_API_KEY)
             .then(resp => resp.json())
             .then(json => {
-                console.log('companydata in getdailydata: ', json)
                 return makeCompanyObj(json)
             })
         }
@@ -72,10 +70,7 @@ function getDailyData(formData, watchlistObj, userId) {
                 }
             })
         }
-        
-        
-     
-                
+
         const makeCompanyObj = (companyData) => {
             return {
                 ticker: companyData.ticker,
@@ -98,7 +93,6 @@ function getDailyData(formData, watchlistObj, userId) {
             const chartData = await fetchChart(ticker)
             console.log(companyData)
             console.log(chartData)
-            // debugger
             return {...companyObj, [ticker]: {companyData: companyData, chartData: chartData}}
     
         }
@@ -112,8 +106,6 @@ function getDailyData(formData, watchlistObj, userId) {
             .map(company => company.ticker)
             .reduce(chainedFetchData, Promise.resolve({}))
             .then(dailyData => databaseFetch(dailyData))
-
     }
-    
 }
     export default getDailyData

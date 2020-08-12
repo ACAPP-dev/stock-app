@@ -2,7 +2,7 @@
 
 Problem: Most stock apps use standard time periods (day, week, month, year) to view stock price trends.  This can make it difficult to spot and track price movement over short term periods.
 
-Solution: "Andrew's Stock App" allows the user to view stock candlestick charts over custom time periods, create and maintain watchlists, and view stock price data over a user specified three day period.
+Solution: "Andrew's Stock App" allows the user to view candlestick charts over custom time periods, create and maintain watchlists, and view stock price data over a user specified three day period.
 
 ## Features
 

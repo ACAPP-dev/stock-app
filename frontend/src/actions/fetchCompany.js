@@ -104,7 +104,7 @@ let newChartData = []
 // Add volume to model later?
 const readyChartData = (chartData) => {
     const newChartArry = []
-    if (chartData.t.length > 0) {
+    if (chartData.t && chartData.t.length > 0) {
         chartData.t.map( (date, index) => {
             return newChartArry.push(
                 {date: date,

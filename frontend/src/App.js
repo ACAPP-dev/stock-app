@@ -40,7 +40,7 @@ class App extends React.Component {
     <Router>
       <div className="App">
         <div><NavBarContainer /></div>
-        <div>
+        <div className='app-div'>
           <Route exact path="/" render={routerProps => <Home {...routerProps} user={this.props.user} />} />
           <Route exact path="/daily" component={DailyContainer} />
           <Route exact path="/about" component={About} />
