@@ -12,17 +12,17 @@ Solution: "Andrew's Stock App" allows the user to view stock candlestick charts 
     <li>Enter stock ticker or enter company name and select from list.</li>
     <li>View company data and candlestick stock chart for user specified time period.</li>
     <li>Create and save multiple "watchlists" to quickly view stock data.</li>
-    <li>Daily View:
+    <li>Daily View (list of multiple stocks on one page):
         <ol>
-            <li>Select watchlist</li>
-            <li>Specify custom three day period</li>
-            <li>Get a table with closing stock price and movement</li>
-            <li>Lists every stock in your specified watchlist</li>
+            <li>Select watchlist.</li>
+            <li>Specify custom three day period.</li>
+            <li>Get a table with closing stock price and movement for each day.</li>
+            <li>See every stock in your specified watchlist.</li>
         </ol>
     </li>
 </ul>
 
-Please use the following link to see an overview of the webapp on YouTube: need
+Use the following link to see an overview of the webapp on YouTube: need
 
 My blog also talks about this project here: need
 
