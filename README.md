@@ -24,7 +24,7 @@ Solution: "Andrew's Stock App" allows the user to view candlestick charts over c
 
 Use the following link to see an overview of the webapp on YouTube: https://youtu.be/4omxv2ArO0c
 
-My blog also talks about this project here: need
+My blog also talks about this project here: https://acapp-dev.github.io/final_project_-_stock_market_app
 
 ## Technologies
 
@@ -51,7 +51,7 @@ To refresh or set up the database, use the following steps:
 
 Download the code for this webapp using:
 
-    $ git clone need
+    $ git clone https://github.com/ACAPP-dev/stock-app.git
 
 Update Gem files using command:
 
@@ -81,7 +81,7 @@ Update Gem files using command:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at need. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ACAPP-dev/stock-app/issues. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 Written by **Andrew Capp** in conjunction with _Flatiron Academy_ - August 2020
 
@@ -91,4 +91,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [Code of Conduct](need).
+Everyone interacting in the project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [Code of Conduct](https://github.com/ACAPP-dev/stock-app/blob/master/CODE_OF_CONDUCT.md).
