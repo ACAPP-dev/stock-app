@@ -22,7 +22,7 @@ Solution: "Andrew's Stock App" allows the user to view candlestick charts over c
     </li>
 </ul>
 
-Use the following link to see an overview of the webapp on YouTube: need
+Use the following link to see an overview of the webapp on YouTube: https://youtu.be/4omxv2ArO0c
 
 My blog also talks about this project here: need
 
