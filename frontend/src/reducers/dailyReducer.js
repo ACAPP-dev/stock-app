@@ -8,7 +8,7 @@ function dailyReducer(state={companies: [], requesting: false}, action) {
             return {...state, companies: [...state.companies], requesting: true}
        
         case 'ADD_DAILY_DATA':
-
+            
             return {...state, ...action.payload, requesting: false}
 
         default:
