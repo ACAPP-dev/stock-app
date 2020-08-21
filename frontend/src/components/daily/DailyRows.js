@@ -41,38 +41,63 @@ const DailyRows = props => {
 
     }
 
-
-    return props.daily.companies.map(company => {
-        const chart = findChart(company)
+    // Original Functionality based on store passed to props
+    // return props.daily.companies.map(company => {
+    //     const chart = findChart(company)
         
-        if (chart) {
-            const priceData = getPriceData(chart)
-            const totalData = totalReturn(chart)
-            return (
-                <tr key={company.id}>
-                    <td>{company.id}</td>
-                    <td>{company.ticker}</td>
-                    <td>{company.name}</td>
-                    {priceData.map( (day, index) => {
-                        return (
-                            <React.Fragment key={index}>
-                            <td className='td-right'>${day.close}</td>
-                            <td className='td-right'>${day.dollarChg}</td>
-                            <td className='td-right'>{day.percentChg}%</td>
-                            </React.Fragment>
-                        )
-                    })}
-                    <React.Fragment>
-                    <td className='td-right'>${totalData.totalDollarChg}</td>
-                    <td className='td-right'>{totalData.totalPercentChg}%</td>
-                    </React.Fragment>
-                </tr>
+    //     if (chart) {
+    //         const priceData = getPriceData(chart)
+    //         const totalData = totalReturn(chart)
+    //         return (
+    //             <tr key={company.id}>
+    //                 <td>{company.id}</td>
+    //                 <td>{company.ticker}</td>
+    //                 <td>{company.name}</td>
+    //                 {priceData.map( (day, index) => {
+    //                     return (
+    //                         <React.Fragment key={index}>
+    //                         <td className='td-right'>${day.close}</td>
+    //                         <td className='td-right'>${day.dollarChg}</td>
+    //                         <td className='td-right'>{day.percentChg}%</td>
+    //                         </React.Fragment>
+    //                     )
+    //                 })}
+    //                 <React.Fragment>
+    //                 <td className='td-right'>${totalData.totalDollarChg}</td>
+    //                 <td className='td-right'>{totalData.totalPercentChg}%</td>
+    //                 </React.Fragment>
+    //             </tr>
 
-            )
+    //         )
             
-        } else { return (<tr>Blank Row</tr>)}
+    //     } else { return (<tr>Blank Row</tr>)}
 
 
+    // })
+
+    // Revised functionality based on new tableObject passed as props
+
+    return props.daily.map(company => { 
+        return (
+            <tr key={company.id}>
+                <td>{company.id}</td>
+                <td>{company.ticker}</td>
+                <td>{company.name}</td>
+                {company.data.map( (day, index) => {
+                    return (
+                        <React.Fragment key={index}>
+                        <td className='td-right'>${day.close}</td>
+                        <td className='td-right'>${day.dollarChg}</td>
+                        <td className='td-right'>{day.percentChg}%</td>
+                        </React.Fragment>
+                    )
+                })}
+                <React.Fragment>
+                <td className='td-right'>${company.totals.totalDollarChg}</td>
+                <td className='td-right'>{company.totals.totalPercentChg}%</td>
+                </React.Fragment>
+            </tr>
+        )
     })
 }
 

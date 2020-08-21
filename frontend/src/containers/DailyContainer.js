@@ -23,7 +23,8 @@ class DailyContainer extends React.Component {
     }
 
     formatDate = date => {
-        return new Date(date * 1000).toDateString()
+        const newDate = new Date(date * 1000).toUTCString()
+        return newDate.split(' ').slice(0,4).join(' ')
     }
 
     getTableDays = () => {
@@ -37,7 +38,82 @@ class DailyContainer extends React.Component {
                 })   
             }
         }
+        // debugger
         return dateArry
+    }
+
+    // Add sorting capability to daily view
+    findChart = (company) => {
+        // debugger
+        return company.charts.find(chart => chart.chart_type === 'daily')
+    }
+
+    formatNumber = number => {
+        if (!number || Number.isNaN(number)) { return '' }
+        const numberArry = parseFloat(number).toFixed(2).split('.')
+        numberArry[0] = numberArry[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return numberArry.join('.')
+    }
+
+    makePriceObject = (chart) => {
+        // Return object to use for the price data in the rows
+        const priceObject =  chart.chart_lines.slice(1).map( (date, index) => {
+                
+                const prevClose = chart.chart_lines[index].close
+                return (
+                    {
+                        date: date.date,
+                        close: this.formatNumber(date.close),
+                        dollarChg: this.formatNumber(date.close - prevClose),
+                        percentChg: Math.round(((date.close / prevClose) - 1) * 10000) / 100
+
+                    }
+                )})
+        // debugger
+        return priceObject
+    }
+
+    totalReturn = (chart) => {
+        const firstClose = chart.chart_lines[0].close
+        const lastClose = chart.chart_lines[chart.chart_lines.length-1].close
+
+        return { totalDollarChg: this.formatNumber(lastClose - firstClose),
+            totalPercentChg: Math.round(((lastClose / firstClose) - 1) * 10000) / 100}
+
+    }
+    consolidateTableData = () => {
+        // Making object for the table data that can be sorted easier
+        let tableObject = []
+        // tableObject [
+        //     {
+        //         id: "1",
+        //         ticker: "BAC",
+        //         name: "Bank of Amer",
+        //         data: [ {date: "xx", close: "xx", chg$: "xx", chg%: "xx} ]
+        //     }
+        // ]
+
+        if (this.props.daily.companies.length > 0) {
+            tableObject = this.props.daily.companies.map(company => {
+                let chartArry = []
+                if (this.findChart(company)) {
+                    chartArry = this.makePriceObject(this.findChart(company))
+                    
+                    }
+
+                const companyObject = {
+                    id: company.id,
+                    ticker: company.ticker,
+                    name: company.name,
+                    data: chartArry,
+                    totals: this.totalReturn(this.findChart(company))
+                }
+                return companyObject
+            })
+        }
+        // debugger
+        return tableObject
+
     }
 
     render() {
@@ -77,8 +153,11 @@ class DailyContainer extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* {this.props.daily.companies.length < 1 ? <tr /> : 
+                        < DailyRows daily={this.props.daily} /> } */}
                         {this.props.daily.companies.length < 1 ? <tr /> : 
-                        < DailyRows daily={this.props.daily} /> }
+                        < DailyRows daily={this.consolidateTableData()} /> }
+
                     </tbody>
                 </Table>
             </div>
