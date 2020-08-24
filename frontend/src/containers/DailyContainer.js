@@ -33,14 +33,23 @@ class DailyContainer extends React.Component {
     }
 
     handleSort (event) {
-      
+        let sortedTable
 
-        const sortedTable = this.state.tableDetailArry.sort( (a,b) => {
-            return (a.totals.totalPercentChg > b.totals.totalPercentChg) ? 1 : -1
-        })
-        // debugger
-        this.setState({tableDetailArry: sortedTable})
-        // this.render()
+        switch (event.target.id) {
+            case 'ticker':
+                sortedTable = this.state.tableDetailArry.sort((a,b) => {return a.ticker > b.ticker ? 1 : -1})
+                this.setState({tableDetailArry: sortedTable})
+                break
+            case 'totalDollarChg':
+                sortedTable = this.state.tableDetailArry.sort((a,b) => {return a.totals.totalDollarChg > b.totals.totalDollarChg ? 1 : -1})
+                this.setState({tableDetailArry: sortedTable})
+                break
+            case 'totalPercentChg':
+                sortedTable = this.state.tableDetailArry.sort((a,b) => {return a.totals.totalPercentChg > b.totals.totalPercentChg ? 1 : -1})
+                this.setState({tableDetailArry: sortedTable})
+                break
+        }
+        
     }
 
     showRequesting = () => {
@@ -161,7 +170,9 @@ class DailyContainer extends React.Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Ticker</th>
+                            <th>
+                            <button id='ticker' onClick={this.handleSort}>Ticker</button>
+                                </th>
                             <th>Name</th>
                             <th colSpan='3'>{this.getTableDays()[1]}</th>
                             <th colSpan='3'>{this.getTableDays()[2]}</th>
@@ -182,9 +193,11 @@ class DailyContainer extends React.Component {
                             <th>Close</th>
                             <th>$ Change</th>
                             <th>% Change</th>
-                            <th>$ Change</th>
                             <th>
-                                <button id="totalPctChg" onClick={this.handleSort}>% Change</button>
+                                <button id="totalDollarChg" onClick={this.handleSort}>$ Change</button>
+                            </th>
+                            <th>
+                                <button id="totalPercentChg" onClick={this.handleSort}>% Change</button>
                             </th>
                         </tr>
                     </thead>
