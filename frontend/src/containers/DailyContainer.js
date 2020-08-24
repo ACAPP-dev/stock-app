@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import DailyRows from '../components/daily/DailyRows'
 import DailyForm from '../components/daily/DailyForm'
 import getDailyData from '../actions/getDailyData'
+import fetchWatchlists from '../actions/fetchWatchlists'
 
 import Alert from 'react-bootstrap/Alert'
 import Table from 'react-bootstrap/Table'
@@ -18,6 +19,10 @@ class DailyContainer extends React.Component {
         this.handleSort = this.handleSort.bind(this)
     }
     
+    componentDidMount() {
+        this.props.fetchWatchlists(this.props.user.id)
+    }
+
     componentDidUpdate(prevProps, prevState) {
         console.log('Componentdidupdate: ', prevState, prevProps)
         if (prevProps.daily.companies !== this.props.daily.companies) {
@@ -213,7 +218,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {getDailyData: (formData, watchlistObj, userId) => dispatch(getDailyData(formData, watchlistObj, userId))}
+    return {
+        getDailyData: (formData, watchlistObj, userId) => dispatch(getDailyData(formData, watchlistObj, userId)),
+        fetchUserData: () => dispatch(),
+        fetchWatchlists: (userId) => dispatch(fetchWatchlists(userId))
+    }
 }
 
 export default connect (mapStateToProps, mapDispatchToProps)(DailyContainer)

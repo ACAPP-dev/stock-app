@@ -1,7 +1,7 @@
 import React from 'react'
 
 const DailyRows = props => {
-    // console.log('props in dailyrows: ', props)
+    console.log('props in dailyrows: ', props)
     
     const formatNumber = number => {
         if (!number || Number.isNaN(number)) { return '' }

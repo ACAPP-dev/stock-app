@@ -32,6 +32,9 @@ function watchlistReducer(state={companies: []}, action) {
 
         case 'START_WATCHLIST_REMOVE':
             return state
+
+        case 'START_WATCHLIST_FETCH':
+            return state
        
         default:
             return state

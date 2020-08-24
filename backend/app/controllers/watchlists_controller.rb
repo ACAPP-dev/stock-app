@@ -6,7 +6,7 @@ class WatchlistsController < ApplicationController
             if user
                 
                 watchlists = user.watchlists
-                render json: watchlists
+                render json: user
             else
                 render json: {response: "User not found!"}, status: 404
             end
