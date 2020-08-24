@@ -10,6 +10,39 @@ import Table from 'react-bootstrap/Table'
 
 class DailyContainer extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            tableDetailArry: []
+            
+        }
+        this.handleSort = this.handleSort.bind(this)
+
+    }
+    
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('Componentdidupdate: ', prevState, prevProps)
+        if (prevProps.daily.companies !== this.props.daily.companies) {
+            this.consolidateTableData()
+        }
+        // if (prevState.tableDetailArry === this.state.tableDetailArry) {
+        //     console.log('true')
+        // }
+
+    }
+
+    handleSort (event) {
+      
+
+        const sortedTable = this.state.tableDetailArry.sort( (a,b) => {
+            return (a.totals.totalPercentChg > b.totals.totalPercentChg) ? 1 : -1
+        })
+        // debugger
+        this.setState({tableDetailArry: sortedTable})
+        // this.render()
+    }
+
     showRequesting = () => {
         return (<Alert className='alert' variant='warning'><h4>Requesting Data</h4></Alert>)
     }
@@ -112,7 +145,8 @@ class DailyContainer extends React.Component {
             })
         }
         // debugger
-        return tableObject
+        // return tableObject
+        this.setState({tableDetailArry: tableObject})
 
     }
 
@@ -149,15 +183,17 @@ class DailyContainer extends React.Component {
                             <th>$ Change</th>
                             <th>% Change</th>
                             <th>$ Change</th>
-                            <th>% Change</th>
+                            <th>
+                                <button id="totalPctChg" onClick={this.handleSort}>% Change</button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* {this.props.daily.companies.length < 1 ? <tr /> : 
                         < DailyRows daily={this.props.daily} /> } */}
                         {this.props.daily.companies.length < 1 ? <tr /> : 
-                        < DailyRows daily={this.consolidateTableData()} /> }
-
+                        < DailyRows daily={this.state.tableDetailArry} /> }
+                        {/* // < DailyRows daily={this.consolidateTableData()} /> } */}
                     </tbody>
                 </Table>
             </div>
