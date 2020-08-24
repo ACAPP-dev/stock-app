@@ -1,7 +1,7 @@
 
 function watchlistReducer(state={companies: []}, action) {
-    console.log('State from watchlistReducer:', state)
-    console.log('Action from watchlistReducer:', action)
+    // console.log('State from watchlistReducer:', state)
+    // console.log('Action from watchlistReducer:', action)
     
     switch (action.type) {
                     

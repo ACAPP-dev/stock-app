@@ -24,7 +24,7 @@ class DailyContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('Componentdidupdate: ', prevState, prevProps)
+        // console.log('Componentdidupdate: ', prevState, prevProps)
         if (prevProps.daily.companies !== this.props.daily.companies) {
             this.consolidateTableData()
         }
