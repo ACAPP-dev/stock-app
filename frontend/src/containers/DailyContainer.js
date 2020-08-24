@@ -14,26 +14,19 @@ class DailyContainer extends React.Component {
         super(props)
         this.state = {
             tableDetailArry: []
-            
         }
         this.handleSort = this.handleSort.bind(this)
-
     }
     
-
     componentDidUpdate(prevProps, prevState) {
         console.log('Componentdidupdate: ', prevState, prevProps)
         if (prevProps.daily.companies !== this.props.daily.companies) {
             this.consolidateTableData()
         }
-        // if (prevState.tableDetailArry === this.state.tableDetailArry) {
-        //     console.log('true')
-        // }
-
     }
 
     handleSort (event) {
-        let sortedTable
+        let sortedTable = []
 
         switch (event.target.id) {
             case 'ticker':
@@ -41,7 +34,9 @@ class DailyContainer extends React.Component {
                 this.setState({tableDetailArry: sortedTable})
                 break
             case 'totalDollarChg':
-                sortedTable = this.state.tableDetailArry.sort((a,b) => {return a.totals.totalDollarChg > b.totals.totalDollarChg ? 1 : -1})
+                sortedTable = this.state.tableDetailArry.sort((a,b) => {
+                    return a.totals.totalDollarChg - b.totals.totalDollarChg})
+                    // return a.totals.totalDollarChg > b.totals.totalDollarChg ? 1 : -1}) <- using an alternative sort above
                 this.setState({tableDetailArry: sortedTable})
                 break
             case 'totalPercentChg':
@@ -80,13 +75,10 @@ class DailyContainer extends React.Component {
                 })   
             }
         }
-        // debugger
         return dateArry
     }
 
-    // Add sorting capability to daily view
     findChart = (company) => {
-        // debugger
         return company.charts.find(chart => chart.chart_type === 'daily')
     }
 
@@ -111,17 +103,17 @@ class DailyContainer extends React.Component {
 
                     }
                 )})
-        // debugger
         return priceObject
     }
 
     totalReturn = (chart) => {
-        const firstClose = chart.chart_lines[0].close
-        const lastClose = chart.chart_lines[chart.chart_lines.length-1].close
+        if (chart) {
+            const firstClose = chart.chart_lines[0].close
+            const lastClose = chart.chart_lines[chart.chart_lines.length-1].close
 
-        return { totalDollarChg: this.formatNumber(lastClose - firstClose),
-            totalPercentChg: Math.round(((lastClose / firstClose) - 1) * 10000) / 100}
-
+            return { totalDollarChg: this.formatNumber(lastClose - firstClose),
+                totalPercentChg: Math.round(((lastClose / firstClose) - 1) * 10000) / 100}
+        }
     }
     consolidateTableData = () => {
         // Making object for the table data that can be sorted easier
@@ -153,10 +145,8 @@ class DailyContainer extends React.Component {
                 return companyObject
             })
         }
-        // debugger
-        // return tableObject
+        // return tableObject <- this is old functionality
         this.setState({tableDetailArry: tableObject})
-
     }
 
     render() {

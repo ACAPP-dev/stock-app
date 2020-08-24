@@ -37,7 +37,8 @@ class WatchlistsController < ApplicationController
             if user
                 watchlist = Watchlist.find_by(id: params[:id])
                 if watchlist && watchlist.user_id == user.id
-                    render json: watchlist
+                    # render json: watchlist
+                    render json: user
                 else
                     render json: {response: "Watchlist not found!"}, status: 404
                 end
@@ -89,7 +90,8 @@ class WatchlistsController < ApplicationController
             render json: {response: "User not found!"}, status: 404
         end 
         
-        render json: watchlist
+        # render json: watchlist
+        render json: user
 
     end
 
@@ -108,7 +110,8 @@ class WatchlistsController < ApplicationController
             render json: {response: "User not found!"}, status: 404
         end 
         
-        render json: watchlist
+        # render json: watchlist
+        render json: user
 
     end
 

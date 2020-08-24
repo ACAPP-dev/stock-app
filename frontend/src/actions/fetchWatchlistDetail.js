@@ -8,7 +8,10 @@ function fetchWatchlistDetail(watchlistId, userId) {
         fetch(FETCH_URL)
         .then(resp => resp.json())
         .then(json => {
-            return dispatch({type: 'GET_WATCHLIST_DETAIL', payload: json})
+            return dispatch({
+                type: 'LOGIN_USER', payload: json,
+                type: 'GET_WATCHLIST_DETAIL', payload: json.watchlists.find(watchlist => watchlist.id === watchlistId)
+            })
         })
     }
 }

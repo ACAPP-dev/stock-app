@@ -38,7 +38,6 @@ class WatchlistContainer extends React.Component {
     }
 
     removeWatchlist = (id) => {
-        console.log('removewatchlist in watchlistcontainer: ', id)
         this.props.removeWatchlist(id, this.props.user.id)
     }
 

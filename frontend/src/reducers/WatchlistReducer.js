@@ -1,7 +1,7 @@
 
 function watchlistReducer(state={companies: []}, action) {
-    // console.log('State from watchlistReducer:', state)
-    // console.log('Action from watchlistReducer:', action)
+    console.log('State from watchlistReducer:', state)
+    console.log('Action from watchlistReducer:', action)
     
     switch (action.type) {
                     
@@ -28,7 +28,6 @@ function watchlistReducer(state={companies: []}, action) {
                 description: action.payload.description,
                 companies: companies
             }
-            // debugger
             return {...state, ...watchlistDetail}
 
         case 'START_WATCHLIST_REMOVE':

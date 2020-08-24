@@ -1,7 +1,7 @@
 import React from 'react'
 
 const DailyRows = props => {
-    console.log('props in dailyrows: ', props)
+    // console.log('props in dailyrows: ', props)
     
     const formatNumber = number => {
         if (!number || Number.isNaN(number)) { return '' }
@@ -10,36 +10,36 @@ const DailyRows = props => {
         return numberArry.join('.')
     }
 
-    const findChart = company => {
-        // debugger
-        return company.charts.find(chart => chart.chart_type === 'daily')
-    }
+    // const findChart = company => {
+    //     // debugger
+    //     return company.charts.find(chart => chart.chart_type === 'daily')
+    // }
 
-    const getPriceData = chart => {
-        // Return object to use for the price data in the rows
-        const priceReturn =  chart.chart_lines.slice(1).map( (date, index) => {
+    // const getPriceData = chart => {
+    //     // Return object to use for the price data in the rows
+    //     const priceReturn =  chart.chart_lines.slice(1).map( (date, index) => {
                 
-                const prevClose = chart.chart_lines[index].close
-                return (
-                    {
-                        close: formatNumber(date.close),
-                        dollarChg: formatNumber(date.close - prevClose),
-                        percentChg: Math.round(((date.close / prevClose) - 1) * 10000) / 100
+    //             const prevClose = chart.chart_lines[index].close
+    //             return (
+    //                 {
+    //                     close: formatNumber(date.close),
+    //                     dollarChg: formatNumber(date.close - prevClose),
+    //                     percentChg: Math.round(((date.close / prevClose) - 1) * 10000) / 100
 
-                    }
-                )})
-        // debugger
-        return priceReturn
-    }
+    //                 }
+    //             )})
+    //     // debugger
+    //     return priceReturn
+    // }
 
-    const totalReturn = chart => {
-        const firstClose = chart.chart_lines[0].close
-        const lastClose = chart.chart_lines[chart.chart_lines.length-1].close
+    // const totalReturn = chart => {
+    //     const firstClose = chart.chart_lines[0].close
+    //     const lastClose = chart.chart_lines[chart.chart_lines.length-1].close
 
-        return { totalDollarChg: formatNumber(lastClose - firstClose),
-            totalPercentChg: Math.round(((lastClose / firstClose) - 1) * 10000) / 100}
+    //     return { totalDollarChg: formatNumber(lastClose - firstClose),
+    //         totalPercentChg: Math.round(((lastClose / firstClose) - 1) * 10000) / 100}
 
-    }
+    // }
 
     // Original Functionality based on store passed to props
     // return props.daily.companies.map(company => {
@@ -87,14 +87,14 @@ const DailyRows = props => {
                     return (
                         <React.Fragment key={index}>
                         <td className='td-right'>${day.close}</td>
-                        <td className='td-right'>${day.dollarChg}</td>
-                        <td className='td-right'>{day.percentChg}%</td>
+                        <td style={{color: day.dollarChg<0 ? 'red' : 'green'}} className='td-right'>${day.dollarChg}</td>
+                        <td style={{color: day.percentChg<0 ? 'red' : 'green'}} className='td-right'>{day.percentChg}%</td>
                         </React.Fragment>
                     )
                 })}
                 <React.Fragment>
-                <td className='td-right'>${company.totals.totalDollarChg}</td>
-                <td className='td-right'>{company.totals.totalPercentChg}%</td>
+                <td style={{color: company.totals.totalDollarChg<0 ? 'red' : 'green'}} className='td-right'>${company.totals.totalDollarChg}</td>
+                <td style={{color: company.totals.totalPercentChg<0 ? 'red' : 'green'}} className='td-right'>{company.totals.totalPercentChg}%</td>
                 </React.Fragment>
             </tr>
         )

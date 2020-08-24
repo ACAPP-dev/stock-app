@@ -34,7 +34,6 @@ function getDailyData(formData, watchlistObj, userId) {
         
         const databaseFetch = dailyData => {
             // Persist company and chart data to database
-        //    debugger
             const companyObject = {
                 method: 'POST',
                 headers: {"Content-Type": "application/json", "Accept": "application/json"},
