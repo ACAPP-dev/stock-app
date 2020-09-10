@@ -3,12 +3,12 @@ import React from 'react'
 const DailyRows = props => {
     // console.log('props in dailyrows: ', props)
     
-    const formatNumber = number => {
-        if (!number || Number.isNaN(number)) { return '' }
-        const numberArry = parseFloat(number).toFixed(2).split('.')
-        numberArry[0] = numberArry[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-        return numberArry.join('.')
-    }
+    // const formatNumber = number => {
+    //     if (!number || Number.isNaN(number)) { return '' }
+    //     const numberArry = parseFloat(number).toFixed(2).split('.')
+    //     numberArry[0] = numberArry[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    //     return numberArry.join('.')
+    // }
 
     // const findChart = company => {
     //     // debugger

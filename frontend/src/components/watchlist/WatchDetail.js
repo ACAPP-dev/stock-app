@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import WatchlistLike from './WatchlistLike'
 
 const WatchDetail = props => {
     
@@ -27,6 +28,8 @@ const WatchDetail = props => {
     const removeCompany = companyId => {
         props.removeCompany(props.watchDetail.id, companyId, )
     }
+
+    
 
     return (
         <Container>
@@ -54,6 +57,7 @@ const WatchDetail = props => {
                         </td>
                         <td><Button className='watchlist-btn' variant='success' onClick={() => viewCompany(company.ticker)}>View Detail</Button>
                         <Button className='watchlist-btn' variant='danger' onClick={() => removeCompany(company.id)}>Remove</Button></td>
+                       
                     </tr>)
                 })}
             </tbody>

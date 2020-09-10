@@ -20,7 +20,9 @@ class DailyContainer extends React.Component {
     }
     
     componentDidMount() {
+        console.log('a')
         this.props.fetchWatchlists(this.props.user.id)
+        console.log('b')
     }
 
     componentDidUpdate(prevProps, prevState) {
