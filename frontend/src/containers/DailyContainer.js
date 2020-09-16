@@ -72,7 +72,7 @@ class DailyContainer extends React.Component {
     }
 
     getTableDays = () => {
-        let dateArry = ['Day0', 'Day 1', 'Day 2', 'Day 3']
+        let dateArry = ['Day0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5']
         
         if (this.props.daily.companies.length > 0) {
             const firstChart = this.props.daily.companies[0].charts[0] || null
@@ -174,15 +174,14 @@ class DailyContainer extends React.Component {
                             <th colSpan='3'>{this.getTableDays()[1]}</th>
                             <th colSpan='3'>{this.getTableDays()[2]}</th>
                             <th colSpan='3'>{this.getTableDays()[3]}</th>
-                            
+                            <th colSpan='3'>{this.getTableDays()[4]}</th>
+                            <th colSpan='3'>{this.getTableDays()[5]}</th>
                             <th colSpan='2'>Total</th>
                             
                         </tr>
                         <tr>
                             <th colSpan='3'></th>
-                            <th>Close</th>
-                            <th>$ Change</th>
-                            <th>% Change</th>
+                            
                             <th>Close</th>
                             <th>$ Change</th>
                             <th>% Change</th>
@@ -190,6 +189,19 @@ class DailyContainer extends React.Component {
                             <th>Close</th>
                             <th>$ Change</th>
                             <th>% Change</th>
+                            
+                            <th>Close</th>
+                            <th>$ Change</th>
+                            <th>% Change</th>
+
+                            <th>Close</th>
+                            <th>$ Change</th>
+                            <th>% Change</th>
+
+                            <th>Close</th>
+                            <th>$ Change</th>
+                            <th>% Change</th>
+
                             <th>
                                 <button id="totalDollarChg" onClick={this.handleSort}>$ Change</button>
                             </th>

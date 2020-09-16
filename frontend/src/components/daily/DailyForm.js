@@ -14,7 +14,7 @@ class DailyForm extends React.Component {
         watchlistId: '',
         watchlistName: 'Select',
         startDate: new Date(new Date().setDate(new Date().getDate() - 2)).toJSON().slice(0,10),
-        chartStartDate: new Date(new Date().setDate(new Date().getDate() - 3)).toJSON().slice(0,10),
+        chartStartDate: new Date(new Date().setDate(new Date().getDate() - 5)).toJSON().slice(0,10),
         endDate: new Date().toJSON().slice(0,10),
         chartEndDate: new Date(new Date().setDate(new Date().getDate() +1)).toJSON().slice(0,10)
     }
@@ -37,22 +37,22 @@ class DailyForm extends React.Component {
 
     getNextThirdWeekdayEndDate = startDate => {
         // Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6
-        // Return number of days to add (normally 2 weekdays)
+        // Return number of days to add (normally 4 weekdays)
         switch (startDate.getDay()) {
             case 0:
-                return 3
+                return 5
             case 1:
-                return 2
+                return 4
             case 2:
-                return 2
+                return 6
             case 3:
-                return 2
+                return 6
             case 4:
-                return 4
+                return 6
             case 5:
-                return 4
+                return 6
             case 6:
-                return 3
+                return 5
             default:
                 return 2
         }
@@ -60,24 +60,24 @@ class DailyForm extends React.Component {
 
     getPrevThirdWeekdayStartDate = endDate => {
         // Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6
-        // Return number of days to deduct (normally 2 weekdays)
+        // Return number of days to deduct (normally 4 weekdays)
         switch (endDate.getDay()) {
             case 0:
-                return 4
+                return 6
             case 1:
-                return 4
+                return 6
             case 2:
-                return 4
+                return 6
             case 3:
-                return 2
+                return 6
             case 4:
-                return 2
+                return 6
             case 5:
-                return 2
+                return 4
             case 6:
-                return 3
+                return 5
             default:
-                return 2
+                return 4
         }
     }
 
@@ -184,7 +184,7 @@ class DailyForm extends React.Component {
                             <Form.Label>End Date:</Form.Label>
                                 <Form.Control type="date" onChange={this.handleChange} name='endDate' value={this.state.endDate} />
                                 <Form.Text className='text-muted'>
-                                    End Date for View (3 Days Max)
+                                    End Date for View (5 Days Max)
                                 </Form.Text>
                             </Col>
                             <Col><Button variant='success' type='submit'>Get Data</Button></Col>
