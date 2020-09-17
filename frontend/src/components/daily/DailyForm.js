@@ -13,7 +13,7 @@ class DailyForm extends React.Component {
     state = {
         watchlistId: '',
         watchlistName: 'Select',
-        startDate: new Date(new Date().setDate(new Date().getDate() - 2)).toJSON().slice(0,10),
+        startDate: new Date(new Date().setDate(new Date().getDate() - 4)).toJSON().slice(0,10),
         chartStartDate: new Date(new Date().setDate(new Date().getDate() - 5)).toJSON().slice(0,10),
         endDate: new Date().toJSON().slice(0,10),
         chartEndDate: new Date(new Date().setDate(new Date().getDate() +1)).toJSON().slice(0,10)
